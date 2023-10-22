@@ -61,6 +61,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         loginButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         loginButton.setText("Login");
+        loginButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
@@ -74,6 +75,11 @@ public class LoginPage extends javax.swing.JFrame {
         registerButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         registerButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         registerButton.setText("Crear cuenta");
+        registerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registerButtonMouseClicked(evt);
+            }
+        });
 
         inputEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
@@ -141,6 +147,12 @@ public class LoginPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Credenciales incorrectas. Inténtelo de nuevo.");
         }
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void registerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseClicked
+        RegisterPage RegisterPage = new RegisterPage();
+        RegisterPage.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_registerButtonMouseClicked
 
     // Método para validar las credenciales en la base de datos
     private boolean validarCredenciales(String email, String password) {
