@@ -19,8 +19,8 @@ public class Conexion {
     private String usuario  = "root";
     private String password = "usbw";
     private String nombreBD = "proyecto_t_a_g";
-    private String url      = "http://localhost:8080/phpmyadmin/proyecto_t_a_g";
-    
+    private String url = "jdbc:mysql://" + host + ":3307/" + nombreBD;
+   
     public Connection DatabaseConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
