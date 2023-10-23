@@ -143,6 +143,12 @@ public class LoginPage extends javax.swing.JFrame {
         // Realiza la verificación en la base de datos
         if (validarCredenciales(email, password)) {
             JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.");
+            
+            // Abrir el frame MainPage
+            MainPage mainPage = new MainPage();
+            mainPage.setVisible(true);
+            
+            setVisible(false);
         } else {
             JOptionPane.showMessageDialog(this, "Credenciales incorrectas. Inténtelo de nuevo.");
         }
