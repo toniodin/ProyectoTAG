@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 /**
  *
@@ -22,7 +24,11 @@ public class LoginPage extends javax.swing.JFrame {
         initComponents();
         conexion = new Conexion(); // Inicializa la instancia de 
         
-        String subRegisterButton ="<html><u>Crear cuenta</u></html>";
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/Logo_Book4u.png")); // Esto es para cambiar el icono de la app
+        Image image = icon.getImage();
+        setIconImage(image);
+        
+        String subRegisterButton ="<html><u>Crear cuenta</u></html>"; //Esto es para tener el texto subrayado
         registerButton.setText(subRegisterButton);
         String subPassOlvidada ="<html><u>¿Ha olvidado su contraseña?</u></html>";
         passOlvidada.setText(subPassOlvidada);
