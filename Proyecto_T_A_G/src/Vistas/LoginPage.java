@@ -29,11 +29,6 @@ public class LoginPage extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/Logo_Book4u.png")); // Esto es para cambiar el icono de la app
         Image image = icon.getImage();
         setIconImage(image);
-        
-        String subRegisterButton ="<html><u>Crear cuenta</u></html>"; //Esto es para tener el texto subrayado
-        registerButton.setText(subRegisterButton);
-        String subPassOlvidada ="<html><u>¿Ha olvidado su contraseña?</u></html>";
-        passOlvidada.setText(subPassOlvidada);
     }
 
     /**
@@ -83,8 +78,8 @@ public class LoginPage extends javax.swing.JFrame {
         jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, 24));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("Introduce el correo electrónico y la contraseña para iniciar sesión.");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel1.setText("<html>Introduce el correo electrónico y la contraseña para iniciar sesión.</html>");
         jLabel1.setToolTipText("");
         jLabel1.setFocusable(false);
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -115,7 +110,7 @@ public class LoginPage extends javax.swing.JFrame {
         passOlvidada.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         passOlvidada.setForeground(new java.awt.Color(0, 0, 255));
         passOlvidada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        passOlvidada.setText("¿Ha olvidado su contraseña?");
+        passOlvidada.setText("<html><u>¿Ha olvidado su contraseña?</u></html>");
         passOlvidada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         passOlvidada.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -133,7 +128,7 @@ public class LoginPage extends javax.swing.JFrame {
         registerButton.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         registerButton.setForeground(new java.awt.Color(0, 0, 255));
         registerButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        registerButton.setText("Crear cuenta");
+        registerButton.setText("<html><u>Crear cuenta</u></html>");
         registerButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
