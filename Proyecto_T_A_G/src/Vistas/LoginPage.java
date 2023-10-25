@@ -20,7 +20,12 @@ public class LoginPage extends javax.swing.JFrame {
 
     public LoginPage() {
         initComponents();
-        conexion = new Conexion(); // Inicializa la instancia de Conexion
+        conexion = new Conexion(); // Inicializa la instancia de 
+        
+        String subRegisterButton ="<html><u>Crear cuenta</u></html>";
+        registerButton.setText(subRegisterButton);
+        String subPassOlvidada ="<html><u>¿Ha olvidado su contraseña?</u></html>";
+        passOlvidada.setText(subPassOlvidada);
     }
 
     /**
@@ -47,6 +52,7 @@ public class LoginPage extends javax.swing.JFrame {
         inputPass = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 222, 89));
