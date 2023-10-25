@@ -41,6 +41,7 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
         passOlvidada = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         registerButton = new javax.swing.JLabel();
         inputEmail = new javax.swing.JFormattedTextField();
         inputPass = new javax.swing.JFormattedTextField();
@@ -49,7 +50,7 @@ public class LoginPage extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 222, 89));
-        jPanel1.setLayout(new java.awt.FlowLayout(1, 0, -20));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, -20));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -57,7 +58,6 @@ public class LoginPage extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
-        jPanel1.getAccessibleContext().setAccessibleParent(jLabel5);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -112,6 +112,9 @@ public class LoginPage extends javax.swing.JFrame {
         });
         jPanel2.add(passOlvidada, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 15));
+
         registerButton.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         registerButton.setForeground(new java.awt.Color(0, 0, 255));
         registerButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -128,7 +131,9 @@ public class LoginPage extends javax.swing.JFrame {
                 registerButtonMouseExited(evt);
             }
         });
-        jPanel2.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, -1, -1));
+        jPanel3.add(registerButton);
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 440, 60));
 
         inputEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         inputEmail.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -270,6 +275,7 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel label1;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel passOlvidada;
