@@ -55,30 +55,37 @@ public class RegisterPage extends javax.swing.JFrame {
         volverLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label1.setText("Registro");
+        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 67, -1, 24));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Rellena los campos para crear un usuario");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 97, 346, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("E-mail");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 134, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Nombre");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 294, -1, -1));
 
         registerButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         registerButton.setText("Registrarse");
+        registerButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 713, 344, 46));
 
         inputEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         inputEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -86,26 +93,38 @@ public class RegisterPage extends javax.swing.JFrame {
                 inputEmailActionPerformed(evt);
             }
         });
+        getContentPane().add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 165, 361, 40));
+        getContentPane().add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 325, 361, 40));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Password");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 211, -1, -1));
+        getContentPane().add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 248, 361, 40));
+        getContentPane().add(inputApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 402, 361, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Apellido 1");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 371, -1, -1));
+        getContentPane().add(inputApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 479, 361, 40));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Apellido 2");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 448, -1, -1));
+        getContentPane().add(inputDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 556, 344, 40));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("DNI");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 525, -1, -1));
+        getContentPane().add(inputDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 630, 344, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Domicilio");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 602, -1, -1));
 
         volverLogin.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         volverLogin.setText("Login");
@@ -114,85 +133,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 volverLoginMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(inputNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(inputEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(inputApellido1)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(275, 275, 275))
-                                .addComponent(inputApellido2, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(jLabel4)
-                            .addComponent(inputPass))
-                        .addContainerGap(21, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(volverLogin)
-                            .addComponent(jLabel8)
-                            .addComponent(inputDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(inputDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputPass, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addGap(3, 3, 3)
-                .addComponent(inputDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(volverLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
-        );
+        getContentPane().add(volverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 676, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

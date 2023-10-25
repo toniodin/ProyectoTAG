@@ -86,12 +86,12 @@ public class LoginPage extends javax.swing.JFrame {
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 346, -1));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("E-mail");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel3.setText("Password");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
 
@@ -109,7 +109,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         passOlvidada.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         passOlvidada.setForeground(new java.awt.Color(0, 0, 255));
-        passOlvidada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        passOlvidada.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         passOlvidada.setText("<html><u>¿Ha olvidado su contraseña?</u></html>");
         passOlvidada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         passOlvidada.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -127,7 +127,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         registerButton.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         registerButton.setForeground(new java.awt.Color(0, 0, 255));
-        registerButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        registerButton.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         registerButton.setText("<html><u>Crear cuenta</u></html>");
         registerButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerButton.addMouseListener(new java.awt.event.MouseAdapter() {

@@ -109,7 +109,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="16" style="1"/>
             </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="text" type="java.lang.String" value="E-mail"/>
           </Properties>
           <Constraints>
@@ -123,7 +123,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="16" style="1"/>
             </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="text" type="java.lang.String" value="Password"/>
           </Properties>
           <Constraints>
@@ -165,7 +165,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;&lt;html&gt;&lt;u&gt;&#xbf;Ha olvidado su contrase&#xf1;a?&lt;/u&gt;&lt;/html&gt;&quot;" type="code"/>
             </Property>
@@ -208,7 +208,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="0" red="0" type="rgb"/>
                 </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="horizontalAlignment" type="int" value="11"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;&lt;html&gt;&lt;u&gt;Crear cuenta&lt;/u&gt;&lt;/html&gt;&quot;" type="code"/>
                 </Property>
