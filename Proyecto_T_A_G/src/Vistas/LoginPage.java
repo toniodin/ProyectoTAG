@@ -24,6 +24,8 @@ public class LoginPage extends javax.swing.JFrame {
         initComponents();
         conexion = new Conexion(); // Inicializa la instancia de 
         
+        this.setLocationRelativeTo(null); //Inicializa al centro de la pantalla
+        
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/Logo_Book4u.png")); // Esto es para cambiar el icono de la app
         Image image = icon.getImage();
         setIconImage(image);
