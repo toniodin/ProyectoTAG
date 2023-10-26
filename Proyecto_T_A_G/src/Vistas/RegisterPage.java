@@ -45,6 +45,7 @@ public class RegisterPage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         inputPass = new javax.swing.JFormattedTextField();
         inputApellido2 = new javax.swing.JFormattedTextField();
@@ -68,7 +69,6 @@ public class RegisterPage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro");
         setMinimumSize(new java.awt.Dimension(440, 570));
-        setPreferredSize(new java.awt.Dimension(440, 570));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -169,7 +169,9 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel3.setText("Nombre");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 470));
+        jScrollPane1.setViewportView(jPanel2);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -305,6 +307,7 @@ public class RegisterPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
     private javax.swing.JButton registerButton;
     private javax.swing.JLabel volverLogin;
