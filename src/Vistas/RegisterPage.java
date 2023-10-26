@@ -123,6 +123,14 @@ public class RegisterPage extends javax.swing.JFrame {
         inputEmail.setToolTipText("");
         inputEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         inputEmail.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputEmailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputEmailFocusLost(evt);
+            }
+        });
         inputEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputEmailActionPerformed(evt);
@@ -138,6 +146,14 @@ public class RegisterPage extends javax.swing.JFrame {
         inputPass.setForeground(new java.awt.Color(153, 153, 153));
         inputPass.setText("Indica tu contraseña");
         inputPass.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputPassFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputPassFocusLost(evt);
+            }
+        });
         jPanel2.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 344, 40));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
@@ -148,6 +164,14 @@ public class RegisterPage extends javax.swing.JFrame {
         inputNombre.setForeground(new java.awt.Color(153, 153, 153));
         inputNombre.setText("Indica tu nombre");
         inputNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputNombreFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputNombreFocusLost(evt);
+            }
+        });
         jPanel2.add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 344, 40));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
@@ -158,6 +182,14 @@ public class RegisterPage extends javax.swing.JFrame {
         inputApellido1.setForeground(new java.awt.Color(153, 153, 153));
         inputApellido1.setText("Indica tu apellido");
         inputApellido1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputApellido1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputApellido1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputApellido1FocusLost(evt);
+            }
+        });
         inputApellido1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputApellido1ActionPerformed(evt);
@@ -173,6 +205,14 @@ public class RegisterPage extends javax.swing.JFrame {
         inputApellido2.setForeground(new java.awt.Color(153, 153, 153));
         inputApellido2.setText("Indica tu segundo apellido");
         inputApellido2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputApellido2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputApellido2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputApellido2FocusLost(evt);
+            }
+        });
         jPanel2.add(inputApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 344, 40));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
@@ -180,10 +220,18 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel7.setText("DNI");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, -1, -1));
 
-        inputDNI.setBackground(new java.awt.Color(153, 153, 153));
+        inputDNI.setForeground(new java.awt.Color(153, 153, 153));
         inputDNI.setText("Indica tu dni");
         inputDNI.setToolTipText("");
         inputDNI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputDNI.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputDNIFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputDNIFocusLost(evt);
+            }
+        });
         jPanel2.add(inputDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 344, 40));
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
@@ -194,6 +242,14 @@ public class RegisterPage extends javax.swing.JFrame {
         inputDomicilio.setForeground(new java.awt.Color(153, 153, 153));
         inputDomicilio.setText("Indica tu domicilio");
         inputDomicilio.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputDomicilio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputDomicilioFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputDomicilioFocusLost(evt);
+            }
+        });
         jPanel2.add(inputDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 710, 344, 40));
 
         registerButton.setBackground(new java.awt.Color(255, 222, 89));
@@ -330,6 +386,118 @@ public class RegisterPage extends javax.swing.JFrame {
     private void inputApellido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputApellido1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputApellido1ActionPerformed
+
+    private void inputEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusGained
+        if(inputEmail.getText().equals("Indica tu correo electrónico"))
+        {
+            inputEmail.setText("");
+            inputEmail.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_inputEmailFocusGained
+
+    private void inputEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusLost
+        if(inputEmail.getText().equals(""))
+        {
+            inputEmail.setText("Indica tu correo electrónico");
+            inputEmail.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_inputEmailFocusLost
+
+    private void inputPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusGained
+        if(inputPass.getText().equals("Indica tu contraseña"))
+        {
+            inputPass.setText("");
+            inputPass.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_inputPassFocusGained
+
+    private void inputPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusLost
+        if(inputPass.getText().equals(""))
+        {
+            inputPass.setText("Indica tu contraseña");
+            inputPass.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_inputPassFocusLost
+
+    private void inputNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNombreFocusGained
+        if(inputNombre.getText().equals("Indica tu nombre"))
+        {
+            inputNombre.setText("");
+            inputNombre.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_inputNombreFocusGained
+
+    private void inputNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNombreFocusLost
+        if(inputNombre.getText().equals(""))
+        {
+            inputNombre.setText("Indica tu nombre");
+            inputNombre.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_inputNombreFocusLost
+
+    private void inputApellido1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputApellido1FocusGained
+        if(inputApellido1.getText().equals("Indica tu apellido"))
+        {
+            inputApellido1.setText("");
+            inputApellido1.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_inputApellido1FocusGained
+
+    private void inputApellido1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputApellido1FocusLost
+        if(inputApellido1.getText().equals(""))
+        {
+            inputApellido1.setText("Indica tu apellido");
+            inputApellido1.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_inputApellido1FocusLost
+
+    private void inputApellido2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputApellido2FocusGained
+        if(inputApellido2.getText().equals("Indica tu segundo apellido"))
+        {
+            inputApellido2.setText("");
+            inputApellido2.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_inputApellido2FocusGained
+
+    private void inputApellido2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputApellido2FocusLost
+        if(inputApellido2.getText().equals(""))
+        {
+            inputApellido2.setText("Indica tu segundo apellido");
+            inputApellido2.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_inputApellido2FocusLost
+
+    private void inputDNIFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDNIFocusGained
+        if(inputDNI.getText().equals("Indica tu dni"))
+        {
+            inputDNI.setText("");
+            inputDNI.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_inputDNIFocusGained
+
+    private void inputDNIFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDNIFocusLost
+        if(inputDNI.getText().equals(""))
+        {
+            inputDNI.setText("Indica tu dni");
+            inputDNI.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_inputDNIFocusLost
+
+    private void inputDomicilioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDomicilioFocusGained
+        if(inputDomicilio.getText().equals("Indica tu domicilio"))
+        {
+            inputDomicilio.setText("");
+            inputDomicilio.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_inputDomicilioFocusGained
+
+    private void inputDomicilioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDomicilioFocusLost
+        if(inputDomicilio.getText().equals(""))
+        {
+            inputDomicilio.setText("Indica tu domicilio");
+            inputDomicilio.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_inputDomicilioFocusLost
 
     /**
      * @param args the command line arguments
