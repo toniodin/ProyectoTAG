@@ -35,6 +35,8 @@ public class RegisterPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         label1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -55,12 +57,28 @@ public class RegisterPage extends javax.swing.JFrame {
         volverLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registro");
+        setMinimumSize(new java.awt.Dimension(440, 570));
+        setPreferredSize(new java.awt.Dimension(440, 570));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 222, 89));
+        jPanel1.setMinimumSize(new java.awt.Dimension(145, 105));
+        jPanel1.setPreferredSize(new java.awt.Dimension(145, 105));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, -20));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
+        jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel9);
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
 
         label1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label1.setText("Registro");
-        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 67, -1, 24));
+        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, 24));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -266,6 +284,8 @@ public class RegisterPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel label1;
     private javax.swing.JButton registerButton;
     private javax.swing.JLabel volverLogin;
