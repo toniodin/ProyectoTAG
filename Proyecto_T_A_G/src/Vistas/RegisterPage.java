@@ -65,7 +65,6 @@ public class RegisterPage extends javax.swing.JFrame {
         inputDomicilio = new javax.swing.JFormattedTextField();
         volverLogin = new javax.swing.JLabel();
         registerButton = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro");
@@ -91,17 +90,20 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label1.setText("Registro");
+        label1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         label1.setMaximumSize(new java.awt.Dimension(49, 24));
         label1.setMinimumSize(new java.awt.Dimension(49, 24));
-        label1.setPreferredSize(new java.awt.Dimension(49, 24));
+        label1.setPreferredSize(new java.awt.Dimension(47, 23));
         jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 80, 24));
         label1.getAccessibleContext().setAccessibleParent(jPanel2);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Rellena los campos para crear un usuario");
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel1.setText("<html>Rellena los campos para crear un usuario</html>");
+        jLabel1.setFocusable(false);
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 346, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -174,12 +176,9 @@ public class RegisterPage extends javax.swing.JFrame {
         });
         jPanel2.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 810, 344, 40));
 
-        jLabel10.setText("90  ");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
-
         jScrollPane1.setViewportView(jPanel2);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 900));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -305,7 +304,6 @@ public class RegisterPage extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField inputNombre;
     private javax.swing.JFormattedTextField inputPass;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

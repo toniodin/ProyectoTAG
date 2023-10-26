@@ -52,7 +52,7 @@ public class LoginPage extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         registerButton = new javax.swing.JLabel();
         inputEmail = new javax.swing.JFormattedTextField();
-        inputPass = new javax.swing.JFormattedTextField();
+        inputPass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -153,13 +153,6 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
         jPanel2.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 344, 40));
-
-        inputPass.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        inputPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputPassActionPerformed(evt);
-            }
-        });
         jPanel2.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 344, 40));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 470));
@@ -212,10 +205,6 @@ public class LoginPage extends javax.swing.JFrame {
     private void registerButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseEntered
          registerButton.setForeground(new Color(255,204,0));
     }//GEN-LAST:event_registerButtonMouseEntered
-
-    private void inputPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputPassActionPerformed
 
     // Método para validar las credenciales en la base de datos
     private boolean validarCredenciales(String email, String password) {
@@ -278,7 +267,7 @@ public class LoginPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField inputEmail;
-    private javax.swing.JFormattedTextField inputPass;
+    private javax.swing.JPasswordField inputPass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
