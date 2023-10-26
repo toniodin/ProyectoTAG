@@ -149,6 +149,11 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, -1, -1));
 
         inputApellido1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputApellido1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputApellido1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(inputApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 344, 40));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
@@ -305,6 +310,10 @@ public class RegisterPage extends javax.swing.JFrame {
     private void volverLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverLoginMouseExited
         volverLogin.setForeground(new Color(0, 0, 255));
     }//GEN-LAST:event_volverLoginMouseExited
+
+    private void inputApellido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputApellido1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputApellido1ActionPerformed
 
     /**
      * @param args the command line arguments
