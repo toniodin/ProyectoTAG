@@ -153,6 +153,8 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
         jPanel2.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 344, 40));
+
+        inputPass.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel2.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 344, 40));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 470));
