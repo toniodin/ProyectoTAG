@@ -52,7 +52,7 @@ public class LoginPage extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         registerButton = new javax.swing.JLabel();
         inputEmail = new javax.swing.JFormattedTextField();
-        inputPass = new javax.swing.JFormattedTextField();
+        inputPass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -145,8 +145,18 @@ public class LoginPage extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 440, 60));
 
+        inputEmail.setForeground(new java.awt.Color(153, 153, 153));
+        inputEmail.setText("Indica tu correo electrónico");
         inputEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         inputEmail.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputEmailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputEmailFocusLost(evt);
+            }
+        });
         inputEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputEmailActionPerformed(evt);
@@ -155,9 +165,14 @@ public class LoginPage extends javax.swing.JFrame {
         jPanel2.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 344, 40));
 
         inputPass.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        inputPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputPassActionPerformed(evt);
+        inputPass.setForeground(new java.awt.Color(153, 153, 153));
+        inputPass.setText("Indica tu contraseña");
+        inputPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputPassFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputPassFocusLost(evt);
             }
         });
         jPanel2.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 344, 40));
@@ -213,9 +228,37 @@ public class LoginPage extends javax.swing.JFrame {
          registerButton.setForeground(new Color(255,204,0));
     }//GEN-LAST:event_registerButtonMouseEntered
 
-    private void inputPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputPassActionPerformed
+    private void inputEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusGained
+        if(inputEmail.getText().equals("Indica tu correo electrónico"))
+        {
+            inputEmail.setText("");
+            inputEmail.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_inputEmailFocusGained
+
+    private void inputEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusLost
+        if(inputEmail.getText().equals(""))
+        {
+            inputEmail.setText("Indica tu correo electrónico");
+            inputEmail.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_inputEmailFocusLost
+
+    private void inputPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusGained
+        if(inputPass.getText().equals("Indica tu contraseña"))
+        {
+            inputPass.setText("");
+            inputPass.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_inputPassFocusGained
+
+    private void inputPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusLost
+        if(inputPass.getText().equals(""))
+        {
+            inputPass.setText("Indica tu contraseña");
+            inputPass.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_inputPassFocusLost
 
     // Método para validar las credenciales en la base de datos
     private boolean validarCredenciales(String email, String password) {
@@ -278,7 +321,7 @@ public class LoginPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField inputEmail;
-    private javax.swing.JFormattedTextField inputPass;
+    private javax.swing.JPasswordField inputPass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

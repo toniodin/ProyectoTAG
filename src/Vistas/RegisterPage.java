@@ -6,6 +6,7 @@ package Vistas;
 
 import bd.Conexion;
 import java.awt.Image;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -63,9 +64,10 @@ public class RegisterPage extends javax.swing.JFrame {
         inputDNI = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         inputDomicilio = new javax.swing.JFormattedTextField();
-        volverLogin = new javax.swing.JLabel();
         registerButton = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        volverLogin = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro");
@@ -86,30 +88,38 @@ public class RegisterPage extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
 
         jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(440, 470));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(440, 470));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        label1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        label1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label1.setText("Registro");
+        label1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         label1.setMaximumSize(new java.awt.Dimension(49, 24));
         label1.setMinimumSize(new java.awt.Dimension(49, 24));
-        label1.setPreferredSize(new java.awt.Dimension(49, 24));
+        label1.setPreferredSize(new java.awt.Dimension(47, 23));
         jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 80, 24));
         label1.getAccessibleContext().setAccessibleParent(jPanel2);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Rellena los campos para crear un usuario");
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel1.setText("<html>Rellena los campos para crear un usuario</html>");
+        jLabel1.setFocusable(false);
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 346, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("E-mail");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
         inputEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        inputEmail.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputEmailActionPerformed(evt);
@@ -117,50 +127,58 @@ public class RegisterPage extends javax.swing.JFrame {
         });
         jPanel2.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 344, 40));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Password");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
+
+        inputPass.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel2.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 344, 40));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Nombre");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
+
+        inputNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel2.add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 344, 40));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Apellido 1");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, -1, -1));
+
+        inputApellido1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputApellido1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputApellido1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(inputApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 344, 40));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Apellido 2");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, -1, -1));
+
+        inputApellido2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel2.add(inputApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 344, 40));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("DNI");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, -1, -1));
+
+        inputDNI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel2.add(inputDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 344, 40));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Domicilio");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 680, -1, -1));
-        jPanel2.add(inputDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 710, 344, 40));
 
-        volverLogin.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        volverLogin.setText("Ya tengo cuenta");
-        volverLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                volverLoginMouseClicked(evt);
-            }
-        });
-        jPanel2.add(volverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 770, -1, -1));
+        inputDomicilio.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jPanel2.add(inputDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 710, 344, 40));
 
         registerButton.setBackground(new java.awt.Color(255, 222, 89));
         registerButton.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -172,14 +190,38 @@ public class RegisterPage extends javax.swing.JFrame {
                 registerButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 810, 344, 40));
+        jPanel2.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 810, 344, 46));
 
-        jLabel10.setText("90  ");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new java.awt.FlowLayout(1, 0, 15));
+
+        volverLogin.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        volverLogin.setForeground(new java.awt.Color(0, 0, 255));
+        volverLogin.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        volverLogin.setText("<html><u>Ya tengo cuenta</u></html>");
+        volverLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        volverLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                volverLoginMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                volverLoginMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                volverLoginMouseExited(evt);
+            }
+        });
+        jPanel3.add(volverLogin);
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 750, 440, 60));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setLayout(new java.awt.FlowLayout(1, 0, 15));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 850, 440, 30));
 
         jScrollPane1.setViewportView(jPanel2);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 900));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -261,6 +303,18 @@ public class RegisterPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputEmailActionPerformed
 
+    private void volverLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverLoginMouseEntered
+        volverLogin.setForeground(new Color(255,204,0));
+    }//GEN-LAST:event_volverLoginMouseEntered
+
+    private void volverLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverLoginMouseExited
+        volverLogin.setForeground(new Color(0, 0, 255));
+    }//GEN-LAST:event_volverLoginMouseExited
+
+    private void inputApellido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputApellido1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputApellido1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -305,7 +359,6 @@ public class RegisterPage extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField inputNombre;
     private javax.swing.JFormattedTextField inputPass;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -316,6 +369,8 @@ public class RegisterPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
     private javax.swing.JButton registerButton;
