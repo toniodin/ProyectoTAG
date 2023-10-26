@@ -78,7 +78,7 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 222, 89));
         jPanel1.setMinimumSize(new java.awt.Dimension(145, 105));
         jPanel1.setPreferredSize(new java.awt.Dimension(145, 105));
-        jPanel1.setLayout(new java.awt.FlowLayout(1, 0, -20));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, -20));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
         jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -118,6 +118,9 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel2.setText("E-mail");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
+        inputEmail.setForeground(new java.awt.Color(153, 153, 153));
+        inputEmail.setText("Indica tu correo electrónico");
+        inputEmail.setToolTipText("");
         inputEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         inputEmail.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +135,8 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel4.setText("Password");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
 
+        inputPass.setForeground(new java.awt.Color(153, 153, 153));
+        inputPass.setText("Indica tu contraseña");
         inputPass.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel2.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 344, 40));
 
@@ -140,6 +145,8 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel3.setText("Nombre");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
 
+        inputNombre.setForeground(new java.awt.Color(153, 153, 153));
+        inputNombre.setText("Indica tu nombre");
         inputNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel2.add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 344, 40));
 
@@ -148,6 +155,8 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel5.setText("Apellido 1");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, -1, -1));
 
+        inputApellido1.setForeground(new java.awt.Color(153, 153, 153));
+        inputApellido1.setText("Indica tu apellido");
         inputApellido1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         inputApellido1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,6 +170,8 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel6.setText("Apellido 2");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, -1, -1));
 
+        inputApellido2.setForeground(new java.awt.Color(153, 153, 153));
+        inputApellido2.setText("Indica tu segundo apellido");
         inputApellido2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel2.add(inputApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 344, 40));
 
@@ -169,6 +180,9 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel7.setText("DNI");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, -1, -1));
 
+        inputDNI.setBackground(new java.awt.Color(153, 153, 153));
+        inputDNI.setText("Indica tu dni");
+        inputDNI.setToolTipText("");
         inputDNI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel2.add(inputDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 344, 40));
 
@@ -177,6 +191,8 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel8.setText("Domicilio");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 680, -1, -1));
 
+        inputDomicilio.setForeground(new java.awt.Color(153, 153, 153));
+        inputDomicilio.setText("Indica tu domicilio");
         inputDomicilio.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel2.add(inputDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 710, 344, 40));
 
@@ -193,7 +209,7 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel2.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 810, 344, 46));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new java.awt.FlowLayout(1, 0, 15));
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 15));
 
         volverLogin.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         volverLogin.setForeground(new java.awt.Color(0, 0, 255));
@@ -216,7 +232,7 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 750, 440, 60));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new java.awt.FlowLayout(1, 0, 15));
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 15));
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 850, 440, 30));
 
         jScrollPane1.setViewportView(jPanel2);
