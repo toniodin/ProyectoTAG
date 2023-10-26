@@ -76,7 +76,7 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 222, 89));
         jPanel1.setMinimumSize(new java.awt.Dimension(145, 105));
         jPanel1.setPreferredSize(new java.awt.Dimension(145, 105));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, -20));
+        jPanel1.setLayout(new java.awt.FlowLayout(1, 0, -20));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
         jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -139,45 +139,47 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Apellido 2");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, -1, -1));
-        jPanel2.add(inputApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 361, 40));
+        jPanel2.add(inputApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 344, 40));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("DNI");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, -1, -1));
-        jPanel2.add(inputDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 344, 40));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, -1, -1));
+        jPanel2.add(inputDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 344, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Domicilio");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, -1, -1));
-        jPanel2.add(inputDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 620, 344, 40));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 680, -1, -1));
+        jPanel2.add(inputDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 710, 344, 40));
 
         volverLogin.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        volverLogin.setText("Login");
+        volverLogin.setText("Ya tengo cuenta");
         volverLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 volverLoginMouseClicked(evt);
             }
         });
-        jPanel2.add(volverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 660, -1, -1));
+        jPanel2.add(volverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 770, -1, -1));
 
-        registerButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        registerButton.setBackground(new java.awt.Color(255, 222, 89));
+        registerButton.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         registerButton.setText("Registrarse");
-        registerButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        registerButton.setBorder(null);
+        registerButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 700, 344, 46));
+        jPanel2.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 810, 344, 40));
 
         jLabel10.setText("90  ");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
 
         jScrollPane1.setViewportView(jPanel2);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 470));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

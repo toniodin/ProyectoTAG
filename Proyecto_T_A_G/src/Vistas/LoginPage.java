@@ -60,7 +60,7 @@ public class LoginPage extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 222, 89));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, -20));
+        jPanel1.setLayout(new java.awt.FlowLayout(1, 0, -20));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -123,7 +123,7 @@ public class LoginPage extends javax.swing.JFrame {
         jPanel2.add(passOlvidada, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 15));
+        jPanel3.setLayout(new java.awt.FlowLayout(1, 0, 15));
 
         registerButton.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         registerButton.setForeground(new java.awt.Color(0, 0, 255));
@@ -196,10 +196,6 @@ public class LoginPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputEmailActionPerformed
 
-    private void inputPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputPassActionPerformed
-
     private void passOlvidadaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passOlvidadaMouseEntered
         passOlvidada.setForeground(new Color(255,204,0));
 
@@ -216,6 +212,10 @@ public class LoginPage extends javax.swing.JFrame {
     private void registerButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseEntered
          registerButton.setForeground(new Color(255,204,0));
     }//GEN-LAST:event_registerButtonMouseEntered
+
+    private void inputPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputPassActionPerformed
 
     // Método para validar las credenciales en la base de datos
     private boolean validarCredenciales(String email, String password) {
