@@ -5,6 +5,7 @@
 package Vistas;
 
 import bd.Conexion;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.sql.ResultSet;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import java.sql.Timestamp;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -24,6 +26,12 @@ public class RegisterPage extends javax.swing.JFrame {
     public RegisterPage() {
         initComponents();
         conexion = new Conexion();
+        
+        this.setLocationRelativeTo(null); //Inicializa al centro de la pantalla
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/Logo_Book4u.png")); // Esto es para cambiar el icono de la app
+        Image image = icon.getImage();
+        setIconImage(image);
     }
 
     /**
@@ -37,11 +45,11 @@ public class RegisterPage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         label1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        registerButton = new javax.swing.JButton();
         inputEmail = new javax.swing.JFormattedTextField();
         inputNombre = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -55,6 +63,7 @@ public class RegisterPage extends javax.swing.JFrame {
         inputDomicilio = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         volverLogin = new javax.swing.JLabel();
+        registerButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro");
@@ -75,25 +84,80 @@ public class RegisterPage extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
 
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, -1, -1));
+
         label1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label1.setText("Registro");
-        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, 24));
+        label1.setMaximumSize(new java.awt.Dimension(49, 24));
+        label1.setMinimumSize(new java.awt.Dimension(49, 24));
+        label1.setPreferredSize(new java.awt.Dimension(49, 24));
+        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 24));
+        label1.getAccessibleContext().setAccessibleParent(jPanel2);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Rellena los campos para crear un usuario");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 97, 346, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 346, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("E-mail");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 134, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Nombre");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 294, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
+
+        inputEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        inputEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputEmailActionPerformed(evt);
+            }
+        });
+        getContentPane().add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 361, 40));
+        getContentPane().add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 361, 40));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Password");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+        getContentPane().add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 361, 40));
+        getContentPane().add(inputApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 361, 40));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Apellido 1");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
+        getContentPane().add(inputApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 361, 40));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Apellido 2");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, -1, -1));
+        getContentPane().add(inputDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 344, 40));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("DNI");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, -1, -1));
+        getContentPane().add(inputDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 690, 344, 40));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Domicilio");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 660, -1, -1));
+
+        volverLogin.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        volverLogin.setText("Login");
+        volverLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                volverLoginMouseClicked(evt);
+            }
+        });
+        getContentPane().add(volverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 730, -1, -1));
 
         registerButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         registerButton.setText("Registrarse");
@@ -103,55 +167,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 registerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 713, 344, 46));
-
-        inputEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        inputEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputEmailActionPerformed(evt);
-            }
-        });
-        getContentPane().add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 165, 361, 40));
-        getContentPane().add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 325, 361, 40));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Password");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 211, -1, -1));
-        getContentPane().add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 248, 361, 40));
-        getContentPane().add(inputApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 402, 361, 40));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Apellido 1");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 371, -1, -1));
-        getContentPane().add(inputApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 479, 361, 40));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Apellido 2");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 448, -1, -1));
-        getContentPane().add(inputDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 556, 344, 40));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("DNI");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 525, -1, -1));
-        getContentPane().add(inputDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 630, 344, 40));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Domicilio");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 602, -1, -1));
-
-        volverLogin.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        volverLogin.setText("Login");
-        volverLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                volverLoginMouseClicked(evt);
-            }
-        });
-        getContentPane().add(volverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 676, -1, -1));
+        getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, 344, 46));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -286,6 +302,7 @@ public class RegisterPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel label1;
     private javax.swing.JButton registerButton;
     private javax.swing.JLabel volverLogin;
