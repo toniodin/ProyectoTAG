@@ -33,6 +33,7 @@ public class RegisterPage extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/Logo_Book4u.png")); // Esto es para cambiar el icono de la app
         Image image = icon.getImage();
         setIconImage(image);
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(50); //Incrementar la velocidad de la ruda del raton desplazamiento
     }
 
     /**
@@ -78,7 +79,7 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 222, 89));
         jPanel1.setMinimumSize(new java.awt.Dimension(145, 105));
         jPanel1.setPreferredSize(new java.awt.Dimension(145, 105));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, -20));
+        jPanel1.setLayout(new java.awt.FlowLayout(1, 0, -20));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
         jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -89,6 +90,7 @@ public class RegisterPage extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         jScrollPane1.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(440, 470));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(440, 470));
@@ -265,7 +267,7 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel2.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 810, 344, 46));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 15));
+        jPanel3.setLayout(new java.awt.FlowLayout(1, 0, 15));
 
         volverLogin.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         volverLogin.setForeground(new java.awt.Color(0, 0, 255));
@@ -288,7 +290,7 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 750, 440, 60));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 15));
+        jPanel4.setLayout(new java.awt.FlowLayout(1, 0, 15));
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 850, 440, 30));
 
         jScrollPane1.setViewportView(jPanel2);
