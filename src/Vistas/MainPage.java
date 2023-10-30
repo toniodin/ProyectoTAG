@@ -7,6 +7,12 @@ package Vistas;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import bd.Conexion;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,17 +20,51 @@ import javax.swing.ImageIcon;
  */
 public class MainPage extends javax.swing.JFrame {
 
+    private final int idUser;
+    private Conexion conexion;
+    
     /**
      * Creates new form MainPage
      */
-    public MainPage() {
+    public MainPage(int idUser) {
         initComponents();
-        
+        System.out.println(idUser);
         this.setLocationRelativeTo(null); //Inicializa al centro de la pantalla
         
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/Logo_Book4u.png")); // Esto es para cambiar el icono de la app
         Image image = icon.getImage();
         setIconImage(image);
+        this.idUser = idUser;
+        
+        String nombreUsuario = getNombreUsuarioPorId(idUser);
+        jLabel20.setText(nombreUsuario);
+    }
+
+    private MainPage() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    // Método para validar las credenciales en la base de datos
+    private String getNombreUsuarioPorId(int id) {
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
+        String nombre = "";
+        
+        try {
+            // Consulta SQL para verificar las credenciales
+            String consulta = "SELECT * FROM usuarios WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(consulta);
+            statement.setInt(1, id);
+
+            ResultSet resultado = statement.executeQuery();
+            // Si se encontraron resultados, las credenciales son válidas
+            if (resultado.next()) {
+                nombre = resultado.getString("Nombre");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nombre;
     }
 
     /**

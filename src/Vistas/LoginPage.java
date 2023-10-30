@@ -19,7 +19,7 @@ import java.awt.Image;
  */
 public class LoginPage extends javax.swing.JFrame {
     private Conexion conexion; // Declarar una instancia de Conexion
-
+    public int idUserLogged = 0;
     public LoginPage() {
         initComponents();
         conexion = new Conexion(); // Inicializa la instancia de 
@@ -190,9 +190,8 @@ public class LoginPage extends javax.swing.JFrame {
         // Realiza la verificación en la base de datos
         if (validarCredenciales(email, password)) {
             JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.");
-            
             // Abrir el frame MainPage
-            MainPage mainPage = new MainPage();
+            MainPage mainPage = new MainPage(idUserLogged);
             mainPage.setVisible(true);
             
             setVisible(false);
@@ -272,9 +271,9 @@ public class LoginPage extends javax.swing.JFrame {
             statement.setString(2, password);
 
             ResultSet resultado = statement.executeQuery();
-
             // Si se encontraron resultados, las credenciales son válidas
             if (resultado.next()) {
+                idUserLogged = resultado.getInt("id");
                 return true;
             }
         } catch (Exception e) {
