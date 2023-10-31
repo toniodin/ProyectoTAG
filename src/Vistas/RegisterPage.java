@@ -71,6 +71,7 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         inputPass1 = new javax.swing.JPasswordField();
         inputRepitaPass = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro");
@@ -313,6 +314,14 @@ public class RegisterPage extends javax.swing.JFrame {
         });
         jPanel2.add(inputRepitaPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 344, 40));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 30, -1));
+
         jScrollPane1.setViewportView(jPanel2);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 990));
@@ -537,6 +546,18 @@ public class RegisterPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputRepitaPassFocusLost
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jButton1.getText().equals("Mostrar")) {
+        jButton1.setText("Ocultar");
+        inputPass1.setEchoChar((char) 0); // Mostrar texto sin ocultar
+        inputRepitaPass.setEchoChar((char) 0);
+    } else {
+        jButton1.setText("Mostrar");
+        inputPass1.setEchoChar('*'); // Ocultar texto
+        inputRepitaPass.setEchoChar('*');
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -581,6 +602,7 @@ public class RegisterPage extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField inputNombre;
     private javax.swing.JPasswordField inputPass1;
     private javax.swing.JPasswordField inputRepitaPass;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
