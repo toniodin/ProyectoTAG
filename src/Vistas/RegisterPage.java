@@ -33,6 +33,7 @@ public class RegisterPage extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/Logo_Book4u.png")); // Esto es para cambiar el icono de la app
         Image image = icon.getImage();
         setIconImage(image);
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(50); //Incrementar la velocidad de la ruda del raton desplazamiento
     }
 
     /**
@@ -53,7 +54,6 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         inputEmail = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
-        inputPass = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         inputNombre = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -68,6 +68,10 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         volverLogin = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        inputPass1 = new javax.swing.JPasswordField();
+        inputRepitaPass = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro");
@@ -78,7 +82,7 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 222, 89));
         jPanel1.setMinimumSize(new java.awt.Dimension(145, 105));
         jPanel1.setPreferredSize(new java.awt.Dimension(145, 105));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, -20));
+        jPanel1.setLayout(new java.awt.FlowLayout(1, 0, -20));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
         jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -89,6 +93,7 @@ public class RegisterPage extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         jScrollPane1.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(440, 470));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(440, 470));
@@ -140,26 +145,13 @@ public class RegisterPage extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Password");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
-
-        inputPass.setForeground(new java.awt.Color(153, 153, 153));
-        inputPass.setText("Indica tu contraseña");
-        inputPass.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        inputPass.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                inputPassFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                inputPassFocusLost(evt);
-            }
-        });
-        jPanel2.add(inputPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 344, 40));
+        jLabel4.setText("Repita la contraseña");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Nombre");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, -1, -1));
 
         inputNombre.setForeground(new java.awt.Color(153, 153, 153));
         inputNombre.setText("Indica tu nombre");
@@ -172,12 +164,12 @@ public class RegisterPage extends javax.swing.JFrame {
                 inputNombreFocusLost(evt);
             }
         });
-        jPanel2.add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 344, 40));
+        jPanel2.add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 344, 40));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Apellido 1");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, -1, -1));
 
         inputApellido1.setForeground(new java.awt.Color(153, 153, 153));
         inputApellido1.setText("Indica tu apellido");
@@ -195,12 +187,12 @@ public class RegisterPage extends javax.swing.JFrame {
                 inputApellido1ActionPerformed(evt);
             }
         });
-        jPanel2.add(inputApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 344, 40));
+        jPanel2.add(inputApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 344, 40));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Apellido 2");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, -1, -1));
 
         inputApellido2.setForeground(new java.awt.Color(153, 153, 153));
         inputApellido2.setText("Indica tu segundo apellido");
@@ -213,12 +205,12 @@ public class RegisterPage extends javax.swing.JFrame {
                 inputApellido2FocusLost(evt);
             }
         });
-        jPanel2.add(inputApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 344, 40));
+        jPanel2.add(inputApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 344, 40));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("DNI");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 680, -1, -1));
 
         inputDNI.setForeground(new java.awt.Color(153, 153, 153));
         inputDNI.setText("Indica tu dni");
@@ -232,12 +224,12 @@ public class RegisterPage extends javax.swing.JFrame {
                 inputDNIFocusLost(evt);
             }
         });
-        jPanel2.add(inputDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 344, 40));
+        jPanel2.add(inputDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 710, 344, 40));
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Domicilio");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 680, -1, -1));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 770, -1, -1));
 
         inputDomicilio.setForeground(new java.awt.Color(153, 153, 153));
         inputDomicilio.setText("Indica tu domicilio");
@@ -250,7 +242,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 inputDomicilioFocusLost(evt);
             }
         });
-        jPanel2.add(inputDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 710, 344, 40));
+        jPanel2.add(inputDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 800, 344, 40));
 
         registerButton.setBackground(new java.awt.Color(255, 222, 89));
         registerButton.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -262,10 +254,10 @@ public class RegisterPage extends javax.swing.JFrame {
                 registerButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 810, 344, 46));
+        jPanel2.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 910, 344, 46));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 15));
+        jPanel3.setLayout(new java.awt.FlowLayout(1, 0, 15));
 
         volverLogin.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         volverLogin.setForeground(new java.awt.Color(0, 0, 255));
@@ -285,22 +277,61 @@ public class RegisterPage extends javax.swing.JFrame {
         });
         jPanel3.add(volverLogin);
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 750, 440, 60));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 840, 440, 60));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 15));
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 850, 440, 30));
+        jPanel4.setLayout(new java.awt.FlowLayout(1, 0, 15));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 960, 440, 30));
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Contraseña");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
+
+        inputPass1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputPass1.setForeground(new java.awt.Color(153, 153, 153));
+        inputPass1.setText("Indica tu contraseña");
+        inputPass1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputPass1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputPass1FocusLost(evt);
+            }
+        });
+        jPanel2.add(inputPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 344, 40));
+
+        inputRepitaPass.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        inputRepitaPass.setForeground(new java.awt.Color(153, 153, 153));
+        inputRepitaPass.setText("Repita la contraseña");
+        inputRepitaPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputRepitaPassFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputRepitaPassFocusLost(evt);
+            }
+        });
+        jPanel2.add(inputRepitaPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 344, 40));
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 30, -1));
 
         jScrollPane1.setViewportView(jPanel2);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 470));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 990));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         String email = inputEmail.getText();
-        String password = inputPass.getText();
+        String password = inputRepitaPass.getText();
         String nombre = inputNombre.getText();
         String apellido1 = inputApellido1.getText();
         String apellido2 = inputApellido2.getText();
@@ -403,22 +434,6 @@ public class RegisterPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputEmailFocusLost
 
-    private void inputPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusGained
-        if(inputPass.getText().equals("Indica tu contraseña"))
-        {
-            inputPass.setText("");
-            inputPass.setForeground(new Color(0,0,0));
-        }
-    }//GEN-LAST:event_inputPassFocusGained
-
-    private void inputPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusLost
-        if(inputPass.getText().equals(""))
-        {
-            inputPass.setText("Indica tu contraseña");
-            inputPass.setForeground(new Color(153,153,153));
-        }
-    }//GEN-LAST:event_inputPassFocusLost
-
     private void inputNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNombreFocusGained
         if(inputNombre.getText().equals("Indica tu nombre"))
         {
@@ -499,6 +514,50 @@ public class RegisterPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputDomicilioFocusLost
 
+    private void inputPass1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPass1FocusGained
+       if(inputPass1.getText().equals("Indica tu contraseña"))
+        {
+            inputPass1.setText("");
+            inputPass1.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_inputPass1FocusGained
+
+    private void inputPass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPass1FocusLost
+        if(inputPass1.getText().equals(""))
+        {
+            inputPass1.setText("Indica tu contraseña");
+            inputPass1.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_inputPass1FocusLost
+
+    private void inputRepitaPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputRepitaPassFocusGained
+        if(inputRepitaPass.getText().equals("Repita la contraseña"))
+        {
+            inputRepitaPass.setText("");
+            inputRepitaPass.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_inputRepitaPassFocusGained
+
+    private void inputRepitaPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputRepitaPassFocusLost
+        if(inputRepitaPass.getText().equals(""))
+        {
+            inputRepitaPass.setText("Repita la contraseña");
+            inputRepitaPass.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_inputRepitaPassFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jButton1.getText().equals("Mostrar")) {
+        jButton1.setText("Ocultar");
+        inputPass1.setEchoChar((char) 0); // Mostrar texto sin ocultar
+        inputRepitaPass.setEchoChar((char) 0);
+    } else {
+        jButton1.setText("Mostrar");
+        inputPass1.setEchoChar('*'); // Ocultar texto
+        inputRepitaPass.setEchoChar('*');
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -541,8 +600,11 @@ public class RegisterPage extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField inputDomicilio;
     private javax.swing.JFormattedTextField inputEmail;
     private javax.swing.JFormattedTextField inputNombre;
-    private javax.swing.JFormattedTextField inputPass;
+    private javax.swing.JPasswordField inputPass1;
+    private javax.swing.JPasswordField inputRepitaPass;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
