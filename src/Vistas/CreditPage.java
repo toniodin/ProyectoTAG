@@ -22,7 +22,9 @@ public class CreditPage extends javax.swing.JFrame {
 
     private final int idUser;
     private Conexion conexion;
-    
+    int saldo;
+    int creditos_actuales;
+    String textoDelJTextField;
     /**
      * Creates new form MainPage
      */
@@ -77,12 +79,9 @@ public class CreditPage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
@@ -95,18 +94,18 @@ public class CreditPage extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -115,19 +114,12 @@ public class CreditPage extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Para_ti_uwu.PNG"))); // NOI18N
-        jLabel16.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel16.setIconTextGap(1);
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 220, 210));
-
         jPanel6.setBackground(new java.awt.Color(255, 222, 89));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jTextField1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("Introduce el destino");
+        jTextField1.setText("Añadir Importe");
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField1FocusGained(evt);
@@ -141,44 +133,34 @@ public class CreditPage extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jPanel6.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 16, 205, 33));
-
-        jTextField2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField2.setText("Introduce fechas");
-        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField2FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField2FocusLost(evt);
-            }
-        });
-        jPanel6.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 61, 205, 33));
+        jPanel6.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 230, 40));
 
         jButton1.setBackground(new java.awt.Color(255, 222, 89));
         jButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jButton1.setText("Buscar");
+        jButton1.setText("Agregar");
         jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 96, 270, 50));
-
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/calendario.png"))); // NOI18N
-        jLabel6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel6.setIconTextGap(1);
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 64, 33, -1));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
+        jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 230, 40));
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busqueda_little.png"))); // NOI18N
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
         jLabel15.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel15.setIconTextGap(1);
-        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 16, 33, -1));
+        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 33, -1));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 280, 150));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 440, 100));
 
         jPanel4.setBackground(new java.awt.Color(255, 222, 89));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -240,86 +222,155 @@ public class CreditPage extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/coin1.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/arrow_left.png"))); // NOI18N
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel5.setIconTextGap(1);
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 20, 33, -1));
-
-        jLabel1.setText("0");
-        jLabel1.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 20, 36, 30));
-
-        jPanel5.setBackground(new java.awt.Color(255, 222, 89));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/casas_rurales.png"))); // NOI18N
-        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel8.setIconTextGap(1);
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        jLabel3.setText("Casas rurales");
-        jLabel3.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 80, 30));
-
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/apartamentos.png"))); // NOI18N
-        jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel9.setIconTextGap(1);
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        jLabel4.setText("Apartamentos");
-        jLabel4.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 90, 30));
-
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Hoteles");
-        jLabel7.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 50, 30));
-
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Hoteles.png"))); // NOI18N
-        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel10.setIconTextGap(1);
-        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, -1));
-
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/apartahoteles.png"))); // NOI18N
-        jLabel11.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel11.setIconTextGap(1);
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, -1));
-
-        jLabel12.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel12.setText("Apartahoteles");
-        jLabel12.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 100, 30));
-
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 62, 450, -1));
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 33, -1));
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U_Little.png"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
         jLabel13.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel13.setIconTextGap(1);
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, -20, -1, -1));
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/notify.png"))); // NOI18N
         jLabel14.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel14.setIconTextGap(1);
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, -1));
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
+        jButton2.setText("50");
+        jButton2.setActionCommand("5");
+        jButton2.setHideActionText(true);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 120, 60));
+
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
+        jButton4.setText("80");
+        jButton4.setHideActionText(true);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 120, 60));
+
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
+        jButton5.setText("40");
+        jButton5.setHideActionText(true);
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 120, 60));
+
+        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
+        jButton6.setText("10");
+        jButton6.setHideActionText(true);
+        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 120, 60));
+
+        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
+        jButton7.setText("20");
+        jButton7.setHideActionText(true);
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 120, 60));
+
+        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
+        jButton8.setText("30");
+        jButton8.setHideActionText(true);
+        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 120, 60));
+
+        jPanel3.setBackground(new java.awt.Color(255, 222, 89));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setText("0");
+        jLabel2.setPreferredSize(new java.awt.Dimension(30, 20));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 80, 40));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("(10 Euros equivalen a 1 Credito)");
+        jLabel1.setPreferredSize(new java.awt.Dimension(30, 20));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 200, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setText("Creditos Actuales:");
+        jLabel3.setPreferredSize(new java.awt.Dimension(30, 20));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 220, 40));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 440, 90));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 570));
 
@@ -339,28 +390,87 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1FocusGained
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
-        if(jTextField1.getText().equals(""))
-        {
-            jTextField1.setText("Introduce el destino");
-            jTextField1.setForeground(new Color(153,153,153));
-        }
+        textoDelJTextField = jTextField1.getText();
+        
     }//GEN-LAST:event_jTextField1FocusLost
 
-    private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
-        if(jTextField2.getText().equals("Introduce fechas"))
-        {
-            jTextField2.setText("");
-            jTextField2.setForeground(new Color(0,0,0));
-        }
-    }//GEN-LAST:event_jTextField2FocusGained
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
-        if(jTextField2.getText().equals(""))
-        {
-            jTextField2.setText("Introduce fechas");
-            jTextField2.setForeground(new Color(153,153,153));
-        }
-    }//GEN-LAST:event_jTextField2FocusLost
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    saldo=50;        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+    saldo=80;         // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+    saldo=40;         // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+    saldo=10;        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+    saldo=20;        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+    saldo=30;         // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+    creditos_actuales=saldo; 
+    String creditosA_stg = Integer.toString(creditos_actuales);
+        jLabel2.setText(creditosA_stg);
+                // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection(); // Obtén la conexión// Obtén el correo electrónico y la contraseña ingresados por el usuario
+        int Credito = saldo;
+        int Id = idUser;
+        
+        // Realiza la verificación en la base de datos
+        if (validarCredenciales(Credito,Id)) {
+            JOptionPane.showMessageDialog(this, "Creditos almacenados con exito.");
+            
+            setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error con en el proceso.");
+        }    // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        MainPage mainPage = new MainPage(idUser);
+            mainPage.setVisible(true);
+            setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -398,37 +508,57 @@ public class CreditPage extends javax.swing.JFrame {
         });
     }
 
+    // Método para validar las credenciales en la base de datos
+    private boolean validarCredenciales(int Credito, int Id) {
+        Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
+        
+        try {
+            // Consulta SQL para verificar las credenciales
+            String consulta = "UPDATE usuarios SET Credito = ? WHERE Id = ? ";
+            PreparedStatement statement = connection.prepareStatement(consulta);
+            statement.setInt(1, Credito);
+            statement.setInt(2, Id);
+
+            ResultSet resultado = statement.executeQuery();
+            // Si se encontraron resultados, las credenciales son válidas
+            if (resultado.next()) {
+                Credito = resultado.getInt(Credito);
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
