@@ -12,7 +12,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -119,7 +121,7 @@ public class CreditPage extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("Añadir Importe");
+        jTextField1.setText("Agregar Importe");
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField1FocusGained(evt);
@@ -382,7 +384,7 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
-        if(jTextField1.getText().equals("Introduce el destino"))
+        if(jTextField1.getText().equals("Agregar Importe"))
         {
             jTextField1.setText("");
             jTextField1.setForeground(new Color(0,0,0));
@@ -390,6 +392,7 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1FocusGained
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        
         textoDelJTextField = jTextField1.getText();
         
     }//GEN-LAST:event_jTextField1FocusLost
@@ -399,11 +402,13 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-    saldo=50;        // TODO add your handling code here:
+    saldo=50;   
+    System.out.println("50");// TODO add your handling code here:
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-    saldo=80;         // TODO add your handling code here:
+    saldo=80;
+    System.out.println("80");// TODO add your handling code here:
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -411,7 +416,9 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-    saldo=40;         // TODO add your handling code here:
+    saldo=40;
+    System.out.println("40");
+    // TODO add your handling code here:
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -419,7 +426,8 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-    saldo=10;        // TODO add your handling code here:
+    saldo=10;
+    System.out.println("10");// TODO add your handling code here:
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -427,7 +435,8 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
-    saldo=20;        // TODO add your handling code here:
+    saldo=20;   
+    System.out.println("20");// TODO add your handling code here:
     }//GEN-LAST:event_jButton7MouseClicked
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -435,7 +444,8 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
-    saldo=30;         // TODO add your handling code here:
+    saldo=30; 
+    System.out.println("30");// TODO add your handling code here:
     }//GEN-LAST:event_jButton8MouseClicked
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -443,27 +453,40 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
-    creditos_actuales=saldo; 
+    creditos_actuales = saldo + creditos_actuales;
     String creditosA_stg = Integer.toString(creditos_actuales);
-        jLabel2.setText(creditosA_stg);
-                // TODO add your handling code here:
+
+    jLabel2.setText(creditosA_stg);
+        
+    Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
+    
+    try {
+        // Define la sentencia SQL para la actualización
+        String sql = "UPDATE usuarios SET Credito = ? WHERE Id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, creditos_actuales);
+            preparedStatement.setInt(2, idUser);
+
+            // Ejecuta la sentencia SQL para actualizar los datos
+            int rowsUpdated = preparedStatement.executeUpdate();
+            
+            if (rowsUpdated > 0) {
+                System.out.println("Actualización exitosa");
+            } else {
+                System.out.println("No se encontró ningún usuario con el ID especificado");
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Maneja la excepción apropiadamente
+    }
+
+
     }//GEN-LAST:event_jButton1KeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-    Conexion conexion = new Conexion();
-        Connection connection = conexion.DatabaseConnection(); // Obtén la conexión// Obtén el correo electrónico y la contraseña ingresados por el usuario
-        int Credito = saldo;
-        int Id = idUser;
-        
-        // Realiza la verificación en la base de datos
-        if (validarCredenciales(Credito,Id)) {
-            JOptionPane.showMessageDialog(this, "Creditos almacenados con exito.");
-            
-            setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(this, "Error con en el proceso.");
-        }    // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -508,28 +531,7 @@ public class CreditPage extends javax.swing.JFrame {
         });
     }
 
-    // Método para validar las credenciales en la base de datos
-    private boolean validarCredenciales(int Credito, int Id) {
-        Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
-        
-        try {
-            // Consulta SQL para verificar las credenciales
-            String consulta = "UPDATE usuarios SET Credito = ? WHERE Id = ? ";
-            PreparedStatement statement = connection.prepareStatement(consulta);
-            statement.setInt(1, Credito);
-            statement.setInt(2, Id);
-
-            ResultSet resultado = statement.executeQuery();
-            // Si se encontraron resultados, las credenciales son válidas
-            if (resultado.next()) {
-                Credito = resultado.getInt(Credito);
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
