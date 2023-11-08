@@ -30,7 +30,7 @@ public class RegisterPage extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null); //Inicializa al centro de la pantalla
         
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/Logo_Book4u.png")); // Esto es para cambiar el icono de la app
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icono.png")); // Esto es para cambiar el icono de la app
         Image image = icon.getImage();
         setIconImage(image);
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(50); //Incrementar la velocidad de la ruda del raton desplazamiento
@@ -71,7 +71,10 @@ public class RegisterPage extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         inputPass1 = new javax.swing.JPasswordField();
         inputRepitaPass = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+
+      jButton1 = new javax.swing.JButton();
+        mostrarContraseñaRepetida = new javax.swing.JButton();
+        mostrarContraseña1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro");
@@ -322,6 +325,22 @@ public class RegisterPage extends javax.swing.JFrame {
         });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 30, -1));
 
+      mostrarContraseñaRepetida.setText("jButton1");
+        mostrarContraseñaRepetida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarContraseñaRepetidaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(mostrarContraseñaRepetida, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 30, -1));
+
+        mostrarContraseña1.setText("jButton1");
+        mostrarContraseña1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarContraseña1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(mostrarContraseña1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 30, -1));
+
         jScrollPane1.setViewportView(jPanel2);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 990));
@@ -558,6 +577,26 @@ public class RegisterPage extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void mostrarContraseñaRepetidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarContraseñaRepetidaActionPerformed
+        if (mostrarContraseñaRepetida.getText().equals("Mostrar")) {
+        mostrarContraseñaRepetida.setText("Ocultar");
+        inputRepitaPass.setEchoChar((char) 0);
+    } else {
+        mostrarContraseñaRepetida.setText("Mostrar");
+        inputRepitaPass.setEchoChar('*');
+    }
+    }//GEN-LAST:event_mostrarContraseñaRepetidaActionPerformed
+
+    private void mostrarContraseña1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarContraseña1ActionPerformed
+        if (mostrarContraseñaRepetida.getText().equals("Mostrar")) {
+        mostrarContraseñaRepetida.setText("Ocultar");
+        inputPass1.setEchoChar((char) 0); // Mostrar texto sin ocultar
+    } else {
+        mostrarContraseñaRepetida.setText("Mostrar");
+        inputPass1.setEchoChar('*'); // Ocultar texto
+    }
+    }//GEN-LAST:event_mostrarContraseña1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -619,6 +658,8 @@ public class RegisterPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
+    private javax.swing.JButton mostrarContraseña1;
+    private javax.swing.JButton mostrarContraseñaRepetida;
     private javax.swing.JButton registerButton;
     private javax.swing.JLabel volverLogin;
     // End of variables declaration//GEN-END:variables
