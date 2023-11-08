@@ -99,12 +99,12 @@ public class CreditPage extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btn50euros = new javax.swing.JButton();
+        btn80euros = new javax.swing.JButton();
+        btn40euros = new javax.swing.JButton();
+        btn10euros = new javax.swing.JButton();
+        btn20euros = new javax.swing.JButton();
+        btn30euros = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -182,6 +182,7 @@ public class CreditPage extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel17.setText("Buscar");
+        jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 20));
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -199,6 +200,7 @@ public class CreditPage extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Reservas");
+        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel19.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 100, 23));
 
@@ -211,6 +213,7 @@ public class CreditPage extends javax.swing.JFrame {
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busqueda.png"))); // NOI18N
         jLabel29.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel29.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel29.setIconTextGap(1);
         jLabel29.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -223,6 +226,7 @@ public class CreditPage extends javax.swing.JFrame {
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reservas.png"))); // NOI18N
         jLabel30.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel30.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel30.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel30.setIconTextGap(1);
         jPanel4.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, 40));
@@ -242,6 +246,7 @@ public class CreditPage extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/arrow_left.png"))); // NOI18N
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel5.setIconTextGap(1);
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -267,123 +272,129 @@ public class CreditPage extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
-        jButton2.setText("50");
-        jButton2.setActionCommand("5");
-        jButton2.setHideActionText(true);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn50euros.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        btn50euros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
+        btn50euros.setText("50");
+        btn50euros.setActionCommand("5");
+        btn50euros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn50euros.setHideActionText(true);
+        btn50euros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btn50euros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                btn50eurosMouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn50euros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn50eurosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 120, 60));
+        jPanel1.add(btn50euros, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 120, 60));
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
-        jButton4.setText("80");
-        jButton4.setHideActionText(true);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn80euros.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        btn80euros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
+        btn80euros.setText("80");
+        btn80euros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn80euros.setHideActionText(true);
+        btn80euros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btn80euros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
+                btn80eurosMouseClicked(evt);
             }
         });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn80euros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btn80eurosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 120, 60));
+        jPanel1.add(btn80euros, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 120, 60));
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
-        jButton5.setText("40");
-        jButton5.setHideActionText(true);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn40euros.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        btn40euros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
+        btn40euros.setText("40");
+        btn40euros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn40euros.setHideActionText(true);
+        btn40euros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btn40euros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton5MouseClicked(evt);
+                btn40eurosMouseClicked(evt);
             }
         });
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btn40euros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btn40eurosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 120, 60));
+        jPanel1.add(btn40euros, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 120, 60));
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
-        jButton6.setText("10");
-        jButton6.setHideActionText(true);
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn10euros.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        btn10euros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
+        btn10euros.setText("10");
+        btn10euros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn10euros.setHideActionText(true);
+        btn10euros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btn10euros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton6MouseClicked(evt);
+                btn10eurosMouseClicked(evt);
             }
         });
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btn10euros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btn10eurosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 120, 60));
+        jPanel1.add(btn10euros, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 120, 60));
 
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
-        jButton7.setText("20");
-        jButton7.setHideActionText(true);
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn20euros.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        btn20euros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
+        btn20euros.setText("20");
+        btn20euros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn20euros.setHideActionText(true);
+        btn20euros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btn20euros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton7MouseClicked(evt);
+                btn20eurosMouseClicked(evt);
             }
         });
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btn20euros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btn20eurosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 120, 60));
+        jPanel1.add(btn20euros, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 120, 60));
 
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
-        jButton8.setText("30");
-        jButton8.setHideActionText(true);
-        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn30euros.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        btn30euros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/euro.png"))); // NOI18N
+        btn30euros.setText("30");
+        btn30euros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn30euros.setHideActionText(true);
+        btn30euros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btn30euros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton8MouseClicked(evt);
+                btn30eurosMouseClicked(evt);
             }
         });
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btn30euros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btn30eurosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 120, 60));
+        jPanel1.add(btn30euros, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 120, 60));
 
         jPanel3.setBackground(new java.awt.Color(255, 222, 89));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel2.setText("0");
         jLabel2.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 80, 40));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel1.setText("(10 Euros equivalen a 1 Credito)");
         jLabel1.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 200, 30));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 230, 30));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel3.setText("Creditos Actuales:");
         jLabel3.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 220, 40));
@@ -413,60 +424,60 @@ public class CreditPage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTextField1FocusLost
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn50eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn50eurosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn50eurosActionPerformed
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void btn50eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn50eurosMouseClicked
     saldo=50;   
-    System.out.println("50");// TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MouseClicked
+    jTextField1.setText(String.valueOf(saldo));
+    }//GEN-LAST:event_btn50eurosMouseClicked
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+    private void btn80eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn80eurosMouseClicked
     saldo=80;
-    System.out.println("80");// TODO add your handling code here:
-    }//GEN-LAST:event_jButton4MouseClicked
+    jTextField1.setText(String.valueOf(saldo));
+    }//GEN-LAST:event_btn80eurosMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btn80eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn80eurosActionPerformed
+        
+    }//GEN-LAST:event_btn80eurosActionPerformed
 
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+    private void btn40eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn40eurosMouseClicked
     saldo=40;
-    System.out.println("40");
+    jTextField1.setText(String.valueOf(saldo));
     // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5MouseClicked
+    }//GEN-LAST:event_btn40eurosMouseClicked
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btn40eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn40eurosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btn40eurosActionPerformed
 
-    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+    private void btn10eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn10eurosMouseClicked
     saldo=10;
-    System.out.println("10");// TODO add your handling code here:
-    }//GEN-LAST:event_jButton6MouseClicked
+    jTextField1.setText(String.valueOf(saldo));
+    }//GEN-LAST:event_btn10eurosMouseClicked
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btn10eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn10eurosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btn10eurosActionPerformed
 
-    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+    private void btn20eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn20eurosMouseClicked
     saldo=20;   
-    System.out.println("20");// TODO add your handling code here:
-    }//GEN-LAST:event_jButton7MouseClicked
+    jTextField1.setText(String.valueOf(saldo));
+    }//GEN-LAST:event_btn20eurosMouseClicked
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void btn20eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn20eurosActionPerformed
+        
+    }//GEN-LAST:event_btn20eurosActionPerformed
 
-    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+    private void btn30eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn30eurosMouseClicked
     saldo=30; 
-    System.out.println("30");// TODO add your handling code here:
-    }//GEN-LAST:event_jButton8MouseClicked
+    jTextField1.setText(String.valueOf(saldo));
+    }//GEN-LAST:event_btn30eurosMouseClicked
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btn30eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn30eurosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btn30eurosActionPerformed
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
     
@@ -578,13 +589,13 @@ public class CreditPage extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn10euros;
+    private javax.swing.JButton btn20euros;
+    private javax.swing.JButton btn30euros;
+    private javax.swing.JButton btn40euros;
+    private javax.swing.JButton btn50euros;
+    private javax.swing.JButton btn80euros;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
