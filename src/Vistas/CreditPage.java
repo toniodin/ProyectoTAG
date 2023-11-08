@@ -183,6 +183,11 @@ public class CreditPage extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel17.setText("Buscar");
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 20));
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel17MouseClicked(evt);
+            }
+        });
         jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 50, 23));
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -208,6 +213,11 @@ public class CreditPage extends javax.swing.JFrame {
         jLabel29.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel29.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel29.setIconTextGap(1);
+        jLabel29.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel29MouseClicked(evt);
+            }
+        });
         jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -468,50 +478,66 @@ public class CreditPage extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         MainPage mainPage = new MainPage(idUser);
-            mainPage.setVisible(true);
-            setVisible(false);        // TODO add your handling code here:
+        mainPage.setVisible(true);
+        setVisible(false);        
+        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-creditos_actuales = saldo + creditos_actuales;
-    String creditosA_stg = Integer.toString(creditos_actuales);
+        creditos_actuales = saldo + creditos_actuales;
+        String creditosA_stg = Integer.toString(creditos_actuales);
 
-    jLabel2.setText(creditosA_stg);
-    
-    SwingUtilities.invokeLater(new Runnable() {
-        public void run() {
-            jLabel2.setText(creditosA_stg);
-        }
-        });
+        jLabel2.setText(creditosA_stg);
 
-     /*String url = "jdbc:mysql://localhost:3306/proyecto_t_a_g";
-    String user = "root";
-    String password = "usbw";*/
-     
-        Conexion conexion2 = new Conexion();
-        Connection connection = conexion2.DatabaseConnection();
-    try  {
-        // Define la sentencia SQL para la actualización
-        String sql = "UPDATE usuarios SET Credito = ? WHERE Id = ?";
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, creditos_actuales);
-            preparedStatement.setInt(2, idUser);
-
-            // Ejecuta la sentencia SQL para actualizar los datos
-            int rowsUpdated = preparedStatement.executeUpdate();
-            
-            if (rowsUpdated > 0) {
-                System.out.println("Actualización exitosa");
-            } else {
-                System.out.println("No se encontró ningún usuario con el ID especificado");
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                jLabel2.setText(creditosA_stg);
             }
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        // Maneja la excepción apropiadamente
-    }        // TODO add your handling code here:
+            });
+
+         /*String url = "jdbc:mysql://localhost:3306/proyecto_t_a_g";
+        String user = "root";
+        String password = "usbw";*/
+
+            Conexion conexion2 = new Conexion();
+            Connection connection = conexion2.DatabaseConnection();
+        try  {
+            // Define la sentencia SQL para la actualización
+            String sql = "UPDATE usuarios SET Credito = ? WHERE Id = ?";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, creditos_actuales);
+                preparedStatement.setInt(2, idUser);
+
+                // Ejecuta la sentencia SQL para actualizar los datos
+                int rowsUpdated = preparedStatement.executeUpdate();
+
+                if (rowsUpdated > 0) {
+                    System.out.println("Actualización exitosa");
+                    saldo = 0;
+                } else {
+                    System.out.println("No se encontró ningún usuario con el ID especificado");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Maneja la excepción apropiadamente
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jLabel29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseClicked
+        MainPage mainPage = new MainPage(idUser);
+        mainPage.setVisible(true);
+        setVisible(false); 
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel29MouseClicked
+
+    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
+        MainPage mainPage = new MainPage(idUser);
+        mainPage.setVisible(true);
+        setVisible(false); 
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel17MouseClicked
 
     /**
      * @param args the command line arguments
