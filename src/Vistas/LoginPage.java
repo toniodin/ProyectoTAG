@@ -29,6 +29,7 @@ public class LoginPage extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icono.png")); // Esto es para cambiar el icono de la app
         Image image = icon.getImage();
         setIconImage(image);
+        getRootPane().setDefaultButton(loginButton);
     }
 
     /**
