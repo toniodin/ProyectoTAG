@@ -147,7 +147,9 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new java.awt.FlowLayout(1, 30, 30));
+        jPanel3.setMinimumSize(new java.awt.Dimension(1000, 1000));
+        jPanel3.setPreferredSize(new java.awt.Dimension(1000, 1000));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnActivos.setBackground(new java.awt.Color(255, 222, 89));
         btnActivos.setText("Activos");
@@ -156,15 +158,15 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 btnActivosActionPerformed(evt);
             }
         });
-        jPanel3.add(btnActivos);
+        jPanel3.add(btnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 40));
 
         btnPasados.setBackground(new java.awt.Color(255, 222, 89));
         btnPasados.setText("Pasados");
-        jPanel3.add(btnPasados);
+        jPanel3.add(btnPasados, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 20, 110, 40));
 
         btnCancelados.setBackground(new java.awt.Color(255, 222, 89));
         btnCancelados.setText("Cancelados");
-        jPanel3.add(btnCancelados);
+        jPanel3.add(btnCancelados, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 110, 40));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 60));
 
@@ -253,13 +255,13 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setText("¿Adónde quiere ir?");
-        panelActivos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, -1));
+        panelActivos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("<html>Aún no has iniciado ningún viaje. Cuando hagas una reserva, aparecerá aquí.</html>");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelActivos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 320, -1));
+        panelActivos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 320, -1));
 
         jPanel1.add(panelActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 440, 330));
 
