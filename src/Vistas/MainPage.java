@@ -91,7 +91,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
+        btnReservas = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -110,6 +110,7 @@ public class MainPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -221,12 +222,17 @@ public class MainPage extends javax.swing.JFrame {
         jLabel29.setIconTextGap(1);
         jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
-        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reservas.png"))); // NOI18N
-        jLabel30.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel30.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel30.setIconTextGap(1);
-        jPanel4.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, 40));
+        btnReservas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reservas.png"))); // NOI18N
+        btnReservas.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnReservas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnReservas.setIconTextGap(1);
+        btnReservas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReservasMouseClicked(evt);
+            }
+        });
+        jPanel4.add(btnReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, 40));
 
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/favoritos.png"))); // NOI18N
@@ -363,6 +369,13 @@ public class MainPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextField2FocusLost
 
+    private void btnReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseClicked
+    MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser);
+
+    MevesReservesPage.setVisible(true);
+    setVisible(false);        
+    }//GEN-LAST:event_btnReservasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -399,6 +412,7 @@ public class MainPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnReservas;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -415,7 +429,6 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

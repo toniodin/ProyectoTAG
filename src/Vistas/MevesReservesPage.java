@@ -116,10 +116,10 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        labelReservas = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JLabel();
+        btnReservas = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         panelActivos = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -137,7 +137,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 222, 89));
         jPanel2.setMinimumSize(new java.awt.Dimension(145, 105));
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, -20));
+        jPanel2.setLayout(new java.awt.FlowLayout(1, 0, -20));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -147,7 +147,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 30));
+        jPanel3.setLayout(new java.awt.FlowLayout(1, 30, 30));
 
         btnActivos.setBackground(new java.awt.Color(255, 222, 89));
         btnActivos.setText("Activos");
@@ -180,7 +180,13 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel17.setText("Buscar");
+        jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 20));
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel17MouseClicked(evt);
+            }
+        });
         jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 50, 23));
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -189,11 +195,17 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jLabel18.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 80, 23));
 
-        jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("Reservas");
-        jLabel19.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 100, 23));
+        labelReservas.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        labelReservas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelReservas.setText("Reservas");
+        labelReservas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelReservas.setPreferredSize(new java.awt.Dimension(30, 20));
+        labelReservas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelReservasMouseClicked(evt);
+            }
+        });
+        jPanel4.add(labelReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 60, 23));
 
         jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -201,19 +213,31 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jLabel20.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 90, 23));
 
-        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busqueda.png"))); // NOI18N
-        jLabel29.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel29.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel29.setIconTextGap(1);
-        jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+        btnBuscar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busqueda.png"))); // NOI18N
+        btnBuscar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnBuscar.setIconTextGap(1);
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseClicked(evt);
+            }
+        });
+        jPanel4.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
-        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reservas.png"))); // NOI18N
-        jLabel30.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel30.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel30.setIconTextGap(1);
-        jPanel4.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, 40));
+        btnReservas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reservas.png"))); // NOI18N
+        btnReservas.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnReservas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReservas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnReservas.setIconTextGap(1);
+        btnReservas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReservasMouseClicked(evt);
+            }
+        });
+        jPanel4.add(btnReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, 40));
 
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/favoritos.png"))); // NOI18N
@@ -227,13 +251,15 @@ public class MevesReservesPage extends javax.swing.JFrame {
         panelActivos.setBackground(new java.awt.Color(255, 255, 255));
         panelActivos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setText("¿Adónde quiere ir?");
         panelActivos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("<html>Aún no has iniciado ningún viaje. Cuando hagas una reserva, aparecerá aquí.</html>");
-        panelActivos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, -1, -1));
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelActivos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 320, -1));
 
         jPanel1.add(panelActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 440, 330));
 
@@ -267,6 +293,35 @@ public class MevesReservesPage extends javax.swing.JFrame {
     private void btnActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnActivosActionPerformed
+
+    private void btnReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseClicked
+
+    MevesReservesPage mevesReservesPage = new MevesReservesPage(idUser);
+
+    mevesReservesPage.setVisible(true);
+    setVisible(false);
+    }//GEN-LAST:event_btnReservasMouseClicked
+
+    private void labelReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelReservasMouseClicked
+    MevesReservesPage mevesReservesPage = new MevesReservesPage(idUser);
+
+    mevesReservesPage.setVisible(true);
+    setVisible(false);
+    }//GEN-LAST:event_labelReservasMouseClicked
+
+    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
+    MainPage MainPage = new MainPage(idUser);
+    
+    MainPage.setVisible(true);
+    setVisible(false);
+    }//GEN-LAST:event_btnBuscarMouseClicked
+
+    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
+    MainPage MainPage = new MainPage(idUser);
+    
+    MainPage.setVisible(true);
+    setVisible(false);
+    }//GEN-LAST:event_jLabel17MouseClicked
 
     /**
      * @param args the command line arguments
@@ -305,18 +360,17 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActivos;
+    private javax.swing.JLabel btnBuscar;
     private javax.swing.JButton btnCancelados;
     private javax.swing.JButton btnPasados;
+    private javax.swing.JLabel btnReservas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -324,6 +378,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel labelReservas;
     private javax.swing.JPanel panelActivos;
     private javax.swing.JPanel panelCancelados;
     private javax.swing.JPanel panelPasados;
