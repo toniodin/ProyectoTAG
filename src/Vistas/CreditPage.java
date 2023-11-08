@@ -70,6 +70,7 @@ public class CreditPage extends javax.swing.JFrame {
         }
         return nombre;
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -143,6 +144,11 @@ public class CreditPage extends javax.swing.JFrame {
         jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -453,14 +459,38 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
-    creditos_actuales = saldo + creditos_actuales;
+    
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        MainPage mainPage = new MainPage(idUser);
+            mainPage.setVisible(true);
+            setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+creditos_actuales = saldo + creditos_actuales;
     String creditosA_stg = Integer.toString(creditos_actuales);
 
     jLabel2.setText(creditosA_stg);
-        
-    Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
     
-    try {
+    SwingUtilities.invokeLater(new Runnable() {
+        public void run() {
+            jLabel2.setText(creditosA_stg);
+        }
+        });
+
+     /*String url = "jdbc:mysql://localhost:3306/proyecto_t_a_g";
+    String user = "root";
+    String password = "usbw";*/
+     
+        Conexion conexion2 = new Conexion();
+        Connection connection = conexion2.DatabaseConnection();
+    try  {
         // Define la sentencia SQL para la actualización
         String sql = "UPDATE usuarios SET Credito = ? WHERE Id = ?";
 
@@ -480,20 +510,8 @@ public class CreditPage extends javax.swing.JFrame {
     } catch (SQLException e) {
         e.printStackTrace();
         // Maneja la excepción apropiadamente
-    }
-
-
-    }//GEN-LAST:event_jButton1KeyPressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        MainPage mainPage = new MainPage(idUser);
-            mainPage.setVisible(true);
-            setVisible(false);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
