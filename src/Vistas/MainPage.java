@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import Vistas.CreditPage;
 
 /**
  *
@@ -245,6 +246,11 @@ public class MainPage extends javax.swing.JFrame {
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel5.setIconTextGap(1);
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 20, 33, -1));
 
         jLabel1.setText("0");
@@ -362,6 +368,12 @@ public class MainPage extends javax.swing.JFrame {
             jTextField2.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_jTextField2FocusLost
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        CreditPage creditPage = new CreditPage(idUser);
+        creditPage.setVisible(true);
+        this.dispose();      // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
