@@ -471,14 +471,7 @@ public class CreditPage extends javax.swing.JFrame {
         saldo = 50;
         inputDinero.setText(String.valueOf(saldo));
     }//GEN-LAST:event_btn50eurosMouseClicked
-
-    private void btn80eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn80eurosMouseClicked
-        saldo = 80;
-        inputDinero.setText(String.valueOf(saldo));
-    saldo=50;
-    inputDinero.setText(String.valueOf(saldo));
-    }//GEN-LAST:event_btn50eurosMouseClicked
-
+                                     
     private void btn80eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn80eurosMouseClicked
     saldo=80;
     inputDinero.setText(String.valueOf(saldo));
@@ -492,9 +485,6 @@ public class CreditPage extends javax.swing.JFrame {
         saldo = 40;
         inputDinero.setText(String.valueOf(saldo));
         // TODO add your handling code here:
-    saldo=40;
-    inputDinero.setText(String.valueOf(saldo));
-    // TODO add your handling code here:
     }//GEN-LAST:event_btn40eurosMouseClicked
 
     private void btn40eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn40eurosActionPerformed
@@ -504,8 +494,6 @@ public class CreditPage extends javax.swing.JFrame {
     private void btn10eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn10eurosMouseClicked
         saldo = 10;
         inputDinero.setText(String.valueOf(saldo));
-    saldo=10;
-    inputDinero.setText(String.valueOf(saldo));
     }//GEN-LAST:event_btn10eurosMouseClicked
 
     private void btn10eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn10eurosActionPerformed
@@ -515,8 +503,6 @@ public class CreditPage extends javax.swing.JFrame {
     private void btn20eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn20eurosMouseClicked
         saldo = 20;
         inputDinero.setText(String.valueOf(saldo));
-    saldo=20;
-    inputDinero.setText(String.valueOf(saldo));
     }//GEN-LAST:event_btn20eurosMouseClicked
 
     private void btn20eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn20eurosActionPerformed
@@ -526,8 +512,6 @@ public class CreditPage extends javax.swing.JFrame {
     private void btn30eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn30eurosMouseClicked
         saldo = 30;
         inputDinero.setText(String.valueOf(saldo));
-    saldo=30;
-    inputDinero.setText(String.valueOf(saldo));
     }//GEN-LAST:event_btn30eurosMouseClicked
 
     private void btn30eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn30eurosActionPerformed
