@@ -111,7 +111,6 @@ public class MainPage extends javax.swing.JFrame {
         Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
 
         try {
-            // Consulta SQL para obtener las reservas donde id_usuario es null
             String consulta = "SELECT * FROM reservas WHERE id_usuario IS NULL";
             PreparedStatement statement = connection.prepareStatement(consulta);
 
@@ -119,8 +118,8 @@ public class MainPage extends javax.swing.JFrame {
 
             int i = 0;
             while (resultado.next()) {
-                String imagenPath = resultado.getString("imagen"); // Suponiendo que la columna "imagen" contiene las rutas de las imágenes
-                ImageIcon imagenIcon = new ImageIcon(imagenPath);
+                byte[] imagenBytes = resultado.getBytes("imagen"); 
+                ImageIcon imagenIcon = new ImageIcon(imagenBytes);
                 Image imagen = imagenIcon.getImage();
                 Image nuevaImagen = imagen.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
                 ImageIcon imagenEscalada = new ImageIcon(nuevaImagen);
@@ -133,7 +132,8 @@ public class MainPage extends javax.swing.JFrame {
 
                 // Dependiendo de la variable i, selecciona el JLabel correspondiente y establece el icono
                 if (i == 0) {
-                    imagen0.setIcon(imagenEscalada);
+                    imagen0.setIcon(imagenIcon);
+                    System.out.println(imagenEscalada);
                     tipoEstancia0.setText(tipoEstancia);
                     direccion0.setText(direccion);
                     metros0.setText(String.valueOf(metros));
