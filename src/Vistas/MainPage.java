@@ -78,13 +78,48 @@ public class MainPage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
+        imagen = new javax.swing.JLabel();
+        tipoEstancia = new javax.swing.JLabel();
+        direccion = new javax.swing.JLabel();
+        metros = new javax.swing.JLabel();
+        coste = new javax.swing.JLabel();
+        inputEntrada = new javax.swing.JTextField();
+        btnDateEntrada = new javax.swing.JButton();
+        inputSalida = new javax.swing.JTextField();
+        btnDateSalida = new javax.swing.JButton();
+        reservar = new javax.swing.JButton();
+        imagen1 = new javax.swing.JLabel();
+        tipoEstancia1 = new javax.swing.JLabel();
+        direccion1 = new javax.swing.JLabel();
+        metros1 = new javax.swing.JLabel();
+        inputEntrada1 = new javax.swing.JTextField();
+        inputSalida1 = new javax.swing.JTextField();
+        btnDateSalida1 = new javax.swing.JButton();
+        btnDateEntrada1 = new javax.swing.JButton();
+        reservar1 = new javax.swing.JButton();
+        coste1 = new javax.swing.JLabel();
+        reservar2 = new javax.swing.JButton();
+        btnDateSalida2 = new javax.swing.JButton();
+        inputSalida2 = new javax.swing.JTextField();
+        inputEntrada2 = new javax.swing.JTextField();
+        btnDateEntrada2 = new javax.swing.JButton();
+        coste2 = new javax.swing.JLabel();
+        metros2 = new javax.swing.JLabel();
+        direccion2 = new javax.swing.JLabel();
+        tipoEstancia2 = new javax.swing.JLabel();
+        imagen2 = new javax.swing.JLabel();
+        metros3 = new javax.swing.JLabel();
+        inputSalida3 = new javax.swing.JTextField();
+        coste3 = new javax.swing.JLabel();
+        btnDateSalida3 = new javax.swing.JButton();
+        tipoEstancia3 = new javax.swing.JLabel();
+        inputEntrada3 = new javax.swing.JTextField();
+        btnDateEntrada3 = new javax.swing.JButton();
+        imagen3 = new javax.swing.JLabel();
+        reservar3 = new javax.swing.JButton();
+        direccion3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -118,70 +153,131 @@ public class MainPage extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Para_ti_uwu.PNG"))); // NOI18N
-        jLabel16.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel16.setIconTextGap(1);
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 220, 210));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel6.setBackground(new java.awt.Color(255, 222, 89));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        imagen.setText("jLabel2");
+        jPanel3.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, 20));
 
-        jTextField1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("Introduce el destino");
-        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField1FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField1FocusLost(evt);
-            }
-        });
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jPanel6.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 16, 205, 33));
+        tipoEstancia.setText("jLabel21");
+        jPanel3.add(tipoEstancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        jTextField2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField2.setText("Introduce fechas");
-        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField2FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField2FocusLost(evt);
-            }
-        });
-        jPanel6.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 61, 205, 33));
+        direccion.setText("jLabel2");
+        jPanel3.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(255, 222, 89));
-        jButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 96, 270, 50));
+        metros.setText("jLabel2");
+        jPanel3.add(metros, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/calendario.png"))); // NOI18N
-        jLabel6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel6.setIconTextGap(1);
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 64, 33, -1));
+        coste.setText("jLabel2");
+        jPanel3.add(coste, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
 
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busqueda_little.png"))); // NOI18N
-        jLabel15.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel15.setIconTextGap(1);
-        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 16, 33, -1));
+        inputEntrada.setText("jTextField3");
+        jPanel3.add(inputEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 280, 150));
+        btnDateEntrada.setText("jButton2");
+        jPanel3.add(btnDateEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 20, -1));
+
+        inputSalida.setText("jTextField3");
+        jPanel3.add(inputSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
+        btnDateSalida.setText("jButton2");
+        jPanel3.add(btnDateSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 20, -1));
+
+        reservar.setText("jButton2");
+        jPanel3.add(reservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
+
+        imagen1.setText("jLabel2");
+        jPanel3.add(imagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, 20));
+
+        tipoEstancia1.setText("jLabel21");
+        jPanel3.add(tipoEstancia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+
+        direccion1.setText("jLabel2");
+        jPanel3.add(direccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+
+        metros1.setText("jLabel2");
+        jPanel3.add(metros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+
+        inputEntrada1.setText("jTextField3");
+        jPanel3.add(inputEntrada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, -1, -1));
+
+        inputSalida1.setText("jTextField3");
+        jPanel3.add(inputSalida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, -1, -1));
+
+        btnDateSalida1.setText("jButton2");
+        jPanel3.add(btnDateSalida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 20, -1));
+
+        btnDateEntrada1.setText("jButton2");
+        jPanel3.add(btnDateEntrada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 20, -1));
+
+        reservar1.setText("jButton2");
+        jPanel3.add(reservar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, -1, -1));
+
+        coste1.setText("jLabel2");
+        jPanel3.add(coste1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
+
+        reservar2.setText("jButton2");
+        jPanel3.add(reservar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, -1, -1));
+
+        btnDateSalida2.setText("jButton2");
+        jPanel3.add(btnDateSalida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 640, 20, -1));
+
+        inputSalida2.setText("jTextField3");
+        jPanel3.add(inputSalida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, -1, -1));
+
+        inputEntrada2.setText("jTextField3");
+        jPanel3.add(inputEntrada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
+
+        btnDateEntrada2.setText("jButton2");
+        jPanel3.add(btnDateEntrada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 610, 20, -1));
+
+        coste2.setText("jLabel2");
+        jPanel3.add(coste2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 580, -1, -1));
+
+        metros2.setText("jLabel2");
+        jPanel3.add(metros2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, -1, -1));
+
+        direccion2.setText("jLabel2");
+        jPanel3.add(direccion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, -1, -1));
+
+        tipoEstancia2.setText("jLabel21");
+        jPanel3.add(tipoEstancia2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, -1, -1));
+
+        imagen2.setText("jLabel2");
+        jPanel3.add(imagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, -1, 20));
+
+        metros3.setText("jLabel2");
+        jPanel3.add(metros3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 790, -1, -1));
+
+        inputSalida3.setText("jTextField3");
+        jPanel3.add(inputSalida3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 850, -1, -1));
+
+        coste3.setText("jLabel2");
+        jPanel3.add(coste3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 790, -1, -1));
+
+        btnDateSalida3.setText("jButton2");
+        jPanel3.add(btnDateSalida3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 850, 20, -1));
+
+        tipoEstancia3.setText("jLabel21");
+        jPanel3.add(tipoEstancia3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 730, -1, -1));
+
+        inputEntrada3.setText("jTextField3");
+        jPanel3.add(inputEntrada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 820, -1, -1));
+
+        btnDateEntrada3.setText("jButton2");
+        jPanel3.add(btnDateEntrada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 820, 20, -1));
+
+        imagen3.setText("jLabel2");
+        jPanel3.add(imagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 680, -1, 20));
+
+        reservar3.setText("jButton2");
+        jPanel3.add(reservar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 850, -1, -1));
+
+        direccion3.setText("jLabel2");
+        jPanel3.add(direccion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 760, -1, -1));
+
+        jScrollPane1.setViewportView(jPanel3);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 280, 930));
 
         jPanel4.setBackground(new java.awt.Color(255, 222, 89));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -334,42 +430,10 @@ public class MainPage extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 570));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 1050));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
-        if (jTextField1.getText().equals("Introduce el destino")) {
-            jTextField1.setText("");
-            jTextField1.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_jTextField1FocusGained
-
-    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
-        if (jTextField1.getText().equals("")) {
-            jTextField1.setText("Introduce el destino");
-            jTextField1.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_jTextField1FocusLost
-
-    private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
-        if (jTextField2.getText().equals("Introduce fechas")) {
-            jTextField2.setText("");
-            jTextField2.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_jTextField2FocusGained
-
-    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
-        if (jTextField2.getText().equals("")) {
-            jTextField2.setText("Introduce fechas");
-            jTextField2.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_jTextField2FocusLost
 
     private void btnReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseClicked
         MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser);
@@ -420,16 +484,41 @@ public class MainPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDateEntrada;
+    private javax.swing.JButton btnDateEntrada1;
+    private javax.swing.JButton btnDateEntrada2;
+    private javax.swing.JButton btnDateEntrada3;
+    private javax.swing.JButton btnDateSalida;
+    private javax.swing.JButton btnDateSalida1;
+    private javax.swing.JButton btnDateSalida2;
+    private javax.swing.JButton btnDateSalida3;
     private javax.swing.JLabel btnReservas;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel coste;
+    private javax.swing.JLabel coste1;
+    private javax.swing.JLabel coste2;
+    private javax.swing.JLabel coste3;
+    private javax.swing.JLabel direccion;
+    private javax.swing.JLabel direccion1;
+    private javax.swing.JLabel direccion2;
+    private javax.swing.JLabel direccion3;
+    private javax.swing.JLabel imagen;
+    private javax.swing.JLabel imagen1;
+    private javax.swing.JLabel imagen2;
+    private javax.swing.JLabel imagen3;
+    private javax.swing.JTextField inputEntrada;
+    private javax.swing.JTextField inputEntrada1;
+    private javax.swing.JTextField inputEntrada2;
+    private javax.swing.JTextField inputEntrada3;
+    private javax.swing.JTextField inputSalida;
+    private javax.swing.JTextField inputSalida1;
+    private javax.swing.JTextField inputSalida2;
+    private javax.swing.JTextField inputSalida3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -440,16 +529,26 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel metros;
+    private javax.swing.JLabel metros1;
+    private javax.swing.JLabel metros2;
+    private javax.swing.JLabel metros3;
+    private javax.swing.JButton reservar;
+    private javax.swing.JButton reservar1;
+    private javax.swing.JButton reservar2;
+    private javax.swing.JButton reservar3;
+    private javax.swing.JLabel tipoEstancia;
+    private javax.swing.JLabel tipoEstancia1;
+    private javax.swing.JLabel tipoEstancia2;
+    private javax.swing.JLabel tipoEstancia3;
     // End of variables declaration//GEN-END:variables
 }
