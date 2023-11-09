@@ -200,7 +200,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 LogoMouseClicked(evt);
             }
         });
-        jPanel2.add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, -20, -1, -1));
+        jPanel2.add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, -10, -1, -1));
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/notify.png"))); // NOI18N
