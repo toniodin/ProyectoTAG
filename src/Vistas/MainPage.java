@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import Vistas.CreditPage;
+import java.sql.SQLException;
 
 /**
  *
@@ -23,7 +24,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private final int idUser;
     private Conexion conexion;
-
+    int creditos;
     /**
      * Creates new form MainPage
      */
@@ -39,6 +40,9 @@ public class MainPage extends javax.swing.JFrame {
 
         String nombreUsuario = getNombreUsuarioPorId(idUser);
         jLabel20.setText(nombreUsuario);
+        creditos = getCreditosPorId(idUser);
+        jLabel20.setText(nombreUsuario);
+        jLabel1.setText(String.valueOf(creditos));
     }
 
     private MainPage() {
@@ -66,6 +70,35 @@ public class MainPage extends javax.swing.JFrame {
             e.printStackTrace();
         }
         return nombre;
+    }
+    
+    private int getCreditosPorId(int id) {
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
+        int creditos = 0;
+
+        try {
+            // Consulta SQL para obtener los créditos del usuario por su ID
+            String consulta = "SELECT credito FROM usuarios WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(consulta);
+            statement.setInt(1, id);
+
+            ResultSet resultado = statement.executeQuery();
+            // Si se encontraron resultados, obtenemos los créditos del usuario
+            if (resultado.next()) {
+                creditos = resultado.getInt("credito");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Recuerda cerrar la conexión y otros recursos relacionados con la base de datos
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return creditos;
     }
 
     /**
