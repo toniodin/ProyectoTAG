@@ -27,18 +27,19 @@ public class CreditPage extends javax.swing.JFrame {
     int saldo;
     int creditos_actuales;
     String textoDelJTextField;
+
     /**
      * Creates new form MainPage
      */
     public CreditPage(int idUser) {
         initComponents();
         this.setLocationRelativeTo(null); //Inicializa al centro de la pantalla
-        
+
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/Logo_Book4u.png")); // Esto es para cambiar el icono de la app
         Image image = icon.getImage();
         setIconImage(image);
         this.idUser = idUser;
-        
+
         String nombreUsuario = getNombreUsuarioPorId(idUser);
         creditos_actuales = getCreditosPorId(idUser);
         jLabel20.setText(nombreUsuario);
@@ -48,13 +49,13 @@ public class CreditPage extends javax.swing.JFrame {
     private CreditPage() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     // Método para validar las credenciales en la base de datos
     private String getNombreUsuarioPorId(int id) {
         Conexion conexion = new Conexion();
         Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
         String nombre = "";
-        
+
         try {
             // Consulta SQL para verificar las credenciales
             String consulta = "SELECT * FROM usuarios WHERE id = ?";
@@ -71,7 +72,7 @@ public class CreditPage extends javax.swing.JFrame {
         }
         return nombre;
     }
-    
+
     private int getCreditosPorId(int id) {
         Conexion conexion = new Conexion();
         Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
@@ -100,7 +101,6 @@ public class CreditPage extends javax.swing.JFrame {
         }
         return creditos;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,7 +127,7 @@ public class CreditPage extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        Logo = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         btn50euros = new javax.swing.JButton();
         btn80euros = new javax.swing.JButton();
@@ -291,12 +291,17 @@ public class CreditPage extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 33, -1));
 
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
-        jLabel13.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel13.setIconTextGap(1);
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, -20, -1, -1));
+        Logo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
+        Logo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        Logo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        Logo.setIconTextGap(1);
+        Logo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LogoMouseClicked(evt);
+            }
+        });
+        jPanel2.add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, -20, -1, -1));
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/notify.png"))); // NOI18N
@@ -446,17 +451,16 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_inputDineroActionPerformed
 
     private void inputDineroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDineroFocusGained
-        if(inputDinero.getText().equals("Agregar Importe"))
-        {
+        if (inputDinero.getText().equals("Agregar Importe")) {
             inputDinero.setText("");
-            inputDinero.setForeground(new Color(0,0,0));
+            inputDinero.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_inputDineroFocusGained
 
     private void inputDineroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDineroFocusLost
-        
+
         textoDelJTextField = inputDinero.getText();
-        
+
     }//GEN-LAST:event_inputDineroFocusLost
 
     private void btn50eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn50eurosActionPerformed
@@ -464,32 +468,32 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn50eurosActionPerformed
 
     private void btn50eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn50eurosMouseClicked
-    saldo=50;   
-    jTextField1.setText(String.valueOf(saldo));
+        saldo = 50;
+        inputDinero.setText(String.valueOf(saldo));
     }//GEN-LAST:event_btn50eurosMouseClicked
 
     private void btn80eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn80eurosMouseClicked
-    saldo=80;
-    jTextField1.setText(String.valueOf(saldo));
+        saldo = 80;
+        inputDinero.setText(String.valueOf(saldo));
     }//GEN-LAST:event_btn80eurosMouseClicked
 
     private void btn80eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn80eurosActionPerformed
-        
+
     }//GEN-LAST:event_btn80eurosActionPerformed
 
     private void btn40eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn40eurosMouseClicked
-    saldo=40;
-    jTextField1.setText(String.valueOf(saldo));
-    // TODO add your handling code here:
+        saldo = 40;
+        inputDinero.setText(String.valueOf(saldo));
+        // TODO add your handling code here:
     }//GEN-LAST:event_btn40eurosMouseClicked
-  
+
     private void btn40eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn40eurosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn40eurosActionPerformed
 
     private void btn10eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn10eurosMouseClicked
-    saldo=10;
-    jTextField1.setText(String.valueOf(saldo));
+        saldo = 10;
+        inputDinero.setText(String.valueOf(saldo));
     }//GEN-LAST:event_btn10eurosMouseClicked
 
     private void btn10eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn10eurosActionPerformed
@@ -497,17 +501,17 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn10eurosActionPerformed
 
     private void btn20eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn20eurosMouseClicked
-    saldo=20;   
-    jTextField1.setText(String.valueOf(saldo));
+        saldo = 20;
+        inputDinero.setText(String.valueOf(saldo));
     }//GEN-LAST:event_btn20eurosMouseClicked
 
     private void btn20eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn20eurosActionPerformed
-        
+
     }//GEN-LAST:event_btn20eurosActionPerformed
 
     private void btn30eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn30eurosMouseClicked
-    saldo=30; 
-    jTextField1.setText(String.valueOf(saldo));
+        saldo = 30;
+        inputDinero.setText(String.valueOf(saldo));
     }//GEN-LAST:event_btn30eurosMouseClicked
 
     private void btn30eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn30eurosActionPerformed
@@ -515,7 +519,7 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn30eurosActionPerformed
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
-    
+
     }//GEN-LAST:event_jButton1KeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -525,23 +529,23 @@ public class CreditPage extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         MainPage mainPage = new MainPage(idUser);
         mainPage.setVisible(true);
-        setVisible(false);        
+        setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         String creditosA_stg = "";
-        
+
         if (!inputDinero.getText().equals("Agregar Importe")) {
             try {
                 int dinero = Integer.parseInt(inputDinero.getText());
                 if (dinero % 10 == 0) {
-                    
+
                     if (dinero <= 0) {
                         JOptionPane.showMessageDialog(null, "Por favor, ingrese un múltiplo de 10 y mayor que 0.", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                    
+
                     creditos_actuales = dinero + creditos_actuales;
                     creditosA_stg = String.valueOf(creditos_actuales);
                 } else {
@@ -551,16 +555,16 @@ public class CreditPage extends javax.swing.JFrame {
             } catch (NumberFormatException e) {
                 System.out.println("Por favor, ingrese un número válido.");
             }
-        }else{
+        } else {
             creditos_actuales = saldo + creditos_actuales;
             creditosA_stg = String.valueOf(creditos_actuales);
         }
-        
+
         jLabel2.setText(creditosA_stg);
 
         Conexion conexion2 = new Conexion();
         Connection connection = conexion2.DatabaseConnection();
-        try  {
+        try {
             // Define la sentencia SQL para la actualización
             String sql = "UPDATE usuarios SET Credito = ? WHERE Id = ?";
 
@@ -588,14 +592,14 @@ public class CreditPage extends javax.swing.JFrame {
     private void jLabel29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseClicked
         MainPage mainPage = new MainPage(idUser);
         mainPage.setVisible(true);
-        setVisible(false); 
+        setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel29MouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
         MainPage mainPage = new MainPage(idUser);
         mainPage.setVisible(true);
-        setVisible(false); 
+        setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel17MouseClicked
 
@@ -605,6 +609,13 @@ public class CreditPage extends javax.swing.JFrame {
         MevesReservesPage.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jLabel30MouseClicked
+
+    private void LogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoMouseClicked
+        // TODO add your handling code here:
+        MainPage mainPage = new MainPage(idUser);
+        mainPage.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_LogoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -642,22 +653,18 @@ public class CreditPage extends javax.swing.JFrame {
         });
     }
 
-    
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Logo;
     private javax.swing.JButton btn10euros;
     private javax.swing.JButton btn20euros;
     private javax.swing.JButton btn30euros;
     private javax.swing.JButton btn40euros;
     private javax.swing.JButton btn50euros;
     private javax.swing.JButton btn80euros;
-
     private javax.swing.JTextField inputDinero;
-
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
