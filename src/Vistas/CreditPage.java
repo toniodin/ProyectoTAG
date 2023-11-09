@@ -517,11 +517,17 @@ public class CreditPage extends javax.swing.JFrame {
         if (!inputDinero.getText().equals("Agregar Importe")) {
             try {
                 int dinero = Integer.parseInt(inputDinero.getText());
-                if (dinero % 10 == 0 || dinero < 0) {
+                if (dinero % 10 == 0) {
+                    
+                    if (dinero <= 0) {
+                        JOptionPane.showMessageDialog(null, "Por favor, ingrese un múltiplo de 10 y mayor que 0.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
                     creditos_actuales = dinero + creditos_actuales;
                     creditosA_stg = String.valueOf(creditos_actuales);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Por favor, ingrese un múltiplo de 10.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Por favor, ingrese un múltiplo de 10 y mayor que 0.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             } catch (NumberFormatException e) {
@@ -550,6 +556,7 @@ public class CreditPage extends javax.swing.JFrame {
                 if (rowsUpdated > 0) {
                     System.out.println("Actualización exitosa");
                     saldo = 0;
+                    inputDinero.setText("Agregar Importe");
                 } else {
                     System.out.println("No se encontró ningún usuario con el ID especificado");
                 }
@@ -576,8 +583,8 @@ public class CreditPage extends javax.swing.JFrame {
 
     private void jLabel30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseClicked
         // TODO add your handling code here:
-        MainPage mainPage = new MainPage(idUser);
-        mainPage.setVisible(true);
+        MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser);
+        MevesReservesPage.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jLabel30MouseClicked
 

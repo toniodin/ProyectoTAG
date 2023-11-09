@@ -23,7 +23,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private final int idUser;
     private Conexion conexion;
-    
+
     /**
      * Creates new form MainPage
      */
@@ -31,12 +31,12 @@ public class MainPage extends javax.swing.JFrame {
         initComponents();
         System.out.println(idUser);
         this.setLocationRelativeTo(null); //Inicializa al centro de la pantalla
-        
+
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icono.png")); // Esto es para cambiar el icono de la app
         Image image = icon.getImage();
         setIconImage(image);
         this.idUser = idUser;
-        
+
         String nombreUsuario = getNombreUsuarioPorId(idUser);
         jLabel20.setText(nombreUsuario);
     }
@@ -44,13 +44,13 @@ public class MainPage extends javax.swing.JFrame {
     private MainPage() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     // Método para validar las credenciales en la base de datos
     private String getNombreUsuarioPorId(int id) {
         Conexion conexion = new Conexion();
         Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
         String nombre = "";
-        
+
         try {
             // Consulta SQL para verificar las credenciales
             String consulta = "SELECT * FROM usuarios WHERE id = ?";
@@ -344,44 +344,40 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
-        if(jTextField1.getText().equals("Introduce el destino"))
-        {
+        if (jTextField1.getText().equals("Introduce el destino")) {
             jTextField1.setText("");
-            jTextField1.setForeground(new Color(0,0,0));
+            jTextField1.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_jTextField1FocusGained
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
-        if(jTextField1.getText().equals(""))
-        {
+        if (jTextField1.getText().equals("")) {
             jTextField1.setText("Introduce el destino");
-            jTextField1.setForeground(new Color(153,153,153));
+            jTextField1.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
-        if(jTextField2.getText().equals("Introduce fechas"))
-        {
+        if (jTextField2.getText().equals("Introduce fechas")) {
             jTextField2.setText("");
-            jTextField2.setForeground(new Color(0,0,0));
+            jTextField2.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_jTextField2FocusGained
 
     private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
-        if(jTextField2.getText().equals(""))
-        {
+        if (jTextField2.getText().equals("")) {
             jTextField2.setText("Introduce fechas");
-            jTextField2.setForeground(new Color(153,153,153));
+            jTextField2.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_jTextField2FocusLost
 
     private void btnReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseClicked
-    MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser);
+        MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser);
 
-    MevesReservesPage.setVisible(true);
-    setVisible(false);        
+        MevesReservesPage.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_btnReservasMouseClicked
-  
+
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         CreditPage creditPage = new CreditPage(idUser);
         creditPage.setVisible(true);

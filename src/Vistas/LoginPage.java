@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vistas;
+
 import bd.Conexion;
 import java.awt.Color;
 import java.sql.Connection;
@@ -18,14 +19,16 @@ import java.awt.Image;
  * @author Usuario
  */
 public class LoginPage extends javax.swing.JFrame {
+
     private Conexion conexion; // Declarar una instancia de Conexion
     public int idUserLogged = 0;
+
     public LoginPage() {
         initComponents();
         conexion = new Conexion(); // Inicializa la instancia de 
-        
+
         this.setLocationRelativeTo(null); //Inicializa al centro de la pantalla
-        
+
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icono.png")); // Esto es para cambiar el icono de la app
         Image image = icon.getImage();
         setIconImage(image);
@@ -187,14 +190,14 @@ public class LoginPage extends javax.swing.JFrame {
         // Obtén el correo electrónico y la contraseña ingresados por el usuario
         String email = inputEmail.getText();
         String password = inputPass.getText();
-        
+
         // Realiza la verificación en la base de datos
         if (validarCredenciales(email, password)) {
             JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.");
             // Abrir el frame MainPage
             MainPage mainPage = new MainPage(idUserLogged);
             mainPage.setVisible(true);
-            
+
             setVisible(false);
         } else {
             JOptionPane.showMessageDialog(this, "Credenciales incorrectas. Inténtelo de nuevo.");
@@ -212,12 +215,12 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_inputEmailActionPerformed
 
     private void passOlvidadaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passOlvidadaMouseEntered
-        passOlvidada.setForeground(new Color(255,204,0));
+        passOlvidada.setForeground(new Color(255, 204, 0));
 
     }//GEN-LAST:event_passOlvidadaMouseEntered
 
     private void passOlvidadaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passOlvidadaMouseExited
-       passOlvidada.setForeground(new Color(0, 0, 255));
+        passOlvidada.setForeground(new Color(0, 0, 255));
     }//GEN-LAST:event_passOlvidadaMouseExited
 
     private void registerButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseExited
@@ -225,45 +228,41 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_registerButtonMouseExited
 
     private void registerButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseEntered
-         registerButton.setForeground(new Color(255,204,0));
+        registerButton.setForeground(new Color(255, 204, 0));
     }//GEN-LAST:event_registerButtonMouseEntered
 
     private void inputEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusGained
-        if(inputEmail.getText().equals("Indica tu correo electrónico"))
-        {
+        if (inputEmail.getText().equals("Indica tu correo electrónico")) {
             inputEmail.setText("");
-            inputEmail.setForeground(new Color(0,0,0));
+            inputEmail.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_inputEmailFocusGained
 
     private void inputEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusLost
-        if(inputEmail.getText().equals(""))
-        {
+        if (inputEmail.getText().equals("")) {
             inputEmail.setText("Indica tu correo electrónico");
-            inputEmail.setForeground(new Color(153,153,153));
+            inputEmail.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_inputEmailFocusLost
 
     private void inputPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusGained
-        if(inputPass.getText().equals("Indica tu contraseña"))
-        {
+        if (inputPass.getText().equals("Indica tu contraseña")) {
             inputPass.setText("");
-            inputPass.setForeground(new Color(0,0,0));
+            inputPass.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_inputPassFocusGained
 
     private void inputPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusLost
-        if(inputPass.getText().equals(""))
-        {
+        if (inputPass.getText().equals("")) {
             inputPass.setText("Indica tu contraseña");
-            inputPass.setForeground(new Color(153,153,153));
+            inputPass.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_inputPassFocusLost
 
     // Método para validar las credenciales en la base de datos
     private boolean validarCredenciales(String email, String password) {
         Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
-        
+
         try {
             // Consulta SQL para verificar las credenciales
             String consulta = "SELECT * FROM usuarios WHERE Email = ? AND Password = ?";
@@ -282,7 +281,7 @@ public class LoginPage extends javax.swing.JFrame {
         }
         return false;
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -317,7 +316,7 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField inputEmail;
