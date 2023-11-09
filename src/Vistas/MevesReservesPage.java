@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 
 /**
@@ -25,6 +26,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
     
     private final int idUser;
     private Conexion conexion;
+    int creditos;
     
     public MevesReservesPage(int idUser) {
         initComponents();
@@ -38,6 +40,8 @@ public class MevesReservesPage extends javax.swing.JFrame {
         
         String nombreUsuario = getNombreUsuarioPorId(idUser);
         jLabel20.setText(nombreUsuario);
+        creditos = getCreditosPorId(idUser);
+        jLabel7.setText(String.valueOf(creditos));
         
         //Muestra el panel de reservas Activadas y oculta los otros
         panelActivos.setVisible(true);
@@ -95,6 +99,35 @@ public class MevesReservesPage extends javax.swing.JFrame {
         }
         return nombre;
     }
+    
+    private int getCreditosPorId(int id) {
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
+        int creditos = 0;
+
+        try {
+            // Consulta SQL para obtener los créditos del usuario por su ID
+            String consulta = "SELECT credito FROM usuarios WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(consulta);
+            statement.setInt(1, id);
+
+            ResultSet resultado = statement.executeQuery();
+            // Si se encontraron resultados, obtenemos los créditos del usuario
+            if (resultado.next()) {
+                creditos = resultado.getInt("credito");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Recuerda cerrar la conexión y otros recursos relacionados con la base de datos
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return creditos;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,7 +140,10 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        Logo = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnActivos = new javax.swing.JButton();
         btnPasados = new javax.swing.JButton();
@@ -137,12 +173,41 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 222, 89));
         jPanel2.setMinimumSize(new java.awt.Dimension(145, 105));
-        jPanel2.setLayout(new java.awt.FlowLayout(1, 0, -20));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
-        jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(jLabel5);
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/coin1.png"))); // NOI18N
+        jLabel6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel6.setIconTextGap(1);
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 33, -1));
+
+        jLabel7.setText("0");
+        jLabel7.setPreferredSize(new java.awt.Dimension(30, 20));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 36, 30));
+
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
+        Logo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        Logo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Logo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Logo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LogoMouseClicked(evt);
+            }
+        });
+        jPanel2.add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, -20, -1, -1));
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/notify.png"))); // NOI18N
+        jLabel14.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel14.setIconTextGap(1);
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
 
@@ -176,12 +241,14 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/perfil.png"))); // NOI18N
         jLabel27.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel27.setIconTextGap(1);
         jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel17.setText("Buscar");
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Inicio");
         jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 20));
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -189,11 +256,12 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 jLabel17MouseClicked(evt);
             }
         });
-        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 50, 23));
+        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 60, 23));
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Favoritos");
+        jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel18.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 80, 23));
 
@@ -212,11 +280,12 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Perfil");
+        jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel20.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 90, 23));
 
         btnBuscar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busqueda.png"))); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/HomeUser.png"))); // NOI18N
         btnBuscar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -244,6 +313,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/favoritos.png"))); // NOI18N
         jLabel31.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel31.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel31.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel31.setIconTextGap(1);
         jPanel4.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 40, 40));
@@ -325,6 +395,18 @@ public class MevesReservesPage extends javax.swing.JFrame {
     setVisible(false);
     }//GEN-LAST:event_jLabel17MouseClicked
 
+    private void LogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoMouseClicked
+        MainPage mainPage = new MainPage(idUser);
+        mainPage.setVisible(true);
+        setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_LogoMouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        CreditPage creditPage = new CreditPage(idUser);
+        creditPage.setVisible(true);
+        this.dispose();      // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel6MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -361,12 +443,14 @@ public class MevesReservesPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Logo;
     private javax.swing.JButton btnActivos;
     private javax.swing.JLabel btnBuscar;
     private javax.swing.JButton btnCancelados;
     private javax.swing.JButton btnPasados;
     private javax.swing.JLabel btnReservas;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
@@ -375,7 +459,8 @@ public class MevesReservesPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

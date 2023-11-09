@@ -459,7 +459,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel14.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel14.setIconTextGap(1);
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, -1));
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
 
