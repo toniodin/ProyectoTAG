@@ -344,6 +344,9 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="tipoEstancia">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Century Gothic" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="tipoEstancia"/>
                       </Properties>
                       <Constraints>
@@ -354,6 +357,9 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="direccion">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Century Gothic" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="direccion"/>
                       </Properties>
                       <Constraints>
@@ -364,6 +370,9 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="costeReserva">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Century Gothic" size="12" style="1"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="costeReserva"/>
                       </Properties>
                       <Constraints>

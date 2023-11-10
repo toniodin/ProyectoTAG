@@ -37,8 +37,12 @@ public class MevesReservesPage extends javax.swing.JFrame {
         setIconImage(image);
         this.idUser = idUser;
 
+        this.conexion = new Conexion();
+        
         String nombreUsuario = getNombreUsuarioPorId(idUser);
         jLabel20.setText(nombreUsuario);
+        
+        mostrarReservasActivas();
 
         //Muestra el panel de reservas Activadas y oculta los otros
         panelActivos.setVisible(true);
@@ -109,11 +113,14 @@ public class MevesReservesPage extends javax.swing.JFrame {
         ResultSet resultado = statement.executeQuery();
 
         StringBuilder resultados = new StringBuilder();
-
+        String tipoEstanciaTexto = "";
+        String direccionTexto = "";
+        double costeReservaValor = 0;
+        
         while (resultado.next()) {
-            String tipoEstanciaTexto = resultado.getString("tipo_estancia");
-            String direccionTexto = resultado.getString("direccion");
-            double costeReservaValor = resultado.getDouble("coste_reserva");
+            tipoEstanciaTexto = resultado.getString("tipo_estancia");
+            direccionTexto = resultado.getString("direccion");
+            costeReservaValor = resultado.getDouble("coste_reserva");
             
             // Agrega mensajes de depuración
             System.out.println("Tipo de estancia: " + tipoEstanciaTexto);
@@ -127,9 +134,9 @@ public class MevesReservesPage extends javax.swing.JFrame {
         }
 
         // Muestra los resultados acumulados en las etiquetas
-        tipoEstancia.setText(resultados.toString());
-        direccion.setText("");
-        costeReserva.setText("");
+        tipoEstancia.setText("Tipo de estancia: " + tipoEstanciaTexto);
+        direccion.setText("Dirección: " + direccionTexto);
+        costeReserva.setText("Coste de reserva: " + costeReservaValor);
 
     } catch (Exception e) {
         e.printStackTrace();
@@ -189,7 +196,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 222, 89));
         jPanel2.setMinimumSize(new java.awt.Dimension(145, 105));
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, -20));
+        jPanel2.setLayout(new java.awt.FlowLayout(1, 0, -20));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -307,12 +314,15 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tipoEstancia.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tipoEstancia.setText("tipoEstancia");
         jPanel5.add(tipoEstancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
+        direccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         direccion.setText("direccion");
         jPanel5.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
+        costeReserva.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         costeReserva.setText("costeReserva");
         jPanel5.add(costeReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
         jPanel5.add(fechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 150, -1));
