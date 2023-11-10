@@ -115,28 +115,31 @@ public class MevesReservesPage extends javax.swing.JFrame {
         StringBuilder resultados = new StringBuilder();
         String tipoEstanciaTexto = "";
         String direccionTexto = "";
-        double costeReservaValor = 0;
+        int costeReservaValor = 0;
+        Date fechaSolicitudValor;
+        Date fechaFinReservaValor;
         
         while (resultado.next()) {
             tipoEstanciaTexto = resultado.getString("tipo_estancia");
             direccionTexto = resultado.getString("direccion");
-            costeReservaValor = resultado.getDouble("coste_reserva");
+            costeReservaValor = resultado.getInt("coste_reserva");
+            fechaSolicitudValor = resultado.getDate("fecha_solicitud");
+            fechaFinReservaValor = resultado.getDate("fecha_fin_reserva");
             
-            // Agrega mensajes de depuración
-            System.out.println("Tipo de estancia: " + tipoEstanciaTexto);
-            System.out.println("Dirección: " + direccionTexto);
-            System.out.println("Coste de reserva: " + costeReservaValor);
-
             // Acumula los valores en el StringBuilder
             resultados.append("Tipo de estancia: ").append(tipoEstanciaTexto).append("\n");
             resultados.append("Dirección: ").append(direccionTexto).append("\n");
             resultados.append("Coste de reserva: ").append(costeReservaValor).append("\n\n");
+            resultados.append(fechaSolicitudValor);
+            
         }
 
         // Muestra los resultados acumulados en las etiquetas
-        tipoEstancia.setText("Tipo de estancia: " + tipoEstanciaTexto);
-        direccion.setText("Dirección: " + direccionTexto);
-        costeReserva.setText("Coste de reserva: " + costeReservaValor);
+        tipoEstancia.setText("<html><b>Tipo de estancia:</b><br>" + tipoEstanciaTexto + "</html>");
+        direccion.setText("<html><b>Dirección:</b><br>" + direccionTexto + "</html>");
+        costeReserva.setText("<html><b>Coste de reserva:</b> " + costeReservaValor + "</html>");
+        fechaSolicitud.setDate(fechaSolicitudValor);
+        fechaFinReserva.setDate(fechaFinReservaValor);
 
     } catch (Exception e) {
         e.printStackTrace();
@@ -322,11 +325,11 @@ public class MevesReservesPage extends javax.swing.JFrame {
         direccion.setText("direccion");
         jPanel5.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
-        costeReserva.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        costeReserva.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         costeReserva.setText("costeReserva");
         jPanel5.add(costeReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
-        jPanel5.add(fechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 150, -1));
-        jPanel5.add(fechaFinReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 150, -1));
+        jPanel5.add(fechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 150, -1));
+        jPanel5.add(fechaFinReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 150, -1));
 
         jScrollPane1.setViewportView(jPanel5);
 

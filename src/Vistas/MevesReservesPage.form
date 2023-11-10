@@ -371,7 +371,7 @@
                     <Component class="javax.swing.JLabel" name="costeReserva">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Century Gothic" size="12" style="1"/>
+                          <Font name="Century Gothic" size="12" style="0"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="costeReserva"/>
                       </Properties>
@@ -384,14 +384,14 @@
                     <Component class="com.toedter.calendar.JDateChooser" name="fechaSolicitud">
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="30" y="120" width="150" height="-1"/>
+                          <AbsoluteConstraints x="30" y="130" width="150" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
                     <Component class="com.toedter.calendar.JDateChooser" name="fechaFinReserva">
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="30" y="150" width="150" height="-1"/>
+                          <AbsoluteConstraints x="30" y="160" width="150" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
