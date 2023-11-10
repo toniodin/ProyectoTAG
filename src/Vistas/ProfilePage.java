@@ -126,7 +126,6 @@ public class ProfilePage extends javax.swing.JFrame {
         Logo = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         inputDinero = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
         inputDinero1 = new javax.swing.JTextField();
         inputDinero2 = new javax.swing.JTextField();
         inputDinero3 = new javax.swing.JTextField();
@@ -134,6 +133,7 @@ public class ProfilePage extends javax.swing.JFrame {
         inputDinero5 = new javax.swing.JTextField();
         inputDinero6 = new javax.swing.JTextField();
         inputDinero7 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -141,6 +141,7 @@ public class ProfilePage extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -226,13 +227,13 @@ public class ProfilePage extends javax.swing.JFrame {
                 jLabel5MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 33, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 33, -1));
 
         jLabel1.setText("0");
         jLabel1.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 36, 30));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 36, 30));
 
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U_Little.png"))); // NOI18N
         Logo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         Logo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Logo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -241,16 +242,16 @@ public class ProfilePage extends javax.swing.JFrame {
                 LogoMouseClicked(evt);
             }
         });
-        jPanel2.add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, -10, -1, -1));
+        jPanel2.add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/notify.png"))); // NOI18N
         jLabel15.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel15.setIconTextGap(1);
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 60));
 
         inputDinero.setColumns(1);
         inputDinero.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -271,14 +272,7 @@ public class ProfilePage extends javax.swing.JFrame {
                 inputDineroActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 200, 40));
-
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
-        jLabel14.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel14.setIconTextGap(1);
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, -1, 30));
+        jPanel1.add(inputDinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 200, 40));
 
         inputDinero1.setColumns(1);
         inputDinero1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -299,7 +293,7 @@ public class ProfilePage extends javax.swing.JFrame {
                 inputDinero1ActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 230, -1));
+        jPanel1.add(inputDinero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 230, -1));
 
         inputDinero2.setColumns(1);
         inputDinero2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -320,7 +314,7 @@ public class ProfilePage extends javax.swing.JFrame {
                 inputDinero2ActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 230, -1));
+        jPanel1.add(inputDinero2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 230, -1));
 
         inputDinero3.setColumns(1);
         inputDinero3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -341,7 +335,7 @@ public class ProfilePage extends javax.swing.JFrame {
                 inputDinero3ActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 230, -1));
+        jPanel1.add(inputDinero3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 230, -1));
 
         inputDinero4.setColumns(1);
         inputDinero4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -362,7 +356,7 @@ public class ProfilePage extends javax.swing.JFrame {
                 inputDinero4ActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 230, -1));
+        jPanel1.add(inputDinero4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 230, -1));
 
         inputDinero5.setColumns(1);
         inputDinero5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -383,7 +377,7 @@ public class ProfilePage extends javax.swing.JFrame {
                 inputDinero5ActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 230, -1));
+        jPanel1.add(inputDinero5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 230, -1));
 
         inputDinero6.setColumns(1);
         inputDinero6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -404,7 +398,7 @@ public class ProfilePage extends javax.swing.JFrame {
                 inputDinero6ActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 230, -1));
+        jPanel1.add(inputDinero6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 230, -1));
 
         inputDinero7.setColumns(1);
         inputDinero7.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -425,57 +419,66 @@ public class ProfilePage extends javax.swing.JFrame {
                 inputDinero7ActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 230, -1));
+        jPanel1.add(inputDinero7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 230, -1));
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
+        jLabel14.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel14.setIconTextGap(1);
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, 30));
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
         jLabel16.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel16.setIconTextGap(1);
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, -1, 30));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, 30));
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
         jLabel21.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel21.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel21.setIconTextGap(1);
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, -1, 30));
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, 30));
 
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
         jLabel22.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel22.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel22.setIconTextGap(1);
-        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, -1, 30));
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, -1, 30));
 
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
         jLabel23.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel23.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel23.setIconTextGap(1);
-        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, 30));
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, -1, 30));
 
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
         jLabel24.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel24.setIconTextGap(1);
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, -1, 30));
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, -1, 30));
 
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
         jLabel25.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel25.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel25.setIconTextGap(1);
-        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, -1, 30));
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, -1, 30));
 
+        jButton1.setBackground(new java.awt.Color(255, 222, 89));
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 420, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 423, 110, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 76, 110, 90));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 570));
 
@@ -660,6 +663,7 @@ public class ProfilePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
