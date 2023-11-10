@@ -114,6 +114,11 @@ public class MevesReservesPage extends javax.swing.JFrame {
             String tipoEstanciaTexto = resultado.getString("tipo_estancia");
             String direccionTexto = resultado.getString("direccion");
             double costeReservaValor = resultado.getDouble("coste_reserva");
+            
+            // Agrega mensajes de depuración
+            System.out.println("Tipo de estancia: " + tipoEstanciaTexto);
+            System.out.println("Dirección: " + direccionTexto);
+            System.out.println("Coste de reserva: " + costeReservaValor);
 
             // Acumula los valores en el StringBuilder
             resultados.append("Tipo de estancia: ").append(tipoEstanciaTexto).append("\n");
