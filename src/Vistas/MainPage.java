@@ -39,6 +39,8 @@ public class MainPage extends javax.swing.JFrame {
         Image image = icon.getImage();
         setIconImage(image);
         this.idUser = idUser;
+        
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(25); //Incrementar la velocidad de la ruda del raton desplazamiento
 
         String nombreUsuario = getNombreUsuarioPorId(idUser);
         jLabel20.setText(nombreUsuario);
@@ -250,13 +252,20 @@ public class MainPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel3.add(imagen0, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
@@ -273,6 +282,7 @@ public class MainPage extends javax.swing.JFrame {
         jPanel3.add(id_reserva0, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, -1, -1));
 
         reservar0.setText("Reservar");
+        reservar0.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         reservar0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reservar0ActionPerformed(evt);
@@ -291,12 +301,14 @@ public class MainPage extends javax.swing.JFrame {
         jPanel3.add(metros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
         reservar1.setText("Reservar");
+        reservar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel3.add(reservar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, -1, -1));
 
         coste1.setText("jLabel2");
         jPanel3.add(coste1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
 
         reservar2.setText("Reservar");
+        reservar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel3.add(reservar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 630, -1, -1));
 
         coste2.setText("jLabel2");
@@ -323,6 +335,7 @@ public class MainPage extends javax.swing.JFrame {
         jPanel3.add(imagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 680, -1, -1));
 
         reservar3.setText("Reservar");
+        reservar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel3.add(reservar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 850, -1, -1));
 
         direccion3.setText("jLabel2");
@@ -364,6 +377,7 @@ public class MainPage extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel17.setText("Buscar");
+        jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 50, 23));
 
@@ -376,6 +390,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Reservas");
+        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel19.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 100, 23));
 
@@ -388,6 +403,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busqueda.png"))); // NOI18N
         jLabel29.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel29.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel29.setIconTextGap(1);
         jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
@@ -395,6 +411,7 @@ public class MainPage extends javax.swing.JFrame {
         btnReservas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reservas.png"))); // NOI18N
         btnReservas.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnReservas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReservas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnReservas.setIconTextGap(1);
         btnReservas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -419,6 +436,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/coin1.png"))); // NOI18N
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel5.setIconTextGap(1);
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -490,6 +508,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U_Little.png"))); // NOI18N
         jLabel13.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel13.setIconTextGap(1);
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));

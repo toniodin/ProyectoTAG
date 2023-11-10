@@ -15,35 +15,36 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
  * @author bella
  */
 public class MevesReservesPage extends javax.swing.JFrame {
-    
+
     private final int idUser;
     private Conexion conexion;
-    
+
     public MevesReservesPage(int idUser) {
         initComponents();
         System.out.println(idUser);
         this.setLocationRelativeTo(null); //Inicializa al centro de la pantalla
-        
+
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icono.png")); // Esto es para cambiar el icono de la app
         Image image = icon.getImage();
         setIconImage(image);
         this.idUser = idUser;
-        
+
         String nombreUsuario = getNombreUsuarioPorId(idUser);
         jLabel20.setText(nombreUsuario);
-        
+
         //Muestra el panel de reservas Activadas y oculta los otros
         panelActivos.setVisible(true);
         panelPasados.setVisible(false);
         panelCancelados.setVisible(false);
-        
+
         btnActivos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 panelActivos.setVisible(true);
@@ -51,7 +52,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 panelCancelados.setVisible(false);
             }
         });
-        
+
         btnPasados.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 panelActivos.setVisible(false);
@@ -68,17 +69,17 @@ public class MevesReservesPage extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private MevesReservesPage() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     // Método para validar las credenciales en la base de datos
     private String getNombreUsuarioPorId(int id) {
         Conexion conexion = new Conexion();
         Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
         String nombre = "";
-        
+
         try {
             // Consulta SQL para verificar las credenciales
             String consulta = "SELECT * FROM usuarios WHERE id = ?";
@@ -94,6 +95,47 @@ public class MevesReservesPage extends javax.swing.JFrame {
             e.printStackTrace();
         }
         return nombre;
+    }
+
+    private void mostrarReservasActivas() {
+    // Realiza la consulta SQL con INNER JOIN para obtener la información necesaria
+    String consulta = "SELECT r.tipo_estancia, r.direccion, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
+            + "FROM reservas r INNER JOIN reservas_usuarios ru ON r.id_reserva = ru.id_reserva "
+            + "WHERE ru.id_usuario = ? AND ru.fecha_fin_reserva >= CURRENT_DATE";
+
+    try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
+
+        statement.setInt(1, idUser);
+        ResultSet resultado = statement.executeQuery();
+
+        StringBuilder resultados = new StringBuilder();
+
+        while (resultado.next()) {
+            String tipoEstanciaTexto = resultado.getString("tipo_estancia");
+            String direccionTexto = resultado.getString("direccion");
+            double costeReservaValor = resultado.getDouble("coste_reserva");
+
+            // Acumula los valores en el StringBuilder
+            resultados.append("Tipo de estancia: ").append(tipoEstanciaTexto).append("\n");
+            resultados.append("Dirección: ").append(direccionTexto).append("\n");
+            resultados.append("Coste de reserva: ").append(costeReservaValor).append("\n\n");
+        }
+
+        // Muestra los resultados acumulados en las etiquetas
+        tipoEstancia.setText(resultados.toString());
+        direccion.setText("");
+        costeReserva.setText("");
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
+    private String formatDate(Date date) {
+        // Formatea la fecha en el formato deseado
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(date);
     }
 
     /**
@@ -122,8 +164,13 @@ public class MevesReservesPage extends javax.swing.JFrame {
         btnReservas = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         panelActivos = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel5 = new javax.swing.JPanel();
+        tipoEstancia = new javax.swing.JLabel();
+        direccion = new javax.swing.JLabel();
+        costeReserva = new javax.swing.JLabel();
+        fechaSolicitud = new com.toedter.calendar.JDateChooser();
+        fechaFinReserva = new com.toedter.calendar.JDateChooser();
         panelPasados = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         panelCancelados = new javax.swing.JPanel();
@@ -137,7 +184,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 222, 89));
         jPanel2.setMinimumSize(new java.awt.Dimension(145, 105));
-        jPanel2.setLayout(new java.awt.FlowLayout(1, 0, -20));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, -20));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -253,15 +300,22 @@ public class MevesReservesPage extends javax.swing.JFrame {
         panelActivos.setBackground(new java.awt.Color(255, 255, 255));
         panelActivos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel1.setText("¿Adónde quiere ir?");
-        panelActivos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("<html>Aún no has iniciado ningún viaje. Cuando hagas una reserva, aparecerá aquí.</html>");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelActivos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 320, -1));
+        tipoEstancia.setText("tipoEstancia");
+        jPanel5.add(tipoEstancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        direccion.setText("direccion");
+        jPanel5.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+
+        costeReserva.setText("costeReserva");
+        jPanel5.add(costeReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
+        jPanel5.add(fechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 150, -1));
+        jPanel5.add(fechaFinReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 150, -1));
+
+        jScrollPane1.setViewportView(jPanel5);
+
+        panelActivos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 280, 380));
 
         jPanel1.add(panelActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 440, 330));
 
@@ -293,36 +347,36 @@ public class MevesReservesPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivosActionPerformed
-        // TODO add your handling code here:
+        mostrarReservasActivas();
     }//GEN-LAST:event_btnActivosActionPerformed
 
     private void btnReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseClicked
 
-    MevesReservesPage mevesReservesPage = new MevesReservesPage(idUser);
+        MevesReservesPage mevesReservesPage = new MevesReservesPage(idUser);
 
-    mevesReservesPage.setVisible(true);
-    setVisible(false);
+        mevesReservesPage.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_btnReservasMouseClicked
 
     private void labelReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelReservasMouseClicked
-    MevesReservesPage mevesReservesPage = new MevesReservesPage(idUser);
+        MevesReservesPage mevesReservesPage = new MevesReservesPage(idUser);
 
-    mevesReservesPage.setVisible(true);
-    setVisible(false);
+        mevesReservesPage.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_labelReservasMouseClicked
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-    MainPage MainPage = new MainPage(idUser);
-    
-    MainPage.setVisible(true);
-    setVisible(false);
+        MainPage MainPage = new MainPage(idUser);
+
+        MainPage.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_btnBuscarMouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
-    MainPage MainPage = new MainPage(idUser);
-    
-    MainPage.setVisible(true);
-    setVisible(false);
+        MainPage MainPage = new MainPage(idUser);
+
+        MainPage.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_jLabel17MouseClicked
 
     /**
@@ -366,10 +420,12 @@ public class MevesReservesPage extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelados;
     private javax.swing.JButton btnPasados;
     private javax.swing.JLabel btnReservas;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel costeReserva;
+    private javax.swing.JLabel direccion;
+    private com.toedter.calendar.JDateChooser fechaFinReserva;
+    private com.toedter.calendar.JDateChooser fechaSolicitud;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
@@ -380,9 +436,12 @@ public class MevesReservesPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelReservas;
     private javax.swing.JPanel panelActivos;
     private javax.swing.JPanel panelCancelados;
     private javax.swing.JPanel panelPasados;
+    private javax.swing.JLabel tipoEstancia;
     // End of variables declaration//GEN-END:variables
 }
