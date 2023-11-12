@@ -404,7 +404,7 @@ public class MainPage extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jPanel3);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 280, 960));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 280, 380));
 
         jPanel4.setBackground(new java.awt.Color(255, 222, 89));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -557,7 +557,7 @@ public class MainPage extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 1160));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -612,15 +612,30 @@ public class MainPage extends javax.swing.JFrame {
                 null);
 
         if (opcion == JOptionPane.OK_OPTION) {
-            String updateReservas = "UPDATE reservas SET id_usuario = ?, Credito = ? WHERE id_reserva = ?";
+            creditos = creditos - totalCoste;
+            System.out.println(creditos);
+            String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
             try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
                 updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
-                updateStatement.setInt(2, creditos);
-                updateStatement.setInt(3, idReserva);  // Cambié este índice a 
+                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
 
                 int rowsAffected = updateStatement.executeUpdate();
                 if (rowsAffected > 0) {
-                    System.out.println("Actualización exitosa en la tabla reservas");
+                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                    try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
+                            updateStatementCreditos.setInt(1, creditos); 
+                            updateStatementCreditos.setInt(2, idUser);
+
+                            int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                            if (rowsAffectedCreditos > 0) {
+                                System.out.println("Actualización exitosa en la tabla usuarios");
+                            } else {
+                                System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                                return;
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
                 } else {
                     System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
                     return;
@@ -693,15 +708,28 @@ public class MainPage extends javax.swing.JFrame {
 
         if (opcion == JOptionPane.OK_OPTION) {
             creditos = creditos - totalCoste;
-            String updateReservas = "UPDATE reservas SET id_usuario = ?, Credito = ? WHERE id_reserva = ?";
+            String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
             try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
                 updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
-                updateStatement.setInt(2, creditos);
-                updateStatement.setInt(3, idReserva);  // Cambié este índice a 2
+                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
 
                 int rowsAffected = updateStatement.executeUpdate();
                 if (rowsAffected > 0) {
-                    System.out.println("Actualización exitosa en la tabla reservas");
+                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                    try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
+                            updateStatementCreditos.setInt(1, creditos);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                            updateStatementCreditos.setInt(2, idUser);
+
+                            int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                            if (rowsAffectedCreditos > 0) {
+                                System.out.println("Actualización exitosa en la tabla usuarios");
+                            } else {
+                                System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                                return;
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
                 } else {
                     System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
                     return;
@@ -774,15 +802,28 @@ public class MainPage extends javax.swing.JFrame {
 
         if (opcion == JOptionPane.OK_OPTION) {
             creditos = creditos - totalCoste;
-            String updateReservas = "UPDATE reservas SET id_usuario = ?, Credito = ? WHERE id_reserva = ?";
+            String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
             try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
                 updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
-                updateStatement.setInt(2, creditos);
-                updateStatement.setInt(3, idReserva);  // Cambié este índice a 2
+                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
 
                 int rowsAffected = updateStatement.executeUpdate();
                 if (rowsAffected > 0) {
-                    System.out.println("Actualización exitosa en la tabla reservas");
+                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                    try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
+                            updateStatementCreditos.setInt(1, creditos);  
+                            updateStatementCreditos.setInt(2, idUser);
+
+                            int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                            if (rowsAffectedCreditos > 0) {
+                                System.out.println("Actualización exitosa en la tabla usuarios");
+                            } else {
+                                System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                                return;
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
                 } else {
                     System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
                     return;
@@ -855,15 +896,28 @@ public class MainPage extends javax.swing.JFrame {
 
         if (opcion == JOptionPane.OK_OPTION) {
             creditos = creditos - totalCoste;
-            String updateReservas = "UPDATE reservas SET id_usuario = ?, Credito = ? WHERE id_reserva = ?";
+            String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
             try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
                 updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
-                updateStatement.setInt(2, creditos);
-                updateStatement.setInt(3, idReserva);  // Cambié este índice a 2
+                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
 
                 int rowsAffected = updateStatement.executeUpdate();
                 if (rowsAffected > 0) {
-                    System.out.println("Actualización exitosa en la tabla reservas");
+                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                    try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
+                            updateStatementCreditos.setInt(1, creditos);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                            updateStatementCreditos.setInt(2, idUser);
+
+                            int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                            if (rowsAffectedCreditos > 0) {
+                                System.out.println("Actualización exitosa en la tabla usuarios");
+                            } else {
+                                System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                                return;
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
                 } else {
                     System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
                     return;
