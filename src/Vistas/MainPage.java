@@ -14,8 +14,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import Vistas.CreditPage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -119,57 +127,98 @@ public class MainPage extends javax.swing.JFrame {
             ResultSet resultado = statement.executeQuery();
 
             int i = 0;
-            while (resultado.next()) {
-                byte[] imagenBytes = resultado.getBytes("imagen"); 
+            while (resultado.next() && i < 4) {
+                byte[] imagenBytes = resultado.getBytes("imagen");
                 ImageIcon imagenIcon = new ImageIcon(imagenBytes);
-                Image imagen = imagenIcon.getImage();
-                Image nuevaImagen = imagen.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
-                ImageIcon imagenEscalada = new ImageIcon(nuevaImagen);
-                
+                Image imagen = imagenIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+                ImageIcon imagenEscalada = new ImageIcon(imagen);
+
+                // Obtén otros datos de la fila
                 String tipoEstancia = resultado.getString("tipo_estancia");
-                String direccion    = resultado.getString("direccion");
-                int id_reserva      = resultado.getInt("id_reserva");
-                int coste_dia       = resultado.getInt("coste_dia");
-                int metros          = resultado.getInt("metros");
+                String direccion = resultado.getString("direccion");
+                int id_reserva = resultado.getInt("id_reserva");
+                int coste_dia = resultado.getInt("coste_dia");
+                int metros = resultado.getInt("metros");
 
-                // Dependiendo de la variable i, selecciona el JLabel correspondiente y establece el icono
-                if (i == 0) {
-                    imagen0.setIcon(imagenIcon);
-                    System.out.println(imagenEscalada);
-                    tipoEstancia0.setText(tipoEstancia);
-                    direccion0.setText(direccion);
-                    metros0.setText(String.valueOf(metros));
-                    coste0.setText(String.valueOf(coste_dia));
-                    id_reserva0.setText(String.valueOf(id_reserva));
-                } else if (i == 1) {
-                    imagen1.setIcon(imagenEscalada);
-                    tipoEstancia1.setText(tipoEstancia);
-                    direccion1.setText(direccion);
-                    metros1.setText(String.valueOf(metros));
-                    coste1.setText(String.valueOf(coste_dia));
-                    id_reserva1.setText(String.valueOf(id_reserva));
-                } else if (i == 2) {
-                    imagen2.setIcon(imagenEscalada);
-                    tipoEstancia2.setText(tipoEstancia);
-                    direccion2.setText(direccion);
-                    metros2.setText(String.valueOf(metros));
-                    coste2.setText(String.valueOf(coste_dia));
-                    id_reserva2.setText(String.valueOf(id_reserva));
-                } else if (i == 3) {
-                    imagen3.setIcon(imagenEscalada);
-                    tipoEstancia3.setText(tipoEstancia);
-                    direccion3.setText(direccion);
-                    metros3.setText(String.valueOf(metros));
-                    coste3.setText(String.valueOf(coste_dia));
-                    id_reserva3.setText(String.valueOf(id_reserva));
+                switch (i) {
+                    case 0:
+                        imagen0.setIcon(imagenEscalada);
+                        tipoEstancia0.setText(tipoEstancia);
+                        direccion0.setText(direccion);
+                        metros0.setText(String.valueOf(metros));
+                        coste0.setText(String.valueOf(coste_dia));
+                        id_reserva0.setText(String.valueOf(id_reserva));
+                        break;
+                    case 1:
+                        imagen1.setIcon(imagenEscalada);
+                        tipoEstancia1.setText(tipoEstancia);
+                        direccion1.setText(direccion);
+                        metros1.setText(String.valueOf(metros));
+                        coste1.setText(String.valueOf(coste_dia));
+                        id_reserva1.setText(String.valueOf(id_reserva));
+                        break;
+                    case 2:
+                        imagen2.setIcon(imagenEscalada);
+                        tipoEstancia2.setText(tipoEstancia);
+                        direccion2.setText(direccion);
+                        metros2.setText(String.valueOf(metros));
+                        coste2.setText(String.valueOf(coste_dia));
+                        id_reserva2.setText(String.valueOf(id_reserva));
+                        break;
+                    case 3:
+                        imagen3.setIcon(imagenEscalada);
+                        tipoEstancia3.setText(tipoEstancia);
+                        direccion3.setText(direccion);
+                        metros3.setText(String.valueOf(metros));
+                        coste3.setText(String.valueOf(coste_dia));
+                        id_reserva3.setText(String.valueOf(id_reserva));
+                        break;
                 }
-
                 i++;
+            }
+
+            // Ocultar los JLabel restantes si no hay suficientes registros
+            switch (i) {
+                case 3:
+                    imagen3.setVisible(false);
+                    tipoEstancia3.setVisible(false);
+                    direccion3.setVisible(false);
+                    metros3.setVisible(false);
+                    coste3.setVisible(false);
+                    id_reserva3.setVisible(false);
+                    fechaEntrada3.setVisible(false);
+                    fechaSalida3.setVisible(false);
+                    reservar3.setVisible(false);
+                    jScrollPane1.setSize(280, 670);
+                    break;
+                case 2:
+                    imagen2.setVisible(false);
+                    tipoEstancia2.setVisible(false);
+                    direccion2.setVisible(false);
+                    metros2.setVisible(false);
+                    coste2.setVisible(false);
+                    id_reserva2.setVisible(false);
+                    fechaEntrada2.setVisible(false);
+                    fechaSalida2.setVisible(false);
+                    reservar2.setVisible(false);
+                    jScrollPane1.setSize(280, 450);
+                    break;
+                case 1:
+                    imagen1.setVisible(false);
+                    tipoEstancia1.setVisible(false);
+                    direccion1.setVisible(false);
+                    metros1.setVisible(false);
+                    coste1.setVisible(false);
+                    id_reserva1.setVisible(false);
+                    fechaEntrada1.setVisible(false);
+                    fechaSalida1.setVisible(false);
+                    reservar1.setVisible(false);
+                    jScrollPane1.setSize(280, 220);
+                    break;
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            // Cerrar la conexión y otros recursos relacionados con la base de datos
             try {
                 connection.close();
             } catch (SQLException e) {
@@ -301,14 +350,28 @@ public class MainPage extends javax.swing.JFrame {
         jPanel3.add(metros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
         reservar1.setText("Reservar");
+
         reservar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reservar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reservar1ActionPerformed(evt);
+            }
+        });
+      
         jPanel3.add(reservar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, -1, -1));
 
         coste1.setText("jLabel2");
         jPanel3.add(coste1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
 
         reservar2.setText("Reservar");
+
         reservar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reservar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reservar2ActionPerformed(evt);
+            }
+        });
+
         jPanel3.add(reservar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 630, -1, -1));
 
         coste2.setText("jLabel2");
@@ -323,22 +386,20 @@ public class MainPage extends javax.swing.JFrame {
         tipoEstancia2.setText("jLabel21");
         jPanel3.add(tipoEstancia2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, -1, -1));
         jPanel3.add(imagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, -1, -1));
-
-        metros3.setText("jLabel2");
         jPanel3.add(metros3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 790, -1, -1));
-
-        coste3.setText("jLabel2");
         jPanel3.add(coste3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 790, -1, -1));
-
-        tipoEstancia3.setText("jLabel21");
         jPanel3.add(tipoEstancia3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 730, -1, -1));
         jPanel3.add(imagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 680, -1, -1));
 
         reservar3.setText("Reservar");
         reservar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reservar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reservar3ActionPerformed(evt);
+            }
+        });
+      
         jPanel3.add(reservar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 850, -1, -1));
-
-        direccion3.setText("jLabel2");
         jPanel3.add(direccion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 760, -1, -1));
 
         coste0.setText("jLabel2");
@@ -349,8 +410,6 @@ public class MainPage extends javax.swing.JFrame {
 
         id_reserva2.setText("jLabel2");
         jPanel3.add(id_reserva2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 610, -1, -1));
-
-        id_reserva3.setText("jLabel2");
         jPanel3.add(id_reserva3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 830, -1, -1));
         jPanel3.add(fechaEntrada0, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 150, -1));
         jPanel3.add(fechaSalida0, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 150, -1));
@@ -541,8 +600,381 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void reservar0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservar0ActionPerformed
-        // TODO add your handling code here:
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection();
+
+        int coste = Integer.parseInt(coste0.getText());
+        int idReserva = Integer.parseInt(id_reserva0.getText());
+        Date fechaEntrada = fechaEntrada0.getDate();
+        Date fechaSalida = fechaSalida0.getDate();
+
+        if (fechaEntrada == null || fechaSalida == null) {
+            JOptionPane.showMessageDialog(null, "Las fechas de entrada y salida deben estar seleccionadas", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        LocalDate localDateEntrada = fechaEntrada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDateSalida = fechaSalida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        long diasDiferencia = ChronoUnit.DAYS.between(localDateEntrada, localDateSalida);
+
+        if (diasDiferencia <= 0) {
+            JOptionPane.showMessageDialog(null, "La fecha de salida debe ser posterior a la fecha de entrada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int totalCoste = (int) (diasDiferencia * coste);
+
+        int opcion = JOptionPane.showOptionDialog(
+                null,
+                "El precio total de la reserva es de: " + totalCoste + "\n Pulse Ok si desea continuar",
+                "Advertencia",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                null,
+                null);
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            creditos = creditos - totalCoste;
+            System.out.println(creditos);
+            String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
+            try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
+                updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
+
+                int rowsAffected = updateStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                    try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
+                            updateStatementCreditos.setInt(1, creditos); 
+                            updateStatementCreditos.setInt(2, idUser);
+
+                            int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                            if (rowsAffectedCreditos > 0) {
+                                System.out.println("Actualización exitosa en la tabla usuarios");
+                            } else {
+                                System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                                return;
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                } else {
+                    System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            String insertReservasUsuarios = "INSERT INTO reservas_usuarios (id_usuario, fecha_solicitud, fecha_fin_reserva, coste_reserva) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement insertStatement = connection.prepareStatement(insertReservasUsuarios)) {
+                insertStatement.setInt(1, idUser);
+                insertStatement.setDate(2, new java.sql.Date(fechaEntrada.getTime()));
+                insertStatement.setDate(3, new java.sql.Date(fechaSalida.getTime()));
+                insertStatement.setInt(4, totalCoste);
+
+                int rowsInserted = insertStatement.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("Inserción exitosa en la tabla reservas_usuarios");
+                    getReservas();
+                    jLabel1.setText(String.valueOf(creditos));
+                    fechaEntrada0.setDate(null);
+                    fechaSalida0.setDate(null);
+                } else {
+                    System.out.println("No se ha insertado ninguna fila en la tabla reservas_usuarios");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            return;
+        }
     }//GEN-LAST:event_reservar0ActionPerformed
+
+    private void reservar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservar1ActionPerformed
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection();
+
+        int coste = Integer.parseInt(coste1.getText());
+        int idReserva = Integer.parseInt(id_reserva1.getText());
+        Date fechaEntrada = fechaEntrada1.getDate();
+        Date fechaSalida = fechaSalida1.getDate();
+
+        if (fechaEntrada == null || fechaSalida == null) {
+            JOptionPane.showMessageDialog(null, "Las fechas de entrada y salida deben estar seleccionadas", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        LocalDate localDateEntrada = fechaEntrada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDateSalida = fechaSalida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        long diasDiferencia = ChronoUnit.DAYS.between(localDateEntrada, localDateSalida);
+
+        if (diasDiferencia <= 0) {
+            JOptionPane.showMessageDialog(null, "La fecha de salida debe ser posterior a la fecha de entrada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int totalCoste = (int) (diasDiferencia * coste);
+
+        int opcion = JOptionPane.showOptionDialog(
+                null,
+                "El precio total de la reserva es de: " + totalCoste + "\n Pulse Ok si desea continuar",
+                "Advertencia",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                null,
+                null);
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            creditos = creditos - totalCoste;
+            String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
+            try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
+                updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
+
+                int rowsAffected = updateStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                    try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
+                            updateStatementCreditos.setInt(1, creditos);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                            updateStatementCreditos.setInt(2, idUser);
+
+                            int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                            if (rowsAffectedCreditos > 0) {
+                                System.out.println("Actualización exitosa en la tabla usuarios");
+                            } else {
+                                System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                                return;
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                } else {
+                    System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            String insertReservasUsuarios = "INSERT INTO reservas_usuarios (id_usuario, fecha_solicitud, fecha_fin_reserva, coste_reserva) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement insertStatement = connection.prepareStatement(insertReservasUsuarios)) {
+                insertStatement.setInt(1, idUser);
+                insertStatement.setDate(2, new java.sql.Date(fechaEntrada.getTime()));
+                insertStatement.setDate(3, new java.sql.Date(fechaSalida.getTime()));
+                insertStatement.setInt(4, totalCoste);
+
+                int rowsInserted = insertStatement.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("Inserción exitosa en la tabla reservas_usuarios");
+                    getReservas();
+                    jLabel1.setText(String.valueOf(creditos));
+                    fechaEntrada1.setDate(null);
+                    fechaSalida1.setDate(null);
+                } else {
+                    System.out.println("No se ha insertado ninguna fila en la tabla reservas_usuarios");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            return;
+        }
+    }//GEN-LAST:event_reservar1ActionPerformed
+
+    private void reservar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservar2ActionPerformed
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection();
+
+        int coste = Integer.parseInt(coste2.getText());
+        int idReserva = Integer.parseInt(id_reserva2.getText());
+        Date fechaEntrada = fechaEntrada2.getDate();
+        Date fechaSalida = fechaSalida2.getDate();
+
+        if (fechaEntrada == null || fechaSalida == null) {
+            JOptionPane.showMessageDialog(null, "Las fechas de entrada y salida deben estar seleccionadas", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        LocalDate localDateEntrada = fechaEntrada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDateSalida = fechaSalida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        long diasDiferencia = ChronoUnit.DAYS.between(localDateEntrada, localDateSalida);
+
+        if (diasDiferencia <= 0) {
+            JOptionPane.showMessageDialog(null, "La fecha de salida debe ser posterior a la fecha de entrada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int totalCoste = (int) (diasDiferencia * coste);
+
+        int opcion = JOptionPane.showOptionDialog(
+                null,
+                "El precio total de la reserva es de: " + totalCoste + "\n Pulse Ok si desea continuar",
+                "Advertencia",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                null,
+                null);
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            creditos = creditos - totalCoste;
+            String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
+            try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
+                updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
+
+                int rowsAffected = updateStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                    try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
+                            updateStatementCreditos.setInt(1, creditos);  
+                            updateStatementCreditos.setInt(2, idUser);
+
+                            int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                            if (rowsAffectedCreditos > 0) {
+                                System.out.println("Actualización exitosa en la tabla usuarios");
+                            } else {
+                                System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                                return;
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                } else {
+                    System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            String insertReservasUsuarios = "INSERT INTO reservas_usuarios (id_usuario, fecha_solicitud, fecha_fin_reserva, coste_reserva) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement insertStatement = connection.prepareStatement(insertReservasUsuarios)) {
+                insertStatement.setInt(1, idUser);
+                insertStatement.setDate(2, new java.sql.Date(fechaEntrada.getTime()));
+                insertStatement.setDate(3, new java.sql.Date(fechaSalida.getTime()));
+                insertStatement.setInt(4, totalCoste);
+
+                int rowsInserted = insertStatement.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("Inserción exitosa en la tabla reservas_usuarios");
+                    getReservas();
+                    jLabel1.setText(String.valueOf(creditos));
+                    fechaEntrada2.setDate(null);
+                    fechaSalida2.setDate(null);
+                } else {
+                    System.out.println("No se ha insertado ninguna fila en la tabla reservas_usuarios");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            return;
+        }
+    }//GEN-LAST:event_reservar2ActionPerformed
+
+    private void reservar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservar3ActionPerformed
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection();
+
+        int coste = Integer.parseInt(coste3.getText());
+        int idReserva = Integer.parseInt(id_reserva3.getText());
+        Date fechaEntrada = fechaEntrada3.getDate();
+        Date fechaSalida = fechaSalida3.getDate();
+
+        if (fechaEntrada == null || fechaSalida == null) {
+            JOptionPane.showMessageDialog(null, "Las fechas de entrada y salida deben estar seleccionadas", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        LocalDate localDateEntrada = fechaEntrada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDateSalida = fechaSalida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        long diasDiferencia = ChronoUnit.DAYS.between(localDateEntrada, localDateSalida);
+
+        if (diasDiferencia <= 0) {
+            JOptionPane.showMessageDialog(null, "La fecha de salida debe ser posterior a la fecha de entrada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int totalCoste = (int) (diasDiferencia * coste);
+
+        int opcion = JOptionPane.showOptionDialog(
+                null,
+                "El precio total de la reserva es de: " + totalCoste + "\n Pulse Ok si desea continuar",
+                "Advertencia",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                null,
+                null);
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            creditos = creditos - totalCoste;
+            String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
+            try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
+                updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
+
+                int rowsAffected = updateStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                    try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
+                            updateStatementCreditos.setInt(1, creditos);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                            updateStatementCreditos.setInt(2, idUser);
+
+                            int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                            if (rowsAffectedCreditos > 0) {
+                                System.out.println("Actualización exitosa en la tabla usuarios");
+                            } else {
+                                System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                                return;
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                } else {
+                    System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            String insertReservasUsuarios = "INSERT INTO reservas_usuarios (id_usuario, fecha_solicitud, fecha_fin_reserva, coste_reserva) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement insertStatement = connection.prepareStatement(insertReservasUsuarios)) {
+                insertStatement.setInt(1, idUser);
+                insertStatement.setDate(2, new java.sql.Date(fechaEntrada.getTime()));
+                insertStatement.setDate(3, new java.sql.Date(fechaSalida.getTime()));
+                insertStatement.setInt(4, totalCoste);
+
+                int rowsInserted = insertStatement.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("Inserción exitosa en la tabla reservas_usuarios");
+                    getReservas();
+                    jLabel1.setText(String.valueOf(creditos));
+                    fechaEntrada3.setDate(null);
+                    fechaSalida3.setDate(null);
+                } else {
+                    System.out.println("No se ha insertado ninguna fila en la tabla reservas_usuarios");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            return;
+        }
+    }//GEN-LAST:event_reservar3ActionPerformed
 
     /**
      * @param args the command line arguments
