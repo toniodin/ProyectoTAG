@@ -199,7 +199,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 222, 89));
         jPanel2.setMinimumSize(new java.awt.Dimension(145, 105));
-        jPanel2.setLayout(new java.awt.FlowLayout(1, 0, -20));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, -20));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U.png"))); // NOI18N
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -315,6 +315,9 @@ public class MevesReservesPage extends javax.swing.JFrame {
         panelActivos.setBackground(new java.awt.Color(255, 255, 255));
         panelActivos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane1.setBorder(null);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tipoEstancia.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
