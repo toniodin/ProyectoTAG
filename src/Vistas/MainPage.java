@@ -47,7 +47,7 @@ public class MainPage extends javax.swing.JFrame {
         Image image = icon.getImage();
         setIconImage(image);
         this.idUser = idUser;
-        
+
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(25); //Incrementar la velocidad de la ruda del raton desplazamiento
 
         String nombreUsuario = getNombreUsuarioPorId(idUser);
@@ -130,7 +130,7 @@ public class MainPage extends javax.swing.JFrame {
             while (resultado.next() && i < 4) {
                 byte[] imagenBytes = resultado.getBytes("imagen");
                 ImageIcon imagenIcon = new ImageIcon(imagenBytes);
-                Image imagen = imagenIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+                Image imagen = imagenIcon.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
                 ImageIcon imagenEscalada = new ImageIcon(imagen);
 
                 // Obtén otros datos de la fila
@@ -647,19 +647,19 @@ public class MainPage extends javax.swing.JFrame {
                 if (rowsAffected > 0) {
                     String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
                     try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
-                            updateStatementCreditos.setInt(1, creditos); 
-                            updateStatementCreditos.setInt(2, idUser);
+                        updateStatementCreditos.setInt(1, creditos);
+                        updateStatementCreditos.setInt(2, idUser);
 
-                            int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
-                            if (rowsAffectedCreditos > 0) {
-                                System.out.println("Actualización exitosa en la tabla usuarios");
-                            } else {
-                                System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
-                                return;
-                            }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
+                        int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                        if (rowsAffectedCreditos > 0) {
+                            System.out.println("Actualización exitosa en la tabla usuarios");
+                        } else {
+                            System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                            return;
                         }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
                     return;
@@ -741,19 +741,19 @@ public class MainPage extends javax.swing.JFrame {
                 if (rowsAffected > 0) {
                     String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
                     try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
-                            updateStatementCreditos.setInt(1, creditos);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
-                            updateStatementCreditos.setInt(2, idUser);
+                        updateStatementCreditos.setInt(1, creditos);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                        updateStatementCreditos.setInt(2, idUser);
 
-                            int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
-                            if (rowsAffectedCreditos > 0) {
-                                System.out.println("Actualización exitosa en la tabla usuarios");
-                            } else {
-                                System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
-                                return;
-                            }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
+                        int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                        if (rowsAffectedCreditos > 0) {
+                            System.out.println("Actualización exitosa en la tabla usuarios");
+                        } else {
+                            System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                            return;
                         }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
                     return;
@@ -835,19 +835,19 @@ public class MainPage extends javax.swing.JFrame {
                 if (rowsAffected > 0) {
                     String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
                     try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
-                            updateStatementCreditos.setInt(1, creditos);  
-                            updateStatementCreditos.setInt(2, idUser);
+                        updateStatementCreditos.setInt(1, creditos);
+                        updateStatementCreditos.setInt(2, idUser);
 
-                            int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
-                            if (rowsAffectedCreditos > 0) {
-                                System.out.println("Actualización exitosa en la tabla usuarios");
-                            } else {
-                                System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
-                                return;
-                            }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
+                        int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                        if (rowsAffectedCreditos > 0) {
+                            System.out.println("Actualización exitosa en la tabla usuarios");
+                        } else {
+                            System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                            return;
                         }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
                     return;
@@ -929,19 +929,19 @@ public class MainPage extends javax.swing.JFrame {
                 if (rowsAffected > 0) {
                     String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
                     try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
-                            updateStatementCreditos.setInt(1, creditos);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
-                            updateStatementCreditos.setInt(2, idUser);
+                        updateStatementCreditos.setInt(1, creditos);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                        updateStatementCreditos.setInt(2, idUser);
 
-                            int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
-                            if (rowsAffectedCreditos > 0) {
-                                System.out.println("Actualización exitosa en la tabla usuarios");
-                            } else {
-                                System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
-                                return;
-                            }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
+                        int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                        if (rowsAffectedCreditos > 0) {
+                            System.out.println("Actualización exitosa en la tabla usuarios");
+                        } else {
+                            System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                            return;
                         }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
                     return;
