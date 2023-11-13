@@ -203,6 +203,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
         fechaSolicitud = new com.toedter.calendar.JDateChooser();
         fechaFinReserva = new com.toedter.calendar.JDateChooser();
         imagenLabel = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
         panelPasados = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         panelCancelados = new javax.swing.JPanel();
@@ -352,6 +353,10 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jPanel5.add(fechaFinReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 150, -1));
         jPanel5.add(imagenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
+        btnCancelar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        jPanel5.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, -1, -1));
+
         jScrollPane1.setViewportView(jPanel5);
 
         panelActivos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 280, 380));
@@ -457,6 +462,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
     private javax.swing.JButton btnActivos;
     private javax.swing.JLabel btnBuscar;
     private javax.swing.JButton btnCancelados;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnPasados;
     private javax.swing.JLabel btnReservas;
     private javax.swing.JLabel costeReserva;
