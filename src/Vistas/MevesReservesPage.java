@@ -116,21 +116,21 @@ public class MevesReservesPage extends javax.swing.JFrame {
         String tipoEstanciaTexto = "";
         String direccionTexto = "";
         int costeReservaValor = 0;
-//        Date fechaSolicitudValor;
-//        Date fechaFinReservaValor;
-        
+        Date fechaSolicitudValor = null;
+        Date fechaFinReservaValor = null;
+
         while (resultado.next()) {
             tipoEstanciaTexto = resultado.getString("tipo_estancia");
             direccionTexto = resultado.getString("direccion");
             costeReservaValor = resultado.getInt("coste_reserva");
-//            fechaSolicitudValor = resultado.getDate("fecha_solicitud");
-//            fechaFinReservaValor = resultado.getDate("fecha_fin_reserva");
+            fechaSolicitudValor = resultado.getDate("fecha_solicitud");
+            fechaFinReservaValor = resultado.getDate("fecha_fin_reserva");
             
             // Acumula los valores en el StringBuilder
             resultados.append("Tipo de estancia: ").append(tipoEstanciaTexto).append("\n");
             resultados.append("Dirección: ").append(direccionTexto).append("\n");
             resultados.append("Coste de reserva: ").append(costeReservaValor).append("\n\n");
-//            resultados.append(fechaSolicitudValor);
+            resultados.append(fechaSolicitudValor);
             
         }
 
@@ -138,8 +138,8 @@ public class MevesReservesPage extends javax.swing.JFrame {
         tipoEstancia.setText("<html><b>Tipo de estancia:</b><br>" + tipoEstanciaTexto + "</html>");
         direccion.setText("<html><b>Dirección:</b><br>" + direccionTexto + "</html>");
         costeReserva.setText("<html><b>Coste de reserva:</b> " + costeReservaValor + "</html>");
-//        fechaSolicitud.setDate(fechaSolicitudValor);
-//        fechaFinReserva.setDate(fechaFinReservaValor);
+        fechaSolicitud.setDate(fechaSolicitudValor);
+        fechaFinReserva.setDate(fechaFinReservaValor);
 
     } catch (Exception e) {
         e.printStackTrace();
