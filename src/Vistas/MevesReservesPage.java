@@ -17,6 +17,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -38,10 +43,10 @@ public class MevesReservesPage extends javax.swing.JFrame {
         this.idUser = idUser;
 
         this.conexion = new Conexion();
-        
+
         String nombreUsuario = getNombreUsuarioPorId(idUser);
         jLabel20.setText(nombreUsuario);
-        
+
         mostrarReservasActivas();
 
         //Muestra el panel de reservas Activadas y oculta los otros
@@ -102,50 +107,61 @@ public class MevesReservesPage extends javax.swing.JFrame {
     }
 
     private void mostrarReservasActivas() {
-    // Realiza la consulta SQL con INNER JOIN para obtener la información necesaria
-    String consulta = "SELECT r.tipo_estancia, r.direccion, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
-            + "FROM reservas r INNER JOIN reservas_usuarios ru ON r.id_reserva = ru.id_reserva "
-            + "WHERE ru.id_usuario = ? AND ru.fecha_fin_reserva >= CURRENT_DATE";
+        // Realiza la consulta SQL con INNER JOIN para obtener la información necesaria
+        String consulta = "SELECT r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
+                + "FROM reservas r INNER JOIN reservas_usuarios ru ON r.id_reserva = ru.id_reserva "
+                + "WHERE ru.id_usuario = ? AND ru.fecha_fin_reserva >= CURRENT_DATE";
 
-    try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
+        try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
 
-        statement.setInt(1, idUser);
-        ResultSet resultado = statement.executeQuery();
+            statement.setInt(1, idUser);
+            ResultSet resultado = statement.executeQuery();
 
-        StringBuilder resultados = new StringBuilder();
-        String tipoEstanciaTexto = "";
-        String direccionTexto = "";
-        int costeReservaValor = 0;
-        Date fechaSolicitudValor = null;
-        Date fechaFinReservaValor = null;
+            StringBuilder resultados = new StringBuilder();
+            String tipoEstanciaTexto = "";
+            String direccionTexto = "";
+            byte[] imagenBytes = null;
+            int costeReservaValor = 0;
+            Date fechaSolicitudValor = null;
+            Date fechaFinReservaValor = null;
 
-        while (resultado.next()) {
-            tipoEstanciaTexto = resultado.getString("tipo_estancia");
-            direccionTexto = resultado.getString("direccion");
-            costeReservaValor = resultado.getInt("coste_reserva");
-            fechaSolicitudValor = resultado.getDate("fecha_solicitud");
-            fechaFinReservaValor = resultado.getDate("fecha_fin_reserva");
-            
-            // Acumula los valores en el StringBuilder
-            resultados.append("Tipo de estancia: ").append(tipoEstanciaTexto).append("\n");
-            resultados.append("Dirección: ").append(direccionTexto).append("\n");
-            resultados.append("Coste de reserva: ").append(costeReservaValor).append("\n\n");
-            resultados.append(fechaSolicitudValor);
-            
+            while (resultado.next()) {
+                tipoEstanciaTexto = resultado.getString("tipo_estancia");
+                direccionTexto = resultado.getString("direccion");
+                imagenBytes = resultado.getBytes("imagen");
+                costeReservaValor = resultado.getInt("coste_reserva");
+                fechaSolicitudValor = resultado.getDate("fecha_solicitud");
+                fechaFinReservaValor = resultado.getDate("fecha_fin_reserva");
+
+                // Acumula los valores en el StringBuilder
+                resultados.append("Tipo de estancia: ").append(tipoEstanciaTexto).append("\n");
+                resultados.append("Dirección: ").append(direccionTexto).append("\n");
+                resultados.append("Coste de reserva: ").append(costeReservaValor).append("\n\n");
+                resultados.append(fechaSolicitudValor);
+
+                // Puedes guardar la imagenBytes y convertirla a un ImageIcon o Image para mostrarla en tu interfaz
+                ImageIcon imagenReserva = new ImageIcon(imagenBytes);
+
+                // Redimensiona la imagen a las dimensiones deseadas (por ejemplo, 100x100)
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+
+                // Crea un nuevo ImageIcon con la imagen redimensionada
+                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+
+                imagenLabel.setIcon(imagenRedimensionadaIcon);
+            }
+
+            // Muestra los resultados acumulados en las etiquetas
+            tipoEstancia.setText("<html><b>Tipo de estancia:</b><br>" + tipoEstanciaTexto + "</html>");
+            direccion.setText("<html><b>Dirección:</b><br>" + direccionTexto + "</html>");
+            costeReserva.setText("<html><b>Coste de reserva:</b> " + costeReservaValor + "</html>");
+            fechaSolicitud.setDate(fechaSolicitudValor);
+            fechaFinReserva.setDate(fechaFinReservaValor);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        // Muestra los resultados acumulados en las etiquetas
-        tipoEstancia.setText("<html><b>Tipo de estancia:</b><br>" + tipoEstanciaTexto + "</html>");
-        direccion.setText("<html><b>Dirección:</b><br>" + direccionTexto + "</html>");
-        costeReserva.setText("<html><b>Coste de reserva:</b> " + costeReservaValor + "</html>");
-        fechaSolicitud.setDate(fechaSolicitudValor);
-        fechaFinReserva.setDate(fechaFinReservaValor);
-
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
-
 
     private String formatDate(Date date) {
         // Formatea la fecha en el formato deseado
@@ -186,6 +202,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
         costeReserva = new javax.swing.JLabel();
         fechaSolicitud = new com.toedter.calendar.JDateChooser();
         fechaFinReserva = new com.toedter.calendar.JDateChooser();
+        imagenLabel = new javax.swing.JLabel();
         panelPasados = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         panelCancelados = new javax.swing.JPanel();
@@ -322,17 +339,18 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
         tipoEstancia.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tipoEstancia.setText("tipoEstancia");
-        jPanel5.add(tipoEstancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        jPanel5.add(tipoEstancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         direccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         direccion.setText("direccion");
-        jPanel5.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jPanel5.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         costeReserva.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         costeReserva.setText("costeReserva");
-        jPanel5.add(costeReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
-        jPanel5.add(fechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 150, -1));
-        jPanel5.add(fechaFinReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 150, -1));
+        jPanel5.add(costeReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
+        jPanel5.add(fechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 150, -1));
+        jPanel5.add(fechaFinReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 150, -1));
+        jPanel5.add(imagenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         jScrollPane1.setViewportView(jPanel5);
 
@@ -445,6 +463,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
     private javax.swing.JLabel direccion;
     private com.toedter.calendar.JDateChooser fechaFinReserva;
     private com.toedter.calendar.JDateChooser fechaSolicitud;
+    private javax.swing.JLabel imagenLabel;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel20;
