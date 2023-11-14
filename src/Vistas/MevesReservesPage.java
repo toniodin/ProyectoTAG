@@ -22,16 +22,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 
 /**
  *
@@ -90,20 +80,23 @@ public class MevesReservesPage extends javax.swing.JFrame {
     }
 
     private MevesReservesPage() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    // Método para validar las credenciales en la base de datos
     private String getNombreUsuarioPorId(int id) {
         Conexion conexion = new Conexion();
-        Connection connection = conexion.DatabaseConnection();
+        Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
         String nombre = "";
 
         try {
+            // Consulta SQL para verificar las credenciales
             String consulta = "SELECT * FROM usuarios WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(consulta);
             statement.setInt(1, id);
 
             ResultSet resultado = statement.executeQuery();
+            // Si se encontraron resultados, las credenciales son válidas
             if (resultado.next()) {
                 nombre = resultado.getString("Nombre");
             }
@@ -114,78 +107,64 @@ public class MevesReservesPage extends javax.swing.JFrame {
     }
 
     private void mostrarReservasActivas() {
-    String consulta = "SELECT r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
-            + "FROM reservas r INNER JOIN reservas_usuarios ru ON r.id_reserva = ru.id_reserva "
-            + "WHERE ru.id_usuario = ? AND ru.fecha_fin_reserva >= CURRENT_DATE";
+        // Realiza la consulta SQL con INNER JOIN para obtener la información necesaria
+        String consulta = "SELECT r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
+                + "FROM reservas r INNER JOIN reservas_usuarios ru ON r.id_reserva = ru.id_reserva "
+                + "WHERE ru.id_usuario = ? AND ru.fecha_fin_reserva >= CURRENT_DATE";
 
-    try (Connection connection = conexion.DatabaseConnection(); 
-         PreparedStatement statement = connection.prepareStatement(consulta)) {
+        try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
 
-        statement.setInt(1, idUser);
-        ResultSet resultado = statement.executeQuery();
+            statement.setInt(1, idUser);
+            ResultSet resultado = statement.executeQuery();
 
-        // Contar el número de resultados obtenidos
-        int contadorResultados = 0;
+            StringBuilder resultados = new StringBuilder();
+            String tipoEstanciaTexto = "";
+            String direccionTexto = "";
+            byte[] imagenBytes = null;
+            int costeReservaValor = 0;
+            Date fechaSolicitudValor = null;
+            Date fechaFinReservaValor = null;
 
-        // Crear un nuevo panel para contener los resultados
-        JPanel nuevoPanelActivos = new JPanel();
-        nuevoPanelActivos.setLayout(new GridLayout(0, 1)); // Un GridLayout de una columna
+            while (resultado.next()) {
+                tipoEstanciaTexto = resultado.getString("tipo_estancia");
+                direccionTexto = resultado.getString("direccion");
+                imagenBytes = resultado.getBytes("imagen");
+                costeReservaValor = resultado.getInt("coste_reserva");
+                fechaSolicitudValor = resultado.getDate("fecha_solicitud");
+                fechaFinReservaValor = resultado.getDate("fecha_fin_reserva");
 
-        while (resultado.next()) {
-            
-            System.out.println("Procesando una reserva activa...");
-            contadorResultados++;
+                // Acumula los valores en el StringBuilder
+                resultados.append("Tipo de estancia: ").append(tipoEstanciaTexto).append("\n");
+                resultados.append("Dirección: ").append(direccionTexto).append("\n");
+                resultados.append("Coste de reserva: ").append(costeReservaValor).append("\n\n");
+                resultados.append(fechaSolicitudValor);
 
-            String tipoEstanciaTexto = resultado.getString("tipo_estancia");
-            String direccionTexto = resultado.getString("direccion");
-            byte[] imagenBytes = resultado.getBytes("imagen");
-            int costeReservaValor = resultado.getInt("coste_reserva");
-            Date fechaSolicitudValor = resultado.getDate("fecha_solicitud");
+                // Puedes guardar la imagenBytes y convertirla a un ImageIcon o Image para mostrarla en tu interfaz
+                ImageIcon imagenReserva = new ImageIcon(imagenBytes);
 
-            ImageIcon imagenReserva = new ImageIcon(imagenBytes);
-            Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-            ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
-            JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+                // Redimensiona la imagen a las dimensiones deseadas (por ejemplo, 100x100)
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
-            JPanel panelReserva = crearPanelReserva(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor);
-            nuevoPanelActivos.add(panelReserva);
+                // Crea un nuevo ImageIcon con la imagen redimensionada
+                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+
+                imagenLabel.setIcon(imagenRedimensionadaIcon);
+            }
+
+            // Muestra los resultados acumulados en las etiquetas
+            tipoEstancia.setText("<html><b>Tipo de estancia:</b><br>" + tipoEstanciaTexto + "</html>");
+            direccion.setText("<html><b>Dirección:</b><br>" + direccionTexto + "</html>");
+            costeReserva.setText("<html><b>Coste de reserva:</b> " + costeReservaValor + "</html>");
+            fechaSolicitud.setDate(fechaSolicitudValor);
+            fechaFinReserva.setDate(fechaFinReservaValor);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        System.out.println("Número de reservas obtenidas: " + contadorResultados);
-
-        // Crear un nuevo JScrollPane con el nuevo panel
-        JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelActivos);
-        nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-        // Remover todos los componentes del panel principal
-        panelActivos.removeAll();
-
-        // Agregar el nuevo JScrollPane al panel principal
-        panelActivos.setLayout(new BorderLayout());
-        panelActivos.add(nuevoJScrollPane, BorderLayout.CENTER);
-
-        // Actualizar la interfaz gráfica
-        revalidate();
-        repaint();
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-
-
-    private JPanel crearPanelReserva(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaSolicitud) {
-        JPanel panelReserva = new JPanel();
-        panelReserva.setLayout(new BoxLayout(panelReserva, BoxLayout.Y_AXIS));
-        panelReserva.add(imagen);
-        panelReserva.add(new JLabel("<html><b>Tipo de estancia:</b><br>" + tipoEstancia + "</html>"));
-        panelReserva.add(new JLabel("<html><b>Dirección:</b><br>" + direccion + "</html>"));
-        panelReserva.add(new JLabel("<html><b>Coste de reserva:</b> " + coste + "</html>"));
-        panelReserva.add(new JLabel(formatDate(fechaSolicitud)));
-        return panelReserva;
     }
 
     private String formatDate(Date date) {
+        // Formatea la fecha en el formato deseado
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         return sdf.format(date);
     }
