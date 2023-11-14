@@ -147,7 +147,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
             while (resultado.next()) {
                 contadorResultados++;
-
+                
                 String tipoEstanciaTexto = resultado.getString("tipo_estancia");
                 String direccionTexto = resultado.getString("direccion");
                 byte[] imagenBytes = resultado.getBytes("imagen");
@@ -178,8 +178,8 @@ public class MevesReservesPage extends javax.swing.JFrame {
                                 long diferenciaDias = ChronoUnit.DAYS.between(fechaSolicitudLocal, fechaFinSolicitudLocal);
 
                                 int totalCoste = (int) (diferenciaDias * coste);
-;
                                 int devolucion = totalCoste - costeReservaValor;
+                                
                                 int confirmacion = JOptionPane.showOptionDialog(
                                     null,
                                     "El precio total de la reserva es de: " + totalCoste +" se le retornarán los puntos si es que sobran"+ "\n Pulse Ok si desea continuar",
@@ -189,8 +189,9 @@ public class MevesReservesPage extends javax.swing.JFrame {
                                     null,
                                     null,
                                     null);
+                                
                                 creditosUser = creditosUser + devolucion;
-                                creditosUser = creditosUser - totalCoste;
+                                
                                 if (confirmacion == JOptionPane.OK_OPTION) {
                                     String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
                                     try (Connection connection3 = conexion.DatabaseConnection(); PreparedStatement updateStatementCreditos = connection3.prepareStatement(updateCreditos)) {
