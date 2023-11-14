@@ -114,65 +114,63 @@ public class MevesReservesPage extends javax.swing.JFrame {
     }
 
     private void mostrarReservasActivas() {
-    String consulta = "SELECT r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
-            + "FROM reservas r INNER JOIN reservas_usuarios ru ON r.id_reserva = ru.id_reserva "
-            + "WHERE ru.id_usuario = ? AND ru.fecha_fin_reserva >= CURRENT_DATE";
+        String consulta = "SELECT r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
+                + "FROM reservas r INNER JOIN reservas_usuarios ru ON r.id_reserva = ru.id_reserva "
+                + "WHERE ru.id_usuario = ? AND ru.fecha_fin_reserva >= CURRENT_DATE";
 
-    try (Connection connection = conexion.DatabaseConnection(); 
-         PreparedStatement statement = connection.prepareStatement(consulta)) {
+        try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
 
-        statement.setInt(1, idUser);
-        ResultSet resultado = statement.executeQuery();
+            statement.setInt(1, idUser);
+            ResultSet resultado = statement.executeQuery();
 
-        // Contar el número de resultados obtenidos
-        int contadorResultados = 0;
+            // Contar el número de resultados obtenidos
+            int contadorResultados = 0;
 
-        // Crear un nuevo panel para contener los resultados
-        JPanel nuevoPanelActivos = new JPanel();
-        nuevoPanelActivos.setLayout(new GridLayout(0, 1)); // Un GridLayout de una columna
+            // Crear un nuevo panel para contener los resultados
+            JPanel nuevoPanelActivos = new JPanel();
+            nuevoPanelActivos.setLayout(new GridLayout(0, 1)); // Un GridLayout de una columna
 
-        while (resultado.next()) {
-            
-            System.out.println("Procesando una reserva activa...");
-            contadorResultados++;
+            while (resultado.next()) {
 
-            String tipoEstanciaTexto = resultado.getString("tipo_estancia");
-            String direccionTexto = resultado.getString("direccion");
-            byte[] imagenBytes = resultado.getBytes("imagen");
-            int costeReservaValor = resultado.getInt("coste_reserva");
-            Date fechaSolicitudValor = resultado.getDate("fecha_solicitud");
+                System.out.println("Procesando una reserva activa...");
+                contadorResultados++;
 
-            ImageIcon imagenReserva = new ImageIcon(imagenBytes);
-            Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-            ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
-            JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+                String tipoEstanciaTexto = resultado.getString("tipo_estancia");
+                String direccionTexto = resultado.getString("direccion");
+                byte[] imagenBytes = resultado.getBytes("imagen");
+                int costeReservaValor = resultado.getInt("coste_reserva");
+                Date fechaSolicitudValor = resultado.getDate("fecha_solicitud");
 
-            JPanel panelReserva = crearPanelReserva(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor);
-            nuevoPanelActivos.add(panelReserva);
+                ImageIcon imagenReserva = new ImageIcon(imagenBytes);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+                JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+
+                JPanel panelReserva = crearPanelReserva(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor);
+                nuevoPanelActivos.add(panelReserva);
+            }
+
+            System.out.println("Número de reservas obtenidas: " + contadorResultados);
+
+            // Crear un nuevo JScrollPane con el nuevo panel
+            JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelActivos);
+            nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+            // Remover todos los componentes del panel principal
+            panelActivos.removeAll();
+
+            // Agregar el nuevo JScrollPane al panel principal
+            panelActivos.setLayout(new BorderLayout());
+            panelActivos.add(nuevoJScrollPane, BorderLayout.CENTER);
+
+            // Actualizar la interfaz gráfica
+            revalidate();
+            repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        System.out.println("Número de reservas obtenidas: " + contadorResultados);
-
-        // Crear un nuevo JScrollPane con el nuevo panel
-        JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelActivos);
-        nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-        // Remover todos los componentes del panel principal
-        panelActivos.removeAll();
-
-        // Agregar el nuevo JScrollPane al panel principal
-        panelActivos.setLayout(new BorderLayout());
-        panelActivos.add(nuevoJScrollPane, BorderLayout.CENTER);
-
-        // Actualizar la interfaz gráfica
-        revalidate();
-        repaint();
-
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
-
 
     private JPanel crearPanelReserva(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaSolicitud) {
         JPanel panelReserva = new JPanel();
