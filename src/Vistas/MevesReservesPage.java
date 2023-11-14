@@ -31,8 +31,14 @@ import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -122,6 +128,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
     }
 
     private void mostrarReservasActivas() {
+
         String consulta = "SELECT ru.id_reserva, r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
                 + "FROM reservas r INNER JOIN reservas_usuarios ru ON r.id_reserva = ru.id_reserva "
                 + "WHERE ru.id_usuario = ? AND ru.fecha_fin_reserva >= CURRENT_DATE";
@@ -134,9 +141,9 @@ public class MevesReservesPage extends javax.swing.JFrame {
             // Contar el número de resultados obtenidos
             int contadorResultados = 0;
 
-            // Crear un nuevo panel para contener los resultados
+             // Crear un nuevo panel para contener los resultados
             JPanel nuevoPanelActivos = new JPanel();
-            nuevoPanelActivos.setLayout(new GridLayout(0, 1)); // Un GridLayout de una columna
+            nuevoPanelActivos.setLayout(new BoxLayout(nuevoPanelActivos, BoxLayout.Y_AXIS));
 
             while (resultado.next()) {
                 contadorResultados++;
@@ -150,7 +157,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 Date fechaFinSolicitudValor = resultado.getDate("fecha_fin_reserva");
 
                 ImageIcon imagenReserva = new ImageIcon(imagenBytes);
-                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
                 JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
                 JButton editarReservaButton = new JButton("Editar Reserva");
@@ -203,13 +210,14 @@ public class MevesReservesPage extends javax.swing.JFrame {
                     }
                 });
 
-                JPanel panelReserva = crearPanelReserva(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor, fechaFinSolicitudValor, editarReservaButton);
+              JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor, fechaFinReservaValor);
                 nuevoPanelActivos.add(panelReserva);
             }
 
             // Crear un nuevo JScrollPane con el nuevo panel
             JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelActivos);
             nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
 
             // Remover todos los componentes del panel principal
             panelActivos.removeAll();
@@ -227,30 +235,59 @@ public class MevesReservesPage extends javax.swing.JFrame {
         }
     }
 
-    private JPanel crearPanelReserva(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaInicio, Date fechaFin, JButton editarReserva) {
+    private JPanel crearPanelReservaMejorado(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaSolicitud, Date fechaFinReserva) {
         JPanel panelReserva = new JPanel();
-        panelReserva.setLayout(new BoxLayout(panelReserva, BoxLayout.Y_AXIS));
-        panelReserva.add(imagen);
-        panelReserva.add(new JLabel("<html><b>Tipo de estancia:</b><br>" + tipoEstancia + "</html>"));
-        panelReserva.add(new JLabel("<html><b>Dirección:</b><br>" + direccion + "</html>"));
-        panelReserva.add(new JLabel("<html><b>Coste de reserva:</b> " + coste + "</html>"));
+        panelReserva.setLayout(new BorderLayout());
+        panelReserva.setBackground(Color.WHITE);
+        panelReserva.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        JDateChooser fechaInicioReservaChooser = new JDateChooser();
-        JDateChooser fechaFinReservaChooser = new JDateChooser();
-        fechaInicioReservaChooser.setDate(fechaInicio);
-        fechaFinReservaChooser.setDate(fechaFin);
-        System.out.println(fechaFin);
-        System.out.println(fechaInicio);
-        // Añade el JDateChooser al panel
-        panelReserva.add(new JLabel("Fecha de Inicio Reserva:"));
-        panelReserva.add(fechaInicioReservaChooser);
+        // JPanel para la información de la reserva
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS)); // Diseño en una columna
+        infoPanel.setBackground(Color.WHITE);
 
-        // Añade el JDateChooser al panel
-        panelReserva.add(new JLabel("Fecha de Fin Reserva:"));
-        panelReserva.add(fechaFinReservaChooser);
+        // JLabel para el tipo de estancia
+        JLabel tipoEstanciaLabel = new JLabel("<html><b>Tipo de estancia:</b> " + tipoEstancia + "</html>");
+        tipoEstanciaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        infoPanel.add(tipoEstanciaLabel);
 
-        // Añade el botón
-        panelReserva.add(editarReserva);
+        // JLabel para la dirección
+        JLabel direccionLabel = new JLabel("<html><b>Dirección:</b> " + direccion + "</html>");
+        direccionLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        infoPanel.add(direccionLabel);
+
+        // JLabel para el coste de la reserva
+        JLabel costeReservaLabel = new JLabel("<html><b>Coste de reserva:</b> " + coste + "</html>");
+        costeReservaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        infoPanel.add(costeReservaLabel);
+
+        // JLabel para la fecha de solicitud
+        JLabel fechaSolicitudLabel = new JLabel("<html><b>Fecha de Solicitud:</b></html>");
+        fechaSolicitudLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        infoPanel.add(fechaSolicitudLabel);
+
+        // JDateChooser para la fecha de solicitud
+        JDateChooser fechaSolicitudChooser = new JDateChooser(fechaSolicitud);
+        fechaSolicitudChooser.setDateFormatString("dd-MM-yyyy"); // Puedes establecer el formato aquí
+        infoPanel.add(fechaSolicitudChooser);
+
+        // JLabel para la fecha de fin de reserva
+        JLabel fechaFinReservaLabel = new JLabel("<html><b>Fecha de Fin Reserva:</b></html>");
+        fechaFinReservaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        infoPanel.add(fechaFinReservaLabel);
+
+        // JDateChooser para la fecha de fin de reserva
+        JDateChooser fechaFinReservaChooser = new JDateChooser(fechaFinReserva);
+        fechaFinReservaChooser.setDateFormatString("dd-MM-yyyy"); // Puedes establecer el formato aquí
+        infoPanel.add(fechaFinReservaChooser);
+
+        // Botón "Editar Reserva" deshabilitado
+        JButton editarReservaButton = new JButton("Editar Reserva");
+        infoPanel.add(editarReservaButton);
+
+        // Añadir elementos al panelReserva
+        panelReserva.add(imagen, BorderLayout.WEST);
+        panelReserva.add(infoPanel, BorderLayout.CENTER);
 
         return panelReserva;
     }
@@ -283,19 +320,21 @@ public class MevesReservesPage extends javax.swing.JFrame {
         panelActivos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
-        tipoEstancia = new javax.swing.JLabel();
-        direccion = new javax.swing.JLabel();
-        costeReserva = new javax.swing.JLabel();
-        fechaSolicitud = new com.toedter.calendar.JDateChooser();
-        fechaFinReserva = new com.toedter.calendar.JDateChooser();
+        jPanel6 = new javax.swing.JPanel();
         imagenLabel = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
+        fechaFinReserva = new com.toedter.calendar.JDateChooser();
+        fechaSolicitud = new com.toedter.calendar.JDateChooser();
+        costeReserva = new javax.swing.JLabel();
+        direccion = new javax.swing.JLabel();
+        tipoEstancia = new javax.swing.JLabel();
         panelPasados = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         panelCancelados = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -424,29 +463,28 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tipoEstancia.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tipoEstancia.setText("tipoEstancia");
-        jPanel5.add(tipoEstancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
-
-        direccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        direccion.setText("direccion");
-        jPanel5.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
-
-        costeReserva.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        costeReserva.setText("costeReserva");
-        jPanel5.add(costeReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
-        jPanel5.add(fechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 150, -1));
-        jPanel5.add(fechaFinReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 150, -1));
-        jPanel5.add(imagenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel6.add(imagenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         btnCancelar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        jPanel5.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, -1, -1));
+        jPanel6.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, -1));
+        jPanel6.add(fechaFinReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, -1));
+        jPanel6.add(fechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 150, -1));
+
+        costeReserva.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        costeReserva.setText("costeReserva");
+        jPanel6.add(costeReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, -1, -1));
+
+        direccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        direccion.setText("direccion");
+        jPanel6.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        tipoEstancia.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tipoEstancia.setText("tipoEstancia");
+        jPanel6.add(tipoEstancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 250));
 
         jScrollPane1.setViewportView(jPanel5);
 
@@ -578,6 +616,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelReservas;
     private javax.swing.JPanel panelActivos;
