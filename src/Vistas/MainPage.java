@@ -587,7 +587,7 @@ public class MainPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseClicked
-        MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser);
+        MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser,creditos);
 
         MevesReservesPage.setVisible(true);
         setVisible(false);

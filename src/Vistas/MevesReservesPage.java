@@ -39,6 +39,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import javax.swing.JButton;
 
 /**
@@ -48,9 +52,10 @@ import javax.swing.JButton;
 public class MevesReservesPage extends javax.swing.JFrame {
 
     private final int idUser;
+    private int creditosUser;
     private Conexion conexion;
 
-    public MevesReservesPage(int idUser) {
+    public MevesReservesPage(int idUser, int creditos) {
         initComponents();
         System.out.println(idUser);
         this.setLocationRelativeTo(null); //Inicializa al centro de la pantalla
@@ -59,7 +64,8 @@ public class MevesReservesPage extends javax.swing.JFrame {
         Image image = icon.getImage();
         setIconImage(image);
         this.idUser = idUser;
-
+        this.creditosUser = creditos;
+        
         this.conexion = new Conexion();
 
         String nombreUsuario = getNombreUsuarioPorId(idUser);
@@ -122,7 +128,8 @@ public class MevesReservesPage extends javax.swing.JFrame {
     }
 
     private void mostrarReservasActivas() {
-        String consulta = "SELECT r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
+
+        String consulta = "SELECT ru.id_reserva, r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
                 + "FROM reservas r INNER JOIN reservas_usuarios ru ON r.id_reserva = ru.id_reserva "
                 + "WHERE ru.id_usuario = ? AND ru.fecha_fin_reserva >= CURRENT_DATE";
 
@@ -131,26 +138,79 @@ public class MevesReservesPage extends javax.swing.JFrame {
             statement.setInt(1, idUser);
             ResultSet resultado = statement.executeQuery();
 
-            // Crear un nuevo panel para contener los resultados
+            // Contar el número de resultados obtenidos
+            int contadorResultados = 0;
+
+             // Crear un nuevo panel para contener los resultados
             JPanel nuevoPanelActivos = new JPanel();
             nuevoPanelActivos.setLayout(new BoxLayout(nuevoPanelActivos, BoxLayout.Y_AXIS));
 
             while (resultado.next()) {
-                System.out.println("Procesando una reserva activa...");
+                contadorResultados++;
 
                 String tipoEstanciaTexto = resultado.getString("tipo_estancia");
                 String direccionTexto = resultado.getString("direccion");
                 byte[] imagenBytes = resultado.getBytes("imagen");
                 int costeReservaValor = resultado.getInt("coste_reserva");
+                int idReserva = resultado.getInt("id_reserva");
                 Date fechaSolicitudValor = resultado.getDate("fecha_solicitud");
-                Date fechaFinReservaValor = resultado.getDate("fecha_fin_reserva");
+                Date fechaFinSolicitudValor = resultado.getDate("fecha_fin_reserva");
 
                 ImageIcon imagenReserva = new ImageIcon(imagenBytes);
                 Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
                 JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+                JButton editarReservaButton = new JButton("Editar Reserva");
+                editarReservaButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Lógica para editar la reserva
 
-                JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor, fechaFinReservaValor);
+                        String consulta2 = "SELECT * FROM reservas WHERE id_reserva = ?";
+                        try (Connection connection2 = conexion.DatabaseConnection(); PreparedStatement statement2 = connection2.prepareStatement(consulta2)) {
+                            statement2.setInt(1, idReserva);
+                            ResultSet resultado2 = statement2.executeQuery();
+                            while (resultado2.next()) {
+                                int coste = resultado2.getInt("coste_dia");
+
+                                // Convertir las fechas a LocalDate
+                                LocalDate fechaSolicitudLocal = new java.sql.Date(fechaSolicitudValor.getTime()).toLocalDate();
+                                LocalDate fechaFinSolicitudLocal = new java.sql.Date(fechaFinSolicitudValor.getTime()).toLocalDate();
+                                long diferenciaDias = ChronoUnit.DAYS.between(fechaSolicitudLocal, fechaFinSolicitudLocal);
+
+                                int totalCoste = (int) (diferenciaDias * coste);
+;
+                                int devolucion = totalCoste - costeReservaValor;
+                                int confirmacion = JOptionPane.showOptionDialog(
+                                    null,
+                                    "El precio total de la reserva es de: " + totalCoste +" se le retornarán los puntos si es que sobran"+ "\n Pulse Ok si desea continuar",
+                                    "Advertencia",
+                                    JOptionPane.OK_CANCEL_OPTION,
+                                    JOptionPane.WARNING_MESSAGE,
+                                    null,
+                                    null,
+                                    null);
+                                creditosUser = creditosUser + devolucion;
+                                creditosUser = creditosUser - totalCoste;
+                                if (confirmacion == JOptionPane.OK_OPTION) {
+                                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                                    try (Connection connection3 = conexion.DatabaseConnection(); PreparedStatement updateStatementCreditos = connection3.prepareStatement(updateCreditos)) {
+                                        updateStatementCreditos.setInt(1, creditosUser);
+                                        updateStatementCreditos.setInt(2, idUser);
+
+                                        int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                                    } catch (SQLException e2) {
+                                        e2.printStackTrace();
+                                    }
+                                }
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
+
+              JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor, fechaFinReservaValor);
                 nuevoPanelActivos.add(panelReserva);
             }
 
@@ -237,11 +297,6 @@ public class MevesReservesPage extends javax.swing.JFrame {
         return sdf.format(date);
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -470,14 +525,14 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
     private void btnReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseClicked
 
-        MevesReservesPage mevesReservesPage = new MevesReservesPage(idUser);
+        MevesReservesPage mevesReservesPage = new MevesReservesPage(idUser, creditosUser);
 
         mevesReservesPage.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnReservasMouseClicked
 
     private void labelReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelReservasMouseClicked
-        MevesReservesPage mevesReservesPage = new MevesReservesPage(idUser);
+        MevesReservesPage mevesReservesPage = new MevesReservesPage(idUser,creditosUser);
 
         mevesReservesPage.setVisible(true);
         setVisible(false);
@@ -496,6 +551,10 @@ public class MevesReservesPage extends javax.swing.JFrame {
         MainPage.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jLabel17MouseClicked
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
