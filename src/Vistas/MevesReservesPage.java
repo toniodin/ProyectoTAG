@@ -164,7 +164,6 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 editarReservaButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Lógica para editar la reserva
 
                         String consulta2 = "SELECT * FROM reservas WHERE id_reserva = ?";
                         try (Connection connection2 = conexion.DatabaseConnection(); PreparedStatement statement2 = connection2.prepareStatement(consulta2)) {
@@ -210,7 +209,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
                     }
                 });
 
-              JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor, fechaFinReservaValor);
+              JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor, fechaFinSolicitudValor, editarReservaButton);
                 nuevoPanelActivos.add(panelReserva);
             }
 
@@ -235,7 +234,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
         }
     }
 
-    private JPanel crearPanelReservaMejorado(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaSolicitud, Date fechaFinReserva) {
+    private JPanel crearPanelReservaMejorado(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaSolicitud, Date fechaFinReserva, JButton editarReservaButton) {
         JPanel panelReserva = new JPanel();
         panelReserva.setLayout(new BorderLayout());
         panelReserva.setBackground(Color.WHITE);
@@ -282,7 +281,6 @@ public class MevesReservesPage extends javax.swing.JFrame {
         infoPanel.add(fechaFinReservaChooser);
 
         // Botón "Editar Reserva" deshabilitado
-        JButton editarReservaButton = new JButton("Editar Reserva");
         infoPanel.add(editarReservaButton);
 
         // Añadir elementos al panelReserva
