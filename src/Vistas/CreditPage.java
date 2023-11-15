@@ -207,12 +207,14 @@ public class CreditPage extends javax.swing.JFrame {
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/perfil.png"))); // NOI18N
         jLabel27.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel27.setIconTextGap(1);
         jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel17.setText("Buscar");
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Inicio");
         jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 20));
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -220,11 +222,12 @@ public class CreditPage extends javax.swing.JFrame {
                 jLabel17MouseClicked(evt);
             }
         });
-        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 50, 23));
+        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 60, 23));
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Favoritos");
+        jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel18.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 80, 23));
 
@@ -238,11 +241,12 @@ public class CreditPage extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Perfil");
+        jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel20.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 90, 23));
 
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busqueda.png"))); // NOI18N
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/HomeUser.png"))); // NOI18N
         jLabel29.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel29.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -270,6 +274,7 @@ public class CreditPage extends javax.swing.JFrame {
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/favoritos.png"))); // NOI18N
         jLabel31.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel31.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel31.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel31.setIconTextGap(1);
         jPanel4.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 40, 40));
