@@ -447,8 +447,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel17.setText("Inicio");
         jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 20));
@@ -457,7 +456,6 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 jLabel17MouseClicked(evt);
             }
         });
-
         jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 50, 50, 23));
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -677,13 +675,12 @@ public class MevesReservesPage extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnPasados;
     private javax.swing.JLabel btnReservas;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel costeReserva;
     private javax.swing.JLabel direccion;
     private com.toedter.calendar.JDateChooser fechaFinReserva;
     private com.toedter.calendar.JDateChooser fechaSolicitud;
     private javax.swing.JLabel imagenLabel;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel20;
