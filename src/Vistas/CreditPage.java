@@ -142,6 +142,7 @@ public class CreditPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -610,7 +611,7 @@ public class CreditPage extends javax.swing.JFrame {
 
     private void jLabel30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseClicked
         // TODO add your handling code here:
-        MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser);
+        MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser,creditos_actuales);
         MevesReservesPage.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jLabel30MouseClicked

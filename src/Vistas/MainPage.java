@@ -14,7 +14,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import Vistas.CreditPage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -25,6 +34,7 @@ public class MainPage extends javax.swing.JFrame {
     private final int idUser;
     private Conexion conexion;
     int creditos;
+
     /**
      * Creates new form MainPage
      */
@@ -38,11 +48,15 @@ public class MainPage extends javax.swing.JFrame {
         setIconImage(image);
         this.idUser = idUser;
 
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(25); //Incrementar la velocidad de la ruda del raton desplazamiento
+
         String nombreUsuario = getNombreUsuarioPorId(idUser);
         jLabel20.setText(nombreUsuario);
         creditos = getCreditosPorId(idUser);
         jLabel20.setText(nombreUsuario);
         jLabel1.setText(String.valueOf(creditos));
+
+        getReservas();
     }
 
     private MainPage() {
@@ -71,7 +85,7 @@ public class MainPage extends javax.swing.JFrame {
         }
         return nombre;
     }
-    
+
     private int getCreditosPorId(int id) {
         Conexion conexion = new Conexion();
         Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
@@ -101,6 +115,118 @@ public class MainPage extends javax.swing.JFrame {
         return creditos;
     }
 
+    // Método para validar las credenciales en la base de datos
+    private void getReservas() {
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
+
+        try {
+            String consulta = "SELECT * FROM reservas WHERE id_usuario IS NULL";
+            PreparedStatement statement = connection.prepareStatement(consulta);
+
+            ResultSet resultado = statement.executeQuery();
+
+            int i = 0;
+            while (resultado.next() && i < 4) {
+                byte[] imagenBytes = resultado.getBytes("imagen");
+                ImageIcon imagenIcon = new ImageIcon(imagenBytes);
+                Image imagen = imagenIcon.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
+                ImageIcon imagenEscalada = new ImageIcon(imagen);
+
+                // Obtén otros datos de la fila
+                String tipoEstancia = resultado.getString("tipo_estancia");
+                String direccion = resultado.getString("direccion");
+                int id_reserva = resultado.getInt("id_reserva");
+                int coste_dia = resultado.getInt("coste_dia");
+                int metros = resultado.getInt("metros");
+
+                switch (i) {
+                    case 0:
+                        imagen0.setIcon(imagenEscalada);
+                        tipoEstancia0.setText(tipoEstancia);
+                        direccion0.setText(direccion);
+                        metros0.setText(String.valueOf(metros));
+                        coste0.setText(String.valueOf(coste_dia));
+                        id_reserva0.setText(String.valueOf(id_reserva));
+                        break;
+                    case 1:
+                        imagen1.setIcon(imagenEscalada);
+                        tipoEstancia1.setText(tipoEstancia);
+                        direccion1.setText(direccion);
+                        metros1.setText(String.valueOf(metros));
+                        coste1.setText(String.valueOf(coste_dia));
+                        id_reserva1.setText(String.valueOf(id_reserva));
+                        break;
+                    case 2:
+                        imagen2.setIcon(imagenEscalada);
+                        tipoEstancia2.setText(tipoEstancia);
+                        direccion2.setText(direccion);
+                        metros2.setText(String.valueOf(metros));
+                        coste2.setText(String.valueOf(coste_dia));
+                        id_reserva2.setText(String.valueOf(id_reserva));
+                        break;
+                    case 3:
+                        imagen3.setIcon(imagenEscalada);
+                        tipoEstancia3.setText(tipoEstancia);
+                        direccion3.setText(direccion);
+                        metros3.setText(String.valueOf(metros));
+                        coste3.setText(String.valueOf(coste_dia));
+                        id_reserva3.setText(String.valueOf(id_reserva));
+                        break;
+                }
+                i++;
+            }
+
+            // Ocultar los JLabel restantes si no hay suficientes registros
+            switch (i) {
+                case 3:
+                    imagen3.setVisible(false);
+                    tipoEstancia3.setVisible(false);
+                    direccion3.setVisible(false);
+                    metros3.setVisible(false);
+                    coste3.setVisible(false);
+                    id_reserva3.setVisible(false);
+                    fechaEntrada3.setVisible(false);
+                    fechaSalida3.setVisible(false);
+                    reservar3.setVisible(false);
+                    jScrollPane1.setSize(280, 670);
+                    break;
+                case 2:
+                    imagen2.setVisible(false);
+                    tipoEstancia2.setVisible(false);
+                    direccion2.setVisible(false);
+                    metros2.setVisible(false);
+                    coste2.setVisible(false);
+                    id_reserva2.setVisible(false);
+                    fechaEntrada2.setVisible(false);
+                    fechaSalida2.setVisible(false);
+                    reservar2.setVisible(false);
+                    jScrollPane1.setSize(280, 450);
+                    break;
+                case 1:
+                    imagen1.setVisible(false);
+                    tipoEstancia1.setVisible(false);
+                    direccion1.setVisible(false);
+                    metros1.setVisible(false);
+                    coste1.setVisible(false);
+                    id_reserva1.setVisible(false);
+                    fechaEntrada1.setVisible(false);
+                    fechaSalida1.setVisible(false);
+                    reservar1.setVisible(false);
+                    jScrollPane1.setSize(280, 220);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -113,46 +239,42 @@ public class MainPage extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
-        imagen = new javax.swing.JLabel();
-        tipoEstancia = new javax.swing.JLabel();
-        direccion = new javax.swing.JLabel();
-        metros = new javax.swing.JLabel();
-        coste = new javax.swing.JLabel();
-        inputEntrada = new javax.swing.JTextField();
-        btnDateEntrada = new javax.swing.JButton();
-        inputSalida = new javax.swing.JTextField();
-        btnDateSalida = new javax.swing.JButton();
-        reservar = new javax.swing.JButton();
+        imagen0 = new javax.swing.JLabel();
+        tipoEstancia0 = new javax.swing.JLabel();
+        direccion0 = new javax.swing.JLabel();
+        metros0 = new javax.swing.JLabel();
+        id_reserva0 = new javax.swing.JLabel();
+        reservar0 = new javax.swing.JButton();
         imagen1 = new javax.swing.JLabel();
         tipoEstancia1 = new javax.swing.JLabel();
         direccion1 = new javax.swing.JLabel();
         metros1 = new javax.swing.JLabel();
-        inputEntrada1 = new javax.swing.JTextField();
-        inputSalida1 = new javax.swing.JTextField();
-        btnDateSalida1 = new javax.swing.JButton();
-        btnDateEntrada1 = new javax.swing.JButton();
         reservar1 = new javax.swing.JButton();
         coste1 = new javax.swing.JLabel();
         reservar2 = new javax.swing.JButton();
-        btnDateSalida2 = new javax.swing.JButton();
-        inputSalida2 = new javax.swing.JTextField();
-        inputEntrada2 = new javax.swing.JTextField();
-        btnDateEntrada2 = new javax.swing.JButton();
         coste2 = new javax.swing.JLabel();
         metros2 = new javax.swing.JLabel();
         direccion2 = new javax.swing.JLabel();
         tipoEstancia2 = new javax.swing.JLabel();
         imagen2 = new javax.swing.JLabel();
         metros3 = new javax.swing.JLabel();
-        inputSalida3 = new javax.swing.JTextField();
         coste3 = new javax.swing.JLabel();
-        btnDateSalida3 = new javax.swing.JButton();
         tipoEstancia3 = new javax.swing.JLabel();
-        inputEntrada3 = new javax.swing.JTextField();
-        btnDateEntrada3 = new javax.swing.JButton();
         imagen3 = new javax.swing.JLabel();
         reservar3 = new javax.swing.JButton();
         direccion3 = new javax.swing.JLabel();
+        coste0 = new javax.swing.JLabel();
+        id_reserva1 = new javax.swing.JLabel();
+        id_reserva2 = new javax.swing.JLabel();
+        id_reserva3 = new javax.swing.JLabel();
+        fechaEntrada0 = new com.toedter.calendar.JDateChooser();
+        fechaSalida0 = new com.toedter.calendar.JDateChooser();
+        fechaEntrada1 = new com.toedter.calendar.JDateChooser();
+        fechaSalida1 = new com.toedter.calendar.JDateChooser();
+        fechaEntrada2 = new com.toedter.calendar.JDateChooser();
+        fechaSalida2 = new com.toedter.calendar.JDateChooser();
+        fechaEntrada3 = new com.toedter.calendar.JDateChooser();
+        fechaSalida3 = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -179,47 +301,44 @@ public class MainPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(imagen0, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
-        imagen.setText("jLabel2");
-        jPanel3.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, 20));
+        tipoEstancia0.setText("jLabel21");
+        jPanel3.add(tipoEstancia0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        tipoEstancia.setText("jLabel21");
-        jPanel3.add(tipoEstancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        direccion0.setText("jLabel2");
+        jPanel3.add(direccion0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
-        direccion.setText("jLabel2");
-        jPanel3.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        metros0.setText("jLabel2");
+        jPanel3.add(metros0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
-        metros.setText("jLabel2");
-        jPanel3.add(metros, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        id_reserva0.setText("jLabel2");
+        jPanel3.add(id_reserva0, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, -1, -1));
 
-        coste.setText("jLabel2");
-        jPanel3.add(coste, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
-
-        inputEntrada.setText("jTextField3");
-        jPanel3.add(inputEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
-
-        btnDateEntrada.setText("jButton2");
-        jPanel3.add(btnDateEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 20, -1));
-
-        inputSalida.setText("jTextField3");
-        jPanel3.add(inputSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
-
-        btnDateSalida.setText("jButton2");
-        jPanel3.add(btnDateSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 20, -1));
-
-        reservar.setText("jButton2");
-        jPanel3.add(reservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
-
-        imagen1.setText("jLabel2");
-        jPanel3.add(imagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, 20));
+        reservar0.setText("Reservar");
+        reservar0.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reservar0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reservar0ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(reservar0, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, -1));
+        jPanel3.add(imagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
 
         tipoEstancia1.setText("jLabel21");
         jPanel3.add(tipoEstancia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
@@ -230,38 +349,30 @@ public class MainPage extends javax.swing.JFrame {
         metros1.setText("jLabel2");
         jPanel3.add(metros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
-        inputEntrada1.setText("jTextField3");
-        jPanel3.add(inputEntrada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, -1, -1));
+        reservar1.setText("Reservar");
 
-        inputSalida1.setText("jTextField3");
-        jPanel3.add(inputSalida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, -1, -1));
-
-        btnDateSalida1.setText("jButton2");
-        jPanel3.add(btnDateSalida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 20, -1));
-
-        btnDateEntrada1.setText("jButton2");
-        jPanel3.add(btnDateEntrada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 20, -1));
-
-        reservar1.setText("jButton2");
-        jPanel3.add(reservar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, -1, -1));
+        reservar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reservar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reservar1ActionPerformed(evt);
+            }
+        });
+      
+        jPanel3.add(reservar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, -1, -1));
 
         coste1.setText("jLabel2");
         jPanel3.add(coste1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
 
-        reservar2.setText("jButton2");
-        jPanel3.add(reservar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, -1, -1));
+        reservar2.setText("Reservar");
 
-        btnDateSalida2.setText("jButton2");
-        jPanel3.add(btnDateSalida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 640, 20, -1));
+        reservar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reservar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reservar2ActionPerformed(evt);
+            }
+        });
 
-        inputSalida2.setText("jTextField3");
-        jPanel3.add(inputSalida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, -1, -1));
-
-        inputEntrada2.setText("jTextField3");
-        jPanel3.add(inputEntrada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
-
-        btnDateEntrada2.setText("jButton2");
-        jPanel3.add(btnDateEntrada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 610, 20, -1));
+        jPanel3.add(reservar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 630, -1, -1));
 
         coste2.setText("jLabel2");
         jPanel3.add(coste2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 580, -1, -1));
@@ -274,43 +385,44 @@ public class MainPage extends javax.swing.JFrame {
 
         tipoEstancia2.setText("jLabel21");
         jPanel3.add(tipoEstancia2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, -1, -1));
-
-        imagen2.setText("jLabel2");
-        jPanel3.add(imagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, -1, 20));
-
-        metros3.setText("jLabel2");
+        jPanel3.add(imagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, -1, -1));
         jPanel3.add(metros3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 790, -1, -1));
-
-        inputSalida3.setText("jTextField3");
-        jPanel3.add(inputSalida3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 850, -1, -1));
-
-        coste3.setText("jLabel2");
         jPanel3.add(coste3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 790, -1, -1));
-
-        btnDateSalida3.setText("jButton2");
-        jPanel3.add(btnDateSalida3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 850, 20, -1));
-
-        tipoEstancia3.setText("jLabel21");
         jPanel3.add(tipoEstancia3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 730, -1, -1));
+        jPanel3.add(imagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 680, -1, -1));
 
-        inputEntrada3.setText("jTextField3");
-        jPanel3.add(inputEntrada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 820, -1, -1));
-
-        btnDateEntrada3.setText("jButton2");
-        jPanel3.add(btnDateEntrada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 820, 20, -1));
-
-        imagen3.setText("jLabel2");
-        jPanel3.add(imagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 680, -1, 20));
-
-        reservar3.setText("jButton2");
-        jPanel3.add(reservar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 850, -1, -1));
-
-        direccion3.setText("jLabel2");
+        reservar3.setText("Reservar");
+        reservar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reservar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reservar3ActionPerformed(evt);
+            }
+        });
+      
+        jPanel3.add(reservar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 850, -1, -1));
         jPanel3.add(direccion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 760, -1, -1));
+
+        coste0.setText("jLabel2");
+        jPanel3.add(coste0, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
+
+        id_reserva1.setText("jLabel2");
+        jPanel3.add(id_reserva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, -1, -1));
+
+        id_reserva2.setText("jLabel2");
+        jPanel3.add(id_reserva2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 610, -1, -1));
+        jPanel3.add(id_reserva3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 830, -1, -1));
+        jPanel3.add(fechaEntrada0, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 150, -1));
+        jPanel3.add(fechaSalida0, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 150, -1));
+        jPanel3.add(fechaEntrada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 150, -1));
+        jPanel3.add(fechaSalida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 150, -1));
+        jPanel3.add(fechaEntrada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 150, -1));
+        jPanel3.add(fechaSalida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 150, -1));
+        jPanel3.add(fechaEntrada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 820, 150, -1));
+        jPanel3.add(fechaSalida3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 850, 150, -1));
 
         jScrollPane1.setViewportView(jPanel3);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 280, 930));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 280, 380));
 
         jPanel4.setBackground(new java.awt.Color(255, 222, 89));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -324,6 +436,7 @@ public class MainPage extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel17.setText("Buscar");
+        jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 50, 23));
 
@@ -336,6 +449,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Reservas");
+        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel19.setPreferredSize(new java.awt.Dimension(30, 20));
         jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 100, 23));
 
@@ -348,6 +462,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busqueda.png"))); // NOI18N
         jLabel29.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel29.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel29.setIconTextGap(1);
         jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
@@ -355,6 +470,7 @@ public class MainPage extends javax.swing.JFrame {
         btnReservas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reservas.png"))); // NOI18N
         btnReservas.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnReservas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReservas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnReservas.setIconTextGap(1);
         btnReservas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -379,6 +495,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/coin1.png"))); // NOI18N
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel5.setIconTextGap(1);
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -450,6 +567,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U_Little.png"))); // NOI18N
         jLabel13.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel13.setIconTextGap(1);
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
@@ -463,13 +581,13 @@ public class MainPage extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 100));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 1050));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseClicked
-        MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser);
+        MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser,creditos);
 
         MevesReservesPage.setVisible(true);
         setVisible(false);
@@ -480,6 +598,383 @@ public class MainPage extends javax.swing.JFrame {
         creditPage.setVisible(true);
         this.dispose();      // TODO add your handling code here:
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void reservar0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservar0ActionPerformed
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection();
+
+        int coste = Integer.parseInt(coste0.getText());
+        int idReserva = Integer.parseInt(id_reserva0.getText());
+        Date fechaEntrada = fechaEntrada0.getDate();
+        Date fechaSalida = fechaSalida0.getDate();
+
+        if (fechaEntrada == null || fechaSalida == null) {
+            JOptionPane.showMessageDialog(null, "Las fechas de entrada y salida deben estar seleccionadas", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        LocalDate localDateEntrada = fechaEntrada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDateSalida = fechaSalida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        long diasDiferencia = ChronoUnit.DAYS.between(localDateEntrada, localDateSalida);
+
+        if (diasDiferencia <= 0) {
+            JOptionPane.showMessageDialog(null, "La fecha de salida debe ser posterior a la fecha de entrada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int totalCoste = (int) (diasDiferencia * coste);
+
+        int opcion = JOptionPane.showOptionDialog(
+                null,
+                "El precio total de la reserva es de: " + totalCoste + "\n Pulse Ok si desea continuar",
+                "Advertencia",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                null,
+                null);
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            creditos = creditos - totalCoste;
+            System.out.println(creditos);
+            String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
+            try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
+                updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
+
+                int rowsAffected = updateStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                    try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
+                        updateStatementCreditos.setInt(1, creditos);
+                        updateStatementCreditos.setInt(2, idUser);
+
+                        int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                        if (rowsAffectedCreditos > 0) {
+                            System.out.println("Actualización exitosa en la tabla usuarios");
+                        } else {
+                            System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                            return;
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            String insertReservasUsuarios = "INSERT INTO reservas_usuarios (id_usuario, fecha_solicitud, fecha_fin_reserva, coste_reserva) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement insertStatement = connection.prepareStatement(insertReservasUsuarios)) {
+                insertStatement.setInt(1, idUser);
+                insertStatement.setDate(2, new java.sql.Date(fechaEntrada.getTime()));
+                insertStatement.setDate(3, new java.sql.Date(fechaSalida.getTime()));
+                insertStatement.setInt(4, totalCoste);
+
+                int rowsInserted = insertStatement.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("Inserción exitosa en la tabla reservas_usuarios");
+                    getReservas();
+                    jLabel1.setText(String.valueOf(creditos));
+                    fechaEntrada0.setDate(null);
+                    fechaSalida0.setDate(null);
+                } else {
+                    System.out.println("No se ha insertado ninguna fila en la tabla reservas_usuarios");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            return;
+        }
+    }//GEN-LAST:event_reservar0ActionPerformed
+
+    private void reservar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservar1ActionPerformed
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection();
+
+        int coste = Integer.parseInt(coste1.getText());
+        int idReserva = Integer.parseInt(id_reserva1.getText());
+        Date fechaEntrada = fechaEntrada1.getDate();
+        Date fechaSalida = fechaSalida1.getDate();
+
+        if (fechaEntrada == null || fechaSalida == null) {
+            JOptionPane.showMessageDialog(null, "Las fechas de entrada y salida deben estar seleccionadas", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        LocalDate localDateEntrada = fechaEntrada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDateSalida = fechaSalida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        long diasDiferencia = ChronoUnit.DAYS.between(localDateEntrada, localDateSalida);
+
+        if (diasDiferencia <= 0) {
+            JOptionPane.showMessageDialog(null, "La fecha de salida debe ser posterior a la fecha de entrada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int totalCoste = (int) (diasDiferencia * coste);
+
+        int opcion = JOptionPane.showOptionDialog(
+                null,
+                "El precio total de la reserva es de: " + totalCoste + "\n Pulse Ok si desea continuar",
+                "Advertencia",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                null,
+                null);
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            creditos = creditos - totalCoste;
+            String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
+            try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
+                updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
+
+                int rowsAffected = updateStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                    try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
+                        updateStatementCreditos.setInt(1, creditos);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                        updateStatementCreditos.setInt(2, idUser);
+
+                        int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                        if (rowsAffectedCreditos > 0) {
+                            System.out.println("Actualización exitosa en la tabla usuarios");
+                        } else {
+                            System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                            return;
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            String insertReservasUsuarios = "INSERT INTO reservas_usuarios (id_usuario, fecha_solicitud, fecha_fin_reserva, coste_reserva) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement insertStatement = connection.prepareStatement(insertReservasUsuarios)) {
+                insertStatement.setInt(1, idUser);
+                insertStatement.setDate(2, new java.sql.Date(fechaEntrada.getTime()));
+                insertStatement.setDate(3, new java.sql.Date(fechaSalida.getTime()));
+                insertStatement.setInt(4, totalCoste);
+
+                int rowsInserted = insertStatement.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("Inserción exitosa en la tabla reservas_usuarios");
+                    getReservas();
+                    jLabel1.setText(String.valueOf(creditos));
+                    fechaEntrada1.setDate(null);
+                    fechaSalida1.setDate(null);
+                } else {
+                    System.out.println("No se ha insertado ninguna fila en la tabla reservas_usuarios");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            return;
+        }
+    }//GEN-LAST:event_reservar1ActionPerformed
+
+    private void reservar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservar2ActionPerformed
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection();
+
+        int coste = Integer.parseInt(coste2.getText());
+        int idReserva = Integer.parseInt(id_reserva2.getText());
+        Date fechaEntrada = fechaEntrada2.getDate();
+        Date fechaSalida = fechaSalida2.getDate();
+
+        if (fechaEntrada == null || fechaSalida == null) {
+            JOptionPane.showMessageDialog(null, "Las fechas de entrada y salida deben estar seleccionadas", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        LocalDate localDateEntrada = fechaEntrada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDateSalida = fechaSalida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        long diasDiferencia = ChronoUnit.DAYS.between(localDateEntrada, localDateSalida);
+
+        if (diasDiferencia <= 0) {
+            JOptionPane.showMessageDialog(null, "La fecha de salida debe ser posterior a la fecha de entrada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int totalCoste = (int) (diasDiferencia * coste);
+
+        int opcion = JOptionPane.showOptionDialog(
+                null,
+                "El precio total de la reserva es de: " + totalCoste + "\n Pulse Ok si desea continuar",
+                "Advertencia",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                null,
+                null);
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            creditos = creditos - totalCoste;
+            String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
+            try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
+                updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
+
+                int rowsAffected = updateStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                    try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
+                        updateStatementCreditos.setInt(1, creditos);
+                        updateStatementCreditos.setInt(2, idUser);
+
+                        int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                        if (rowsAffectedCreditos > 0) {
+                            System.out.println("Actualización exitosa en la tabla usuarios");
+                        } else {
+                            System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                            return;
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            String insertReservasUsuarios = "INSERT INTO reservas_usuarios (id_usuario, fecha_solicitud, fecha_fin_reserva, coste_reserva) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement insertStatement = connection.prepareStatement(insertReservasUsuarios)) {
+                insertStatement.setInt(1, idUser);
+                insertStatement.setDate(2, new java.sql.Date(fechaEntrada.getTime()));
+                insertStatement.setDate(3, new java.sql.Date(fechaSalida.getTime()));
+                insertStatement.setInt(4, totalCoste);
+
+                int rowsInserted = insertStatement.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("Inserción exitosa en la tabla reservas_usuarios");
+                    getReservas();
+                    jLabel1.setText(String.valueOf(creditos));
+                    fechaEntrada2.setDate(null);
+                    fechaSalida2.setDate(null);
+                } else {
+                    System.out.println("No se ha insertado ninguna fila en la tabla reservas_usuarios");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            return;
+        }
+    }//GEN-LAST:event_reservar2ActionPerformed
+
+    private void reservar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservar3ActionPerformed
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection();
+
+        int coste = Integer.parseInt(coste3.getText());
+        int idReserva = Integer.parseInt(id_reserva3.getText());
+        Date fechaEntrada = fechaEntrada3.getDate();
+        Date fechaSalida = fechaSalida3.getDate();
+
+        if (fechaEntrada == null || fechaSalida == null) {
+            JOptionPane.showMessageDialog(null, "Las fechas de entrada y salida deben estar seleccionadas", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        LocalDate localDateEntrada = fechaEntrada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDateSalida = fechaSalida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        long diasDiferencia = ChronoUnit.DAYS.between(localDateEntrada, localDateSalida);
+
+        if (diasDiferencia <= 0) {
+            JOptionPane.showMessageDialog(null, "La fecha de salida debe ser posterior a la fecha de entrada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int totalCoste = (int) (diasDiferencia * coste);
+
+        int opcion = JOptionPane.showOptionDialog(
+                null,
+                "El precio total de la reserva es de: " + totalCoste + "\n Pulse Ok si desea continuar",
+                "Advertencia",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                null,
+                null);
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            creditos = creditos - totalCoste;
+            String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
+            try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
+                updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
+
+                int rowsAffected = updateStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    String updateCreditos = "Update usuarios SET Credito = ? WHERE id = ?";
+                    try (PreparedStatement updateStatementCreditos = connection.prepareStatement(updateCreditos)) {
+                        updateStatementCreditos.setInt(1, creditos);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
+                        updateStatementCreditos.setInt(2, idUser);
+
+                        int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                        if (rowsAffectedCreditos > 0) {
+                            System.out.println("Actualización exitosa en la tabla usuarios");
+                        } else {
+                            System.out.println("No se ha actualizado ninguna fila en la tabla usuarios");
+                            return;
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("No se ha actualizado ninguna fila en la tabla reservas");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            String insertReservasUsuarios = "INSERT INTO reservas_usuarios (id_usuario, fecha_solicitud, fecha_fin_reserva, coste_reserva) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement insertStatement = connection.prepareStatement(insertReservasUsuarios)) {
+                insertStatement.setInt(1, idUser);
+                insertStatement.setDate(2, new java.sql.Date(fechaEntrada.getTime()));
+                insertStatement.setDate(3, new java.sql.Date(fechaSalida.getTime()));
+                insertStatement.setInt(4, totalCoste);
+
+                int rowsInserted = insertStatement.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("Inserción exitosa en la tabla reservas_usuarios");
+                    getReservas();
+                    jLabel1.setText(String.valueOf(creditos));
+                    fechaEntrada3.setDate(null);
+                    fechaSalida3.setDate(null);
+                } else {
+                    System.out.println("No se ha insertado ninguna fila en la tabla reservas_usuarios");
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            return;
+        }
+    }//GEN-LAST:event_reservar3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -517,35 +1012,31 @@ public class MainPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDateEntrada;
-    private javax.swing.JButton btnDateEntrada1;
-    private javax.swing.JButton btnDateEntrada2;
-    private javax.swing.JButton btnDateEntrada3;
-    private javax.swing.JButton btnDateSalida;
-    private javax.swing.JButton btnDateSalida1;
-    private javax.swing.JButton btnDateSalida2;
-    private javax.swing.JButton btnDateSalida3;
     private javax.swing.JLabel btnReservas;
-    private javax.swing.JLabel coste;
+    private javax.swing.JLabel coste0;
     private javax.swing.JLabel coste1;
     private javax.swing.JLabel coste2;
     private javax.swing.JLabel coste3;
-    private javax.swing.JLabel direccion;
+    private javax.swing.JLabel direccion0;
     private javax.swing.JLabel direccion1;
     private javax.swing.JLabel direccion2;
     private javax.swing.JLabel direccion3;
-    private javax.swing.JLabel imagen;
+    private com.toedter.calendar.JDateChooser fechaEntrada0;
+    private com.toedter.calendar.JDateChooser fechaEntrada1;
+    private com.toedter.calendar.JDateChooser fechaEntrada2;
+    private com.toedter.calendar.JDateChooser fechaEntrada3;
+    private com.toedter.calendar.JDateChooser fechaSalida0;
+    private com.toedter.calendar.JDateChooser fechaSalida1;
+    private com.toedter.calendar.JDateChooser fechaSalida2;
+    private com.toedter.calendar.JDateChooser fechaSalida3;
+    private javax.swing.JLabel id_reserva0;
+    private javax.swing.JLabel id_reserva1;
+    private javax.swing.JLabel id_reserva2;
+    private javax.swing.JLabel id_reserva3;
+    private javax.swing.JLabel imagen0;
     private javax.swing.JLabel imagen1;
     private javax.swing.JLabel imagen2;
     private javax.swing.JLabel imagen3;
-    private javax.swing.JTextField inputEntrada;
-    private javax.swing.JTextField inputEntrada1;
-    private javax.swing.JTextField inputEntrada2;
-    private javax.swing.JTextField inputEntrada3;
-    private javax.swing.JTextField inputSalida;
-    private javax.swing.JTextField inputSalida1;
-    private javax.swing.JTextField inputSalida2;
-    private javax.swing.JTextField inputSalida3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -571,15 +1062,15 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel metros;
+    private javax.swing.JLabel metros0;
     private javax.swing.JLabel metros1;
     private javax.swing.JLabel metros2;
     private javax.swing.JLabel metros3;
-    private javax.swing.JButton reservar;
+    private javax.swing.JButton reservar0;
     private javax.swing.JButton reservar1;
     private javax.swing.JButton reservar2;
     private javax.swing.JButton reservar3;
-    private javax.swing.JLabel tipoEstancia;
+    private javax.swing.JLabel tipoEstancia0;
     private javax.swing.JLabel tipoEstancia1;
     private javax.swing.JLabel tipoEstancia2;
     private javax.swing.JLabel tipoEstancia3;
