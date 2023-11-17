@@ -94,14 +94,6 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 panelCancelados.setVisible(false);
             }
         });
-
-        btnCancelados.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                panelActivos.setVisible(false);
-                panelPasados.setVisible(false);
-                panelCancelados.setVisible(true);
-            }
-        });
     }
 
     private MevesReservesPage() {
@@ -159,7 +151,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
     private void mostrarReservasActivas() {
 
-        String consulta = "SELECT ru.id_reserva, r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
+        String consulta = "SELECT ru.id_reservas_usuarios, r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
                 + "FROM reservas r INNER JOIN reservas_usuarios ru ON r.id_reserva = ru.id_reserva "
                 + "WHERE ru.id_usuario = ? AND ru.fecha_fin_reserva >= CURRENT_DATE";
 
@@ -182,7 +174,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 String direccionTexto = resultado.getString("direccion");
                 byte[] imagenBytes = resultado.getBytes("imagen");
                 int costeReservaValor = resultado.getInt("coste_reserva");
-                int idReserva = resultado.getInt("id_reserva");
+                int idReserva = resultado.getInt("id_reservas_usuarios");
                 Date fechaSolicitudValor = resultado.getDate("fecha_solicitud");
                 Date fechaFinSolicitudValor = resultado.getDate("fecha_fin_reserva");
 
@@ -341,6 +333,125 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
         return panelReserva;
     }
+    
+    private void mostrarReservasPasadas() {
+
+        String consulta = "SELECT ru.id_reservas_usuarios,ru.id_usuario,r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
+                + "FROM reservas r INNER JOIN reservas_usuarios ru ON r.id_reserva = ru.id_reserva "
+                + "WHERE ru.id_usuario = ? AND ru.fecha_fin_reserva < CURRENT_DATE ";
+
+        try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
+
+            statement.setInt(1, idUser);
+            ResultSet resultado = statement.executeQuery();
+
+            // Contar el número de resultados obtenidos
+            int contadorResultados = 0;
+
+            // Crear un nuevo panel para contener los resultados
+            JPanel nuevoPanelActivos = new JPanel();
+            nuevoPanelActivos.setLayout(new BoxLayout(nuevoPanelActivos, BoxLayout.Y_AXIS));
+
+            while (resultado.next()) {
+                contadorResultados++;
+
+                String tipoEstanciaTexto = resultado.getString("tipo_estancia");
+                String direccionTexto = resultado.getString("direccion");
+                byte[] imagenBytes = resultado.getBytes("imagen");
+                int costeReservaValor = resultado.getInt("coste_reserva");
+                int idReserva = resultado.getInt("id_reservas_usuarios");
+                Date fechaSolicitudValor = resultado.getDate("fecha_solicitud");
+                Date fechaFinSolicitudValor = resultado.getDate("fecha_fin_reserva");
+
+                ImageIcon imagenReserva = new ImageIcon(imagenBytes);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+                JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+                JButton editarReservaButton = new JButton("Editar Reserva");
+
+                JPanel panelReserva = crearPanelReservaPasadoMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor, fechaFinSolicitudValor, editarReservaButton, idReserva, costeReservaValor);
+                nuevoPanelActivos.add(panelReserva);
+            }
+
+            // Crear un nuevo JScrollPane con el nuevo panel
+            JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelActivos);
+            nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
+
+            // Remover todos los componentes del panel principal
+            panelPasados.removeAll();
+
+            // Agregar el nuevo JScrollPane al panel principal
+            panelPasados.setLayout(new BorderLayout());
+            panelPasados.add(nuevoJScrollPane, BorderLayout.CENTER);
+
+            // Actualizar la interfaz gráfica
+            revalidate();
+            repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JPanel crearPanelReservaPasadoMejorado(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaSolicitud, Date fechaFinReserva, JButton editarReservaButton, int idReserva, int costeReservaValor) {
+        
+        JPanel panelReserva = new JPanel();
+        panelReserva.setLayout(new BorderLayout());
+        panelReserva.setBackground(Color.WHITE);
+        panelReserva.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        // JPanel para la información de la reserva
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS)); // Diseño en una columna
+        infoPanel.setBackground(Color.WHITE);
+
+        // JLabel para el tipo de estancia
+        JLabel tipoEstanciaLabel = new JLabel("<html><b>Tipo de estancia:</b> " + tipoEstancia + "</html>");
+        tipoEstanciaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        infoPanel.add(tipoEstanciaLabel);
+
+        // JLabel para la dirección
+        JLabel direccionLabel = new JLabel("<html><b>Dirección:</b> " + direccion + "</html>");
+        direccionLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        infoPanel.add(direccionLabel);
+
+        // JLabel para el coste de la reserva
+        JLabel costeReservaLabel = new JLabel("<html><b>Coste de reserva:</b> " + coste + "</html>");
+        costeReservaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        infoPanel.add(costeReservaLabel);
+        
+        // JLabel para el coste de la reserva
+        JLabel costeReservaLabelDinero = new JLabel("<html><b>Precio de reserva:</b> " + coste*10+"€"+ "</html>");
+        costeReservaLabelDinero.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        infoPanel.add(costeReservaLabelDinero);
+
+        // JLabel para la fecha de solicitud
+        JLabel fechaSolicitudLabel = new JLabel("<html><b>Fecha de Solicitud:</b></html>");
+        fechaSolicitudLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        infoPanel.add(fechaSolicitudLabel);
+
+        // JDateChooser para la fecha de solicitud
+        JDateChooser fechaSolicitudChooser = new JDateChooser(fechaSolicitud);
+        fechaSolicitudChooser.setDateFormatString("dd-MM-yyyy"); // Puedes establecer el formato aquí
+        infoPanel.add(fechaSolicitudChooser);
+
+        // JLabel para la fecha de fin de reserva
+        JLabel fechaFinReservaLabel = new JLabel("<html><b>Fecha de Fin Reserva:</b></html>");
+        fechaFinReservaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        infoPanel.add(fechaFinReservaLabel);
+
+        // JDateChooser para la fecha de fin de reserva
+        JDateChooser fechaFinReservaChooser = new JDateChooser(fechaFinReserva);
+        fechaFinReservaChooser.setDateFormatString("dd-MM-yyyy"); // Puedes establecer el formato aquí
+        infoPanel.add(fechaFinReservaChooser);
+
+        // Añadir elementos al panelReserva
+        panelReserva.add(imagen, BorderLayout.WEST);
+        panelReserva.add(infoPanel, BorderLayout.CENTER);
+
+        return panelReserva;
+    }
 
     private String formatDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -360,7 +471,6 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btnActivos = new javax.swing.JButton();
         btnPasados = new javax.swing.JButton();
-        btnCancelados = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -445,15 +555,16 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 btnActivosActionPerformed(evt);
             }
         });
-        jPanel3.add(btnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 40));
+        jPanel3.add(btnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 110, 40));
 
         btnPasados.setBackground(new java.awt.Color(255, 222, 89));
         btnPasados.setText("Pasados");
-        jPanel3.add(btnPasados, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 20, 110, 40));
-
-        btnCancelados.setBackground(new java.awt.Color(255, 222, 89));
-        btnCancelados.setText("Cancelados");
-        jPanel3.add(btnCancelados, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 110, 40));
+        btnPasados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPasadosActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnPasados, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 110, 40));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 440, 60));
 
@@ -639,6 +750,10 @@ public class MevesReservesPage extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_jLabel17MouseClicked
 
+    private void btnPasadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasadosActionPerformed
+        mostrarReservasPasadas();
+    }//GEN-LAST:event_btnPasadosActionPerformed
+
     private void LogoMouseClicked(java.awt.event.MouseEvent evt) {
         MainPage mainPage = new MainPage(idUser);
         mainPage.setVisible(true);
@@ -694,7 +809,6 @@ public class MevesReservesPage extends javax.swing.JFrame {
     private javax.swing.JLabel Logo;
     private javax.swing.JButton btnActivos;
     private javax.swing.JLabel btnBuscar;
-    private javax.swing.JButton btnCancelados;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnPasados;
     private javax.swing.JLabel btnReservas;

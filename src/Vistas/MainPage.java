@@ -147,7 +147,6 @@ public class MainPage extends javax.swing.JFrame {
                         direccion0.setText(direccion);
                         metros0.setText(String.valueOf(metros));
                         coste0.setText(String.valueOf(coste_dia));
-                        id_reserva0.setText(String.valueOf(id_reserva));
                         break;
                     case 1:
                         imagen1.setIcon(imagenEscalada);
@@ -155,7 +154,6 @@ public class MainPage extends javax.swing.JFrame {
                         direccion1.setText(direccion);
                         metros1.setText(String.valueOf(metros));
                         coste1.setText(String.valueOf(coste_dia));
-                        id_reserva1.setText(String.valueOf(id_reserva));
                         break;
                     case 2:
                         imagen2.setIcon(imagenEscalada);
@@ -163,7 +161,6 @@ public class MainPage extends javax.swing.JFrame {
                         direccion2.setText(direccion);
                         metros2.setText(String.valueOf(metros));
                         coste2.setText(String.valueOf(coste_dia));
-                        id_reserva2.setText(String.valueOf(id_reserva));
                         break;
                     case 3:
                         imagen3.setIcon(imagenEscalada);
@@ -171,7 +168,6 @@ public class MainPage extends javax.swing.JFrame {
                         direccion3.setText(direccion);
                         metros3.setText(String.valueOf(metros));
                         coste3.setText(String.valueOf(coste_dia));
-                        id_reserva3.setText(String.valueOf(id_reserva));
                         break;
                 }
                 i++;
@@ -185,7 +181,6 @@ public class MainPage extends javax.swing.JFrame {
                     direccion3.setVisible(false);
                     metros3.setVisible(false);
                     coste3.setVisible(false);
-                    id_reserva3.setVisible(false);
                     fechaEntrada3.setVisible(false);
                     fechaSalida3.setVisible(false);
                     reservar3.setVisible(false);
@@ -197,7 +192,6 @@ public class MainPage extends javax.swing.JFrame {
                     direccion2.setVisible(false);
                     metros2.setVisible(false);
                     coste2.setVisible(false);
-                    id_reserva2.setVisible(false);
                     fechaEntrada2.setVisible(false);
                     fechaSalida2.setVisible(false);
                     reservar2.setVisible(false);
@@ -209,7 +203,6 @@ public class MainPage extends javax.swing.JFrame {
                     direccion1.setVisible(false);
                     metros1.setVisible(false);
                     coste1.setVisible(false);
-                    id_reserva1.setVisible(false);
                     fechaEntrada1.setVisible(false);
                     fechaSalida1.setVisible(false);
                     reservar1.setVisible(false);
@@ -694,7 +687,6 @@ public class MainPage extends javax.swing.JFrame {
         Connection connection = conexion.DatabaseConnection();
 
         int coste = Integer.parseInt(coste1.getText());
-        int idReserva = Integer.parseInt(id_reserva1.getText());
         Date fechaEntrada = fechaEntrada1.getDate();
         Date fechaSalida = fechaSalida1.getDate();
 
@@ -730,7 +722,6 @@ public class MainPage extends javax.swing.JFrame {
             String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
             try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
                 updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
-                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
 
                 int rowsAffected = updateStatement.executeUpdate();
                 if (rowsAffected > 0) {
@@ -788,7 +779,6 @@ public class MainPage extends javax.swing.JFrame {
         Connection connection = conexion.DatabaseConnection();
 
         int coste = Integer.parseInt(coste2.getText());
-        int idReserva = Integer.parseInt(id_reserva2.getText());
         Date fechaEntrada = fechaEntrada2.getDate();
         Date fechaSalida = fechaSalida2.getDate();
 
@@ -824,7 +814,6 @@ public class MainPage extends javax.swing.JFrame {
             String updateReservas = "UPDATE reservas SET id_usuario = ? WHERE id_reserva = ?";
             try (PreparedStatement updateStatement = connection.prepareStatement(updateReservas)) {
                 updateStatement.setInt(1, idUser);  // Suponiendo que idUser es tu variable que contiene el ID del usuario
-                updateStatement.setInt(2, idReserva);  // Cambié este índice a 
 
                 int rowsAffected = updateStatement.executeUpdate();
                 if (rowsAffected > 0) {
