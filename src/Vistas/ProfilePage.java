@@ -14,7 +14,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import Vistas.CreditPage;
+import java.awt.BorderLayout;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.SQLException;
+import java.util.Date;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -25,6 +38,9 @@ public class ProfilePage extends javax.swing.JFrame {
     private final int idUser;
     private Conexion conexion;
     int creditos;
+    String textoDelJTextField;
+    private Object chooser;
+
     /**
      * Creates new form MainPage
      */
@@ -40,9 +56,11 @@ public class ProfilePage extends javax.swing.JFrame {
 
         String nombreUsuario = getNombreUsuarioPorId(idUser);
         jLabel20.setText(nombreUsuario);
+
         creditos = getCreditosPorId(idUser);
-        jLabel20.setText(nombreUsuario);
         jLabel1.setText(String.valueOf(creditos));
+
+        mostrarDatosUsuario();
     }
 
     private ProfilePage() {
@@ -71,7 +89,7 @@ public class ProfilePage extends javax.swing.JFrame {
         }
         return nombre;
     }
-    
+
     private int getCreditosPorId(int id) {
         Conexion conexion = new Conexion();
         Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
@@ -101,6 +119,119 @@ public class ProfilePage extends javax.swing.JFrame {
         return creditos;
     }
 
+    private void mostrarDatosUsuario() {
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
+        int creditos = 0;
+
+        try {
+            // Consulta SQL para obtener los créditos del usuario por su ID
+            String consulta = "SELECT * FROM usuarios WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(consulta);
+            statement.setInt(1, idUser);
+
+            ResultSet resultado = statement.executeQuery();
+            // Si se encontraron resultados, obtenemos los créditos del usuario
+            if (resultado.next()) {
+
+                byte[] FotoBytes = resultado.getBytes("Foto");
+                String NombreTexto = resultado.getString("Nombre");
+                String Apellido1Texto = resultado.getString("Apellido1");
+                String Apellido2Texto = resultado.getString("Apellido2");
+                String MailTexto = resultado.getString("Email");
+                String TelefonoInt = resultado.getString("Telefono");
+                String DNITexto = resultado.getString("DNI");
+                String PasswordTexto = resultado.getString("Password");
+                String DomicilioTexto = resultado.getString("Domicilio");
+
+                if (FotoBytes != null) {
+
+                    ImageIcon imagenReserva = new ImageIcon(FotoBytes);
+                    Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                    ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+                    jLabelFoto.setIcon(imagenRedimensionadaIcon);
+                }
+                inputNombre.setText(NombreTexto + " " + Apellido1Texto + " " + Apellido2Texto);
+                inputMail.setText(MailTexto);
+                inputDNI.setText(DNITexto);
+                inputTelef.setText(TelefonoInt);
+                inputPassw.setText(PasswordTexto);
+                inputDomicilio.setText(DomicilioTexto);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void actualizarDatosUsuario() {
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection(); // Obtén la conexión
+        int creditos = 0;
+
+        try {
+            // Consulta SQL para obtener los créditos del usuario por su ID
+            String consulta = "UPDATE usuarios SET Nombre = ?, Apellido1 = ?, Apellido2 = ?, Telefono = ?, DNI = ?, Password = ?, Domicilio = ? WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(consulta);
+
+            // Obtener el contenido actual de inputNombre
+            String nombreCompleto = inputNombre.getText();
+
+            // Separar el contenido en nombre, apellido1 y apellido2
+            String[] partesNombre = nombreCompleto.split(" ");
+
+            // Asegurarse de tener al menos un nombre
+            if (partesNombre.length > 0) {
+                // Establecer los valores correspondientes
+                statement.setString(1, partesNombre[0]); // Nombre
+            }
+
+            // Establecer los apellidos si están disponibles
+            if (partesNombre.length > 1) {
+                statement.setString(2, partesNombre[1]); // Apellido1
+            }
+
+            if (partesNombre.length > 2) {
+                statement.setString(3, partesNombre[2]); // Apellido2
+            }
+            statement.setString(4, inputTelef.getText());
+            statement.setString(5, inputDNI.getText());
+            statement.setString(6, inputPassw.getText());
+            statement.setString(7, inputDomicilio.getText());
+            statement.setInt(8, idUser);
+
+            // Ejecutar la actualización
+            int filasActualizadas = statement.executeUpdate();
+
+            if (filasActualizadas > 0) {
+                JOptionPane.showMessageDialog(this, "Datos del usuario actualizados exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                mostrarDatosUsuario();
+
+                String nombreUsuario = getNombreUsuarioPorId(idUser);
+                jLabel20.setText(nombreUsuario);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos del usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            // Si se encontraron resultados, obtenemos los créditos del usuario
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Recuerda cerrar la conexión y otros recursos relacionados con la base de datos
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,8 +241,13 @@ public class ProfilePage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        jPanelDatos = new javax.swing.JPanel();
+        jPanelSuperior = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        Logo = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jPanelInferior = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -120,28 +256,20 @@ public class ProfilePage extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         btnReservas = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        Logo = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        inputDinero = new javax.swing.JTextField();
-        inputDinero1 = new javax.swing.JTextField();
-        inputDinero2 = new javax.swing.JTextField();
-        inputDinero3 = new javax.swing.JTextField();
-        inputDinero4 = new javax.swing.JTextField();
-        inputDinero5 = new javax.swing.JTextField();
-        inputDinero6 = new javax.swing.JTextField();
-        inputDinero7 = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelFoto = new javax.swing.JLabel();
+        SaveNombre = new javax.swing.JLabel();
+        SaveMail = new javax.swing.JLabel();
+        SaveTelef = new javax.swing.JLabel();
+        SaveDNI = new javax.swing.JLabel();
+        SavePassw = new javax.swing.JLabel();
+        SaveDomicilio = new javax.swing.JLabel();
+        inputNombre = new javax.swing.JTextField();
+        inputDNI = new javax.swing.JTextField();
+        inputMail = new javax.swing.JTextField();
+        inputPassw = new javax.swing.JTextField();
+        inputDomicilio = new javax.swing.JTextField();
+        inputTelef = new javax.swing.JTextField();
+        jButtonGuardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -149,73 +277,12 @@ public class ProfilePage extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelDatos.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelDatos.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
+        jPanelDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(255, 222, 89));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/perfil.png"))); // NOI18N
-        jLabel27.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel27.setIconTextGap(1);
-        jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
-
-        jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel17.setText("Buscar");
-        jLabel17.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 50, 23));
-
-        jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("Favoritos");
-        jLabel18.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 80, 23));
-
-        jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("Reservas");
-        jLabel19.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 100, 23));
-
-        jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Perfil");
-        jLabel20.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 90, 23));
-
-        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/HomeUser.png"))); // NOI18N
-        jLabel29.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel29.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel29.setIconTextGap(1);
-        jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
-
-        btnReservas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reservas.png"))); // NOI18N
-        btnReservas.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        btnReservas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnReservas.setIconTextGap(1);
-        btnReservas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReservasMouseClicked(evt);
-            }
-        });
-        jPanel4.add(btnReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, 40));
-
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/favoritos.png"))); // NOI18N
-        jLabel31.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel31.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel31.setIconTextGap(1);
-        jPanel4.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 40, 40));
-
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 440, 80));
-
-        jPanel2.setBackground(new java.awt.Color(255, 222, 89));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelSuperior.setBackground(new java.awt.Color(255, 222, 89));
+        jPanelSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/coin1.png"))); // NOI18N
@@ -227,11 +294,11 @@ public class ProfilePage extends javax.swing.JFrame {
                 jLabel5MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 33, -1));
+        jPanelSuperior.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 33, -1));
 
         jLabel1.setText("0");
         jLabel1.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 36, 30));
+        jPanelSuperior.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 36, 30));
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_BOOK4U_Little.png"))); // NOI18N
         Logo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -242,251 +309,288 @@ public class ProfilePage extends javax.swing.JFrame {
                 LogoMouseClicked(evt);
             }
         });
-        jPanel2.add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
+        jPanelSuperior.add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/notify.png"))); // NOI18N
         jLabel15.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel15.setIconTextGap(1);
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
+        jPanelSuperior.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 60));
+        jPanelDatos.add(jPanelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 60));
 
-        inputDinero.setColumns(1);
-        inputDinero.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        inputDinero.setForeground(new java.awt.Color(153, 153, 153));
-        inputDinero.setText("Nombre de Usuario");
-        inputDinero.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        inputDinero.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        inputDinero.addFocusListener(new java.awt.event.FocusAdapter() {
+        jPanelInferior.setBackground(new java.awt.Color(255, 222, 89));
+        jPanelInferior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/perfil.png"))); // NOI18N
+        jLabel27.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel27.setIconTextGap(1);
+        jLabel27.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel27MouseClicked(evt);
+            }
+        });
+        jPanelInferior.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Inicio");
+        jLabel17.setPreferredSize(new java.awt.Dimension(30, 20));
+        jPanelInferior.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 60, 23));
+
+        jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("Favoritos");
+        jLabel18.setPreferredSize(new java.awt.Dimension(30, 20));
+        jPanelInferior.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 80, 23));
+
+        jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("Reservas");
+        jLabel19.setPreferredSize(new java.awt.Dimension(30, 20));
+        jPanelInferior.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 100, 23));
+
+        jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("Perfil");
+        jLabel20.setPreferredSize(new java.awt.Dimension(30, 20));
+        jPanelInferior.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 90, 23));
+
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/HomeUser.png"))); // NOI18N
+        jLabel29.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel29.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel29.setIconTextGap(1);
+        jLabel29.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel29MouseClicked(evt);
+            }
+        });
+        jPanelInferior.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+
+        btnReservas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reservas.png"))); // NOI18N
+        btnReservas.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnReservas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnReservas.setIconTextGap(1);
+        btnReservas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReservasMouseClicked(evt);
+            }
+        });
+        jPanelInferior.add(btnReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, 40));
+
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/favoritos.png"))); // NOI18N
+        jLabel31.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel31.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel31.setIconTextGap(1);
+        jPanelInferior.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 40, 40));
+
+        jPanelDatos.add(jPanelInferior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 440, 80));
+
+        jLabelFoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profile_Null.png"))); // NOI18N
+        jLabelFoto.setFocusable(false);
+        jLabelFoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelFotoMouseClicked(evt);
+            }
+        });
+        jPanelDatos.add(jLabelFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 120, 100));
+
+        SaveNombre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        SaveNombre.setText("Nombre:");
+        SaveNombre.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        SaveNombre.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        SaveNombre.setIconTextGap(1);
+        jPanelDatos.add(SaveNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, 30));
+
+        SaveMail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        SaveMail.setText("E-Mail:");
+        SaveMail.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        SaveMail.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        SaveMail.setIconTextGap(1);
+        jPanelDatos.add(SaveMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, 30));
+
+        SaveTelef.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        SaveTelef.setText("Teléfono Móvil:");
+        SaveTelef.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        SaveTelef.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        SaveTelef.setIconTextGap(1);
+        jPanelDatos.add(SaveTelef, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, 30));
+
+        SaveDNI.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        SaveDNI.setText("DNI:");
+        SaveDNI.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        SaveDNI.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        SaveDNI.setIconTextGap(1);
+        jPanelDatos.add(SaveDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, 30));
+
+        SavePassw.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        SavePassw.setText("Contraseña:");
+        SavePassw.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        SavePassw.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        SavePassw.setIconTextGap(1);
+        jPanelDatos.add(SavePassw, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, 30));
+
+        SaveDomicilio.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        SaveDomicilio.setText("Domicilio:");
+        SaveDomicilio.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        SaveDomicilio.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        SaveDomicilio.setIconTextGap(1);
+        jPanelDatos.add(SaveDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, 30));
+
+        inputNombre.setColumns(1);
+        inputNombre.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        inputNombre.setForeground(new java.awt.Color(153, 153, 153));
+        inputNombre.setText("Nombre");
+        inputNombre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        inputNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        inputNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                inputDineroFocusGained(evt);
+                inputNombreFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                inputDineroFocusLost(evt);
+                inputNombreFocusLost(evt);
             }
         });
-        inputDinero.addActionListener(new java.awt.event.ActionListener() {
+        inputNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputDineroActionPerformed(evt);
+                inputNombreActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 200, 40));
+        jPanelDatos.add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 230, -1));
 
-        inputDinero1.setColumns(1);
-        inputDinero1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        inputDinero1.setForeground(new java.awt.Color(153, 153, 153));
-        inputDinero1.setText("Sexo");
-        inputDinero1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        inputDinero1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        inputDinero1.addFocusListener(new java.awt.event.FocusAdapter() {
+        inputDNI.setColumns(1);
+        inputDNI.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        inputDNI.setForeground(new java.awt.Color(153, 153, 153));
+        inputDNI.setText("DNI");
+        inputDNI.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        inputDNI.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        inputDNI.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                inputDinero1FocusGained(evt);
+                inputDNIFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                inputDinero1FocusLost(evt);
+                inputDNIFocusLost(evt);
             }
         });
-        inputDinero1.addActionListener(new java.awt.event.ActionListener() {
+        inputDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputDinero1ActionPerformed(evt);
+                inputDNIActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 230, -1));
+        jPanelDatos.add(inputDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 230, -1));
 
-        inputDinero2.setColumns(1);
-        inputDinero2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        inputDinero2.setForeground(new java.awt.Color(153, 153, 153));
-        inputDinero2.setText("Ubicación");
-        inputDinero2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        inputDinero2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        inputDinero2.addFocusListener(new java.awt.event.FocusAdapter() {
+        inputMail.setColumns(1);
+        inputMail.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        inputMail.setForeground(new java.awt.Color(153, 153, 153));
+        inputMail.setText("E-mail");
+        inputMail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        inputMail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        inputMail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                inputDinero2FocusGained(evt);
+                inputMailFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                inputDinero2FocusLost(evt);
+                inputMailFocusLost(evt);
             }
         });
-        inputDinero2.addActionListener(new java.awt.event.ActionListener() {
+        inputMail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputDinero2ActionPerformed(evt);
+                inputMailActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 230, -1));
+        jPanelDatos.add(inputMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 230, -1));
 
-        inputDinero3.setColumns(1);
-        inputDinero3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        inputDinero3.setForeground(new java.awt.Color(153, 153, 153));
-        inputDinero3.setText("Fecha de nacimiento");
-        inputDinero3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        inputDinero3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        inputDinero3.addFocusListener(new java.awt.event.FocusAdapter() {
+        inputPassw.setColumns(1);
+        inputPassw.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        inputPassw.setForeground(new java.awt.Color(153, 153, 153));
+        inputPassw.setText("Contraseña");
+        inputPassw.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        inputPassw.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        inputPassw.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                inputDinero3FocusGained(evt);
+                inputPasswFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                inputDinero3FocusLost(evt);
+                inputPasswFocusLost(evt);
             }
         });
-        inputDinero3.addActionListener(new java.awt.event.ActionListener() {
+        inputPassw.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputDinero3ActionPerformed(evt);
+                inputPasswActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 230, -1));
+        jPanelDatos.add(inputPassw, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 230, -1));
 
-        inputDinero4.setColumns(1);
-        inputDinero4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        inputDinero4.setForeground(new java.awt.Color(153, 153, 153));
-        inputDinero4.setText("E-mail");
-        inputDinero4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        inputDinero4.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        inputDinero4.addFocusListener(new java.awt.event.FocusAdapter() {
+        inputDomicilio.setColumns(1);
+        inputDomicilio.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        inputDomicilio.setForeground(new java.awt.Color(153, 153, 153));
+        inputDomicilio.setText("Domicilio");
+        inputDomicilio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        inputDomicilio.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        inputDomicilio.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                inputDinero4FocusGained(evt);
+                inputDomicilioFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                inputDinero4FocusLost(evt);
+                inputDomicilioFocusLost(evt);
             }
         });
-        inputDinero4.addActionListener(new java.awt.event.ActionListener() {
+        inputDomicilio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputDinero4ActionPerformed(evt);
+                inputDomicilioActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 230, -1));
+        jPanelDatos.add(inputDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 230, -1));
 
-        inputDinero5.setColumns(1);
-        inputDinero5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        inputDinero5.setForeground(new java.awt.Color(153, 153, 153));
-        inputDinero5.setText("Contraseña");
-        inputDinero5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        inputDinero5.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        inputDinero5.addFocusListener(new java.awt.event.FocusAdapter() {
+        inputTelef.setColumns(1);
+        inputTelef.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        inputTelef.setForeground(new java.awt.Color(153, 153, 153));
+        inputTelef.setText("Teléfono Móvil");
+        inputTelef.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        inputTelef.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        inputTelef.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                inputDinero5FocusGained(evt);
+                inputTelefFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                inputDinero5FocusLost(evt);
+                inputTelefFocusLost(evt);
             }
         });
-        inputDinero5.addActionListener(new java.awt.event.ActionListener() {
+        inputTelef.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputDinero5ActionPerformed(evt);
+                inputTelefActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 230, -1));
+        jPanelDatos.add(inputTelef, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 230, -1));
 
-        inputDinero6.setColumns(1);
-        inputDinero6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        inputDinero6.setForeground(new java.awt.Color(153, 153, 153));
-        inputDinero6.setText("Domicilio");
-        inputDinero6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        inputDinero6.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        inputDinero6.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                inputDinero6FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                inputDinero6FocusLost(evt);
+        jButtonGuardar.setBackground(new java.awt.Color(255, 222, 89));
+        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonGuardarMouseClicked(evt);
             }
         });
-        inputDinero6.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputDinero6ActionPerformed(evt);
+                jButtonGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(inputDinero6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 230, -1));
+        jPanelDatos.add(jButtonGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 200, 30));
 
-        inputDinero7.setColumns(1);
-        inputDinero7.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        inputDinero7.setForeground(new java.awt.Color(153, 153, 153));
-        inputDinero7.setText("Teléfono Móvil");
-        inputDinero7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        inputDinero7.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        inputDinero7.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                inputDinero7FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                inputDinero7FocusLost(evt);
-            }
-        });
-        inputDinero7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputDinero7ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(inputDinero7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 230, -1));
-
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
-        jLabel14.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel14.setIconTextGap(1);
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, 30));
-
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
-        jLabel16.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel16.setIconTextGap(1);
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, 30));
-
-        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
-        jLabel21.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel21.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel21.setIconTextGap(1);
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, 30));
-
-        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
-        jLabel22.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel22.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel22.setIconTextGap(1);
-        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, -1, 30));
-
-        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
-        jLabel23.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel23.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel23.setIconTextGap(1);
-        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, -1, 30));
-
-        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
-        jLabel24.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel24.setIconTextGap(1);
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, -1, 30));
-
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/profileSave.png"))); // NOI18N
-        jLabel25.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel25.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel25.setIconTextGap(1);
-        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, -1, 30));
-
-        jButton1.setBackground(new java.awt.Color(255, 222, 89));
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 423, 110, 30));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 76, 110, 90));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 570));
+        getContentPane().add(jPanelDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 570));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseClicked
-        MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser,creditos);
+        MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser, creditos);
 
         MevesReservesPage.setVisible(true);
         setVisible(false);
@@ -504,139 +608,152 @@ public class ProfilePage extends javax.swing.JFrame {
         setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_LogoMouseClicked
 
-    private void inputDineroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDineroFocusGained
-        if (inputDinero.getText().equals("Agregar Importe")) {
-            inputDinero.setText("");
-            inputDinero.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_inputDineroFocusGained
+    private void inputMailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputMailFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputMailFocusGained
 
-    private void inputDineroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDineroFocusLost
+    private void inputMailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputMailFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputMailFocusLost
 
+    private void inputMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputMailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputMailActionPerformed
+
+    private void inputPasswFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPasswFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputPasswFocusGained
+
+    private void inputPasswFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPasswFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputPasswFocusLost
+
+    private void inputPasswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPasswActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputPasswActionPerformed
+
+    private void inputDomicilioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDomicilioFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputDomicilioFocusGained
+
+    private void inputDomicilioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDomicilioFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputDomicilioFocusLost
+
+    private void inputDomicilioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDomicilioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputDomicilioActionPerformed
+
+    private void inputTelefFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTelefFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputTelefFocusGained
+
+    private void inputTelefFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTelefFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputTelefFocusLost
+
+    private void inputTelefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTelefActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputTelefActionPerformed
+
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
+
+    private void jLabel29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseClicked
+        MainPage MainPage = new MainPage(idUser);
+
+        MainPage.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jLabel29MouseClicked
+
+    private void jLabel27MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseClicked
+        ProfilePage ProfilePage = new ProfilePage(idUser);
+
+        ProfilePage.setVisible(true);
+        setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel27MouseClicked
+
+    private void inputDNIFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDNIFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputDNIFocusGained
+
+    private void inputDNIFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDNIFocusLost
         //textoDelJTextField = inputDinero.getText();
-    }//GEN-LAST:event_inputDineroFocusLost
+    }//GEN-LAST:event_inputDNIFocusLost
 
-    private void inputDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDineroActionPerformed
+    private void inputDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDNIActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputDineroActionPerformed
+    }//GEN-LAST:event_inputDNIActionPerformed
 
-    private void inputDinero1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero1FocusGained
+    private void inputNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero1FocusGained
+    }//GEN-LAST:event_inputNombreActionPerformed
 
-    private void inputDinero1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero1FocusLost
+    private void inputNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNombreFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero1FocusLost
+    }//GEN-LAST:event_inputNombreFocusLost
 
-    private void inputDinero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDinero1ActionPerformed
+    private void inputNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNombreFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero1ActionPerformed
+    }//GEN-LAST:event_inputNombreFocusGained
 
-    private void inputDinero2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero2FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero2FocusGained
+    private void jButtonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGuardarMouseClicked
 
-    private void inputDinero2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero2FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero2FocusLost
+        actualizarDatosUsuario();
 
-    private void inputDinero2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDinero2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero2ActionPerformed
+    }//GEN-LAST:event_jButtonGuardarMouseClicked
 
-    private void inputDinero3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero3FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero3FocusGained
+    private void jLabelFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelFotoMouseClicked
+        Conexion conexion = new Conexion();
+        Connection connection = conexion.DatabaseConnection();
 
-    private void inputDinero3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero3FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero3FocusLost
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.showOpenDialog(this);
 
-    private void inputDinero3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDinero3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero3ActionPerformed
+        File selectedFile = fileChooser.getSelectedFile();
+        if (selectedFile != null) {
+            try {
+                FileInputStream fis = new FileInputStream(selectedFile);
+                byte[] imagenBytes = new byte[(int) selectedFile.length()];
+                fis.read(imagenBytes);
+                fis.close();
 
-    private void inputDinero4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero4FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero4FocusGained
+                try {
+                    String consulta = "UPDATE usuarios SET Foto = ? WHERE id = ?";
+                    PreparedStatement statement = connection.prepareStatement(consulta);
+                    statement.setBytes(1, imagenBytes);
+                    statement.setInt(2, idUser);
 
-    private void inputDinero4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero4FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero4FocusLost
+                    // Ejecutar la actualización
+                    int filasActualizadas = statement.executeUpdate();
 
-    private void inputDinero4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDinero4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero4ActionPerformed
+                    if (filasActualizadas > 0) {
+                        JOptionPane.showMessageDialog(this, "Imagen actualizada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        mostrarDatosUsuario();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos del usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
 
-    private void inputDinero5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero5FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero5FocusGained
-
-    private void inputDinero5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero5FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero5FocusLost
-
-    private void inputDinero5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDinero5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero5ActionPerformed
-
-    private void inputDinero6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero6FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero6FocusGained
-
-    private void inputDinero6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero6FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero6FocusLost
-
-    private void inputDinero6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDinero6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero6ActionPerformed
-
-    private void inputDinero7FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero7FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero7FocusGained
-
-    private void inputDinero7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDinero7FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero7FocusLost
-
-    private void inputDinero7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDinero7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputDinero7ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        connection.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jLabelFotoMouseClicked
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ProfilePage().setVisible(true);
@@ -646,36 +763,33 @@ public class ProfilePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
+    private javax.swing.JLabel SaveDNI;
+    private javax.swing.JLabel SaveDomicilio;
+    private javax.swing.JLabel SaveMail;
+    private javax.swing.JLabel SaveNombre;
+    private javax.swing.JLabel SavePassw;
+    private javax.swing.JLabel SaveTelef;
     private javax.swing.JLabel btnReservas;
-    private javax.swing.JTextField inputDinero;
-    private javax.swing.JTextField inputDinero1;
-    private javax.swing.JTextField inputDinero2;
-    private javax.swing.JTextField inputDinero3;
-    private javax.swing.JTextField inputDinero4;
-    private javax.swing.JTextField inputDinero5;
-    private javax.swing.JTextField inputDinero6;
-    private javax.swing.JTextField inputDinero7;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField inputDNI;
+    private javax.swing.JTextField inputDomicilio;
+    private javax.swing.JTextField inputMail;
+    private javax.swing.JTextField inputNombre;
+    private javax.swing.JTextField inputPassw;
+    private javax.swing.JTextField inputTelef;
+    private javax.swing.JButton jButtonGuardar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel jLabelFoto;
+    private javax.swing.JPanel jPanelDatos;
+    private javax.swing.JPanel jPanelInferior;
+    private javax.swing.JPanel jPanelSuperior;
     // End of variables declaration//GEN-END:variables
 }

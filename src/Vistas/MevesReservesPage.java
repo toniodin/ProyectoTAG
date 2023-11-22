@@ -577,6 +577,11 @@ public class MevesReservesPage extends javax.swing.JFrame {
         jLabel27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel27.setIconTextGap(1);
+        jLabel27.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel27MouseClicked(evt);
+            }
+        });
         jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -753,6 +758,13 @@ public class MevesReservesPage extends javax.swing.JFrame {
     private void btnPasadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasadosActionPerformed
         mostrarReservasPasadas();
     }//GEN-LAST:event_btnPasadosActionPerformed
+
+    private void jLabel27MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseClicked
+        ProfilePage ProfilePage = new ProfilePage(idUser);
+
+        ProfilePage.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jLabel27MouseClicked
 
     private void LogoMouseClicked(java.awt.event.MouseEvent evt) {
         MainPage mainPage = new MainPage(idUser);
