@@ -187,7 +187,7 @@ public class NewMainPage extends javax.swing.JFrame {
         infoPanel.setBackground(Color.WHITE);
 
         // JLabel para el tipo de estancia
-        JLabel tipoEstanciaLabel = new JLabel("<html><b>Tipo de estancia:</b> " + tipoEstancia + "</html>");
+        JLabel tipoEstanciaLabel = new JLabel("<html><b>Estancia:</b> " + tipoEstancia + "</html>");
         tipoEstanciaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
         infoPanel.add(tipoEstanciaLabel);
 
@@ -200,6 +200,11 @@ public class NewMainPage extends javax.swing.JFrame {
         JLabel costeDiaLabel = new JLabel("<html><b>Costo por día:</b> " + costeDia + "</html>");
         costeDiaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
         infoPanel.add(costeDiaLabel);
+        
+        // JLabel para el costo por día
+        /*JLabel metrosLabel = new JLabel("<html><b>Metros:</b> " + metros + " cuadrados</html>");
+        metrosLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        infoPanel.add(metrosLabel);*/
 
         // JLabel y JDateChooser para la fecha de entrada
         JLabel fechaEntradaLabel = new JLabel("<html><b>Fecha de Entrada:</b></html>");
