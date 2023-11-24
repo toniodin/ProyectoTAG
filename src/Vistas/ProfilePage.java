@@ -603,8 +603,8 @@ public class ProfilePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void LogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoMouseClicked
-        MainPage mainPage = new MainPage(idUser);
-        mainPage.setVisible(true);
+        NewMainPage NewMainPage = new NewMainPage(idUser);
+        NewMainPage.setVisible(true);
         setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_LogoMouseClicked
 
@@ -661,9 +661,8 @@ public class ProfilePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jLabel29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseClicked
-        MainPage MainPage = new MainPage(idUser);
-
-        MainPage.setVisible(true);
+        NewMainPage NewMainPage = new NewMainPage(idUser);
+        NewMainPage.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jLabel29MouseClicked
 

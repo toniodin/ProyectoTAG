@@ -535,8 +535,8 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        MainPage mainPage = new MainPage(idUser);
-        mainPage.setVisible(true);
+        NewMainPage NewMainPage = new NewMainPage(idUser);
+        NewMainPage.setVisible(true);
         setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel5MouseClicked
@@ -598,15 +598,15 @@ public class CreditPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jLabel29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseClicked
-        MainPage mainPage = new MainPage(idUser);
-        mainPage.setVisible(true);
+        NewMainPage NewMainPage = new NewMainPage(idUser);
+        NewMainPage.setVisible(true);
         setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel29MouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
-        MainPage mainPage = new MainPage(idUser);
-        mainPage.setVisible(true);
+        NewMainPage NewMainPage = new NewMainPage(idUser);
+        NewMainPage.setVisible(true);
         setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel17MouseClicked

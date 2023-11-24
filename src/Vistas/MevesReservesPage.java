@@ -439,11 +439,13 @@ public class MevesReservesPage extends javax.swing.JFrame {
         // JLabel para la fecha de fin de reserva
         JLabel fechaFinReservaLabel = new JLabel("<html><b>Fecha de Fin Reserva:</b></html>");
         fechaFinReservaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        fechaFinReservaLabel.setPreferredSize(new Dimension(50, 30));
         infoPanel.add(fechaFinReservaLabel);
 
         // JDateChooser para la fecha de fin de reserva
         JDateChooser fechaFinReservaChooser = new JDateChooser(fechaFinReserva);
         fechaFinReservaChooser.setDateFormatString("dd-MM-yyyy"); // Puedes establecer el formato aquí
+        fechaFinReservaChooser.setPreferredSize(new Dimension(50, 30));
         infoPanel.add(fechaFinReservaChooser);
 
         // Añadir elementos al panelReserva
@@ -742,16 +744,15 @@ public class MevesReservesPage extends javax.swing.JFrame {
     }//GEN-LAST:event_labelReservasMouseClicked
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        MainPage MainPage = new MainPage(idUser);
-
-        MainPage.setVisible(true);
+        NewMainPage NewMainPage = new NewMainPage(idUser);
+        NewMainPage.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnBuscarMouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
-        MainPage MainPage = new MainPage(idUser);
+        NewMainPage NewMainPage = new NewMainPage(idUser);
+        NewMainPage.setVisible(true);
 
-        MainPage.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jLabel17MouseClicked
 
@@ -767,8 +768,8 @@ public class MevesReservesPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel27MouseClicked
 
     private void LogoMouseClicked(java.awt.event.MouseEvent evt) {
-        MainPage mainPage = new MainPage(idUser);
-        mainPage.setVisible(true);
+        NewMainPage NewMainPage = new NewMainPage(idUser);
+        NewMainPage.setVisible(true);
         setVisible(false);
     }
 
