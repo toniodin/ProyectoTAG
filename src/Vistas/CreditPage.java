@@ -584,11 +584,11 @@ public class CreditPage extends javax.swing.JFrame {
                 int rowsUpdated = preparedStatement.executeUpdate();
 
                 if (rowsUpdated > 0) {
-                    System.out.println("Actualización exitosa");
+                    JOptionPane.showMessageDialog(null, "Se han añadido creditos de forma exitosa");
                     saldo = 0;
                     inputDinero.setText("Agregar Importe");
                 } else {
-                    System.out.println("No se encontró ningún usuario con el ID especificado");
+                    JOptionPane.showMessageDialog(null, "No se encontró ningún usuario con el ID especificado", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } catch (SQLException e) {
