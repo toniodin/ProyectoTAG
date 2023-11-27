@@ -202,9 +202,9 @@ public class NewMainPage extends javax.swing.JFrame {
         infoPanel.add(costeDiaLabel);
         
         // JLabel para el costo por día
-        /*JLabel metrosLabel = new JLabel("<html><b>Metros:</b> " + metros + " cuadrados</html>");
+        JLabel metrosLabel = new JLabel("<html><b>Metros:</b> " + metros + " cuadrados</html>");
         metrosLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(metrosLabel);*/
+        infoPanel.add(metrosLabel);
 
         // JLabel y JDateChooser para la fecha de entrada
         JLabel fechaEntradaLabel = new JLabel("<html><b>Fecha de Entrada:</b></html>");
@@ -355,7 +355,7 @@ public class NewMainPage extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        casaRural = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -405,12 +405,17 @@ public class NewMainPage extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(255, 222, 89));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/casas_rurales.png"))); // NOI18N
-        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel8.setIconTextGap(1);
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+        casaRural.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        casaRural.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/casas_rurales.png"))); // NOI18N
+        casaRural.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        casaRural.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        casaRural.setIconTextGap(1);
+        casaRural.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                casaRuralMouseClicked(evt);
+            }
+        });
+        jPanel5.add(casaRural, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         jLabel3.setText("Casas rurales");
@@ -572,6 +577,58 @@ public class NewMainPage extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_btnReservasMouseClicked
 
+    private void casaRuralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_casaRuralMouseClicked
+        String consulta = "SELECT id_reserva, tipo_estancia, coste_dia, metros, direccion, imagen FROM reservas WHERE id_usuario IS NULL and tipo_estancia = 'Casa Rural'";
+
+        try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
+
+            ResultSet resultado = statement.executeQuery();
+
+            // Crear un nuevo panel para contener los resultados
+            JPanel nuevoPanelDisponibles = new JPanel();
+            nuevoPanelDisponibles.setLayout(new BoxLayout(nuevoPanelDisponibles, BoxLayout.Y_AXIS));
+
+            while (resultado.next()) {
+                int idReserva = resultado.getInt("id_reserva");
+                String tipoEstanciaTexto = resultado.getString("tipo_estancia");
+                String direccionTexto = resultado.getString("direccion");
+                byte[] imagenBytes = resultado.getBytes("imagen");
+                int costeDia = resultado.getInt("coste_dia");
+                int metros = resultado.getInt("metros");
+
+                ImageIcon imagenReserva = new ImageIcon(imagenBytes);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+                JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+                JButton reservarButton = new JButton("Reservar");
+
+                JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeDia, metros, idReserva, reservarButton);
+
+                nuevoPanelDisponibles.add(panelReserva);
+            }
+
+            // Crear un nuevo JScrollPane con el nuevo panel
+            JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelDisponibles);
+            nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
+            nuevoJScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+            // Remover todos los componentes del panel principal
+            PanelReservas.removeAll();
+
+            // Agregar el nuevo JScrollPane al panel principal
+            PanelReservas.setLayout(new BorderLayout());
+            PanelReservas.add(nuevoJScrollPane, BorderLayout.CENTER);
+
+            // Actualizar la interfaz gráfica
+            PanelReservas.revalidate();
+            PanelReservas.repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_casaRuralMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -610,6 +667,7 @@ public class NewMainPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelReservas;
     private javax.swing.JLabel btnReservas;
+    private javax.swing.JLabel casaRural;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -627,7 +685,6 @@ public class NewMainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
