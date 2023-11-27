@@ -9,7 +9,10 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -27,10 +30,12 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -157,6 +162,7 @@ public class NewMainPage extends javax.swing.JFrame {
             nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
             nuevoJScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            nuevoJScrollPane.getVerticalScrollBar().setUnitIncrement(25); // Configurar el desplazamiento a 25 píxeles
 
             // Remover todos los componentes del panel principal
             PanelReservas.removeAll();
@@ -175,60 +181,52 @@ public class NewMainPage extends javax.swing.JFrame {
     }
 
     private JPanel crearPanelReservaMejorado(JLabel imagen, String tipoEstancia, String direccion, int costeDia, int metros, int idReserva, JButton reservarButton) {
-
         JPanel panelReserva = new JPanel();
         panelReserva.setLayout(new BorderLayout());
         panelReserva.setBackground(Color.WHITE);
         panelReserva.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         // JPanel para la información de la reserva
-        JPanel infoPanel = new JPanel();
-        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS)); // Diseño en una columna
+        JPanel infoPanel = new JPanel(new GridBagLayout());
         infoPanel.setBackground(Color.WHITE);
+        infoPanel.setBorder(new EmptyBorder(0, 0, 0, 0)); // Margen de 10 en todos los lados
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(5, 5, 5, 5);
 
         // JLabel para el tipo de estancia
-        JLabel tipoEstanciaLabel = new JLabel("<html><b>Estancia:</b> " + tipoEstancia + "</html>");
-        tipoEstanciaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(tipoEstanciaLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Estancia:</b> " + tipoEstancia + "</html>");
 
         // JLabel para la dirección
-        JLabel direccionLabel = new JLabel("<html><b>Dirección:</b> " + direccion + "</html>");
-        direccionLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(direccionLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Dirección:</b> " + direccion + "</html>");
 
         // JLabel para el costo por día
-        JLabel costeDiaLabel = new JLabel("<html><b>Costo por día:</b> " + costeDia + "</html>");
-        costeDiaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(costeDiaLabel);
-        
-        // JLabel para el costo por día
-        JLabel metrosLabel = new JLabel("<html><b>Metros:</b> " + metros + " cuadrados</html>");
-        metrosLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(metrosLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Costo por día:</b> " + costeDia + "</html>");
+
+        // JLabel para los metros
+        agregarComponente(infoPanel, gbc, "<html><b>Metros:</b> " + metros + " cuadrados</html>");
 
         // JLabel y JDateChooser para la fecha de entrada
-        JLabel fechaEntradaLabel = new JLabel("<html><b>Fecha de Entrada:</b></html>");
-        fechaEntradaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(fechaEntradaLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Fecha de Entrada:</b></html>");
         JDateChooser fechaEntradaChooser = new JDateChooser();
         fechaEntradaChooser.setDateFormatString("dd-MM-yyyy");
-        fechaEntradaChooser.setPreferredSize(new Dimension(150, 30)); // Ajusta el tamaño según sea necesario
-        infoPanel.add(fechaEntradaChooser);
+        fechaEntradaChooser.setPreferredSize(new Dimension(150, 30));
+        agregarComponente(infoPanel, gbc, fechaEntradaChooser);
 
         // JLabel y JDateChooser para la fecha de salida
-        JLabel fechaSalidaLabel = new JLabel("<html><b>Fecha de Salida:</b></html>");
-        fechaSalidaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(fechaSalidaLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Fecha de Salida:</b></html>");
         JDateChooser fechaSalidaChooser = new JDateChooser();
         fechaSalidaChooser.setDateFormatString("dd-MM-yyyy");
-        fechaSalidaChooser.setPreferredSize(new Dimension(150, 30)); // Ajusta el tamaño según sea necesario
-        infoPanel.add(fechaSalidaChooser);
+        fechaSalidaChooser.setPreferredSize(new Dimension(150, 30));
+        agregarComponente(infoPanel, gbc, fechaSalidaChooser);
 
-        // Ajusta el tamaño del panel que contiene los JDateChooser
-        infoPanel.setPreferredSize(new Dimension(200, 200)); // Ajusta el tamaño según sea necesario
+        // Añadir botón de reserva con diseño personalizado
+        JButton botonReserva = new JButton("Reservar");
+        botonReserva.setBackground(new Color(255,222,89)); // Color verde
+        botonReserva.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        botonReserva.setPreferredSize(new Dimension(150, 30));
 
-        // Añadir botón de reserva
-        reservarButton.addActionListener(new ActionListener() {
+        botonReserva.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Conexion conexion = new Conexion();
@@ -332,13 +330,27 @@ public class NewMainPage extends javax.swing.JFrame {
                 }
             }
         });
-        infoPanel.add(reservarButton);
+
+        agregarComponente(infoPanel, gbc, botonReserva);
 
         // Añadir elementos al panelReserva
         panelReserva.add(imagen, BorderLayout.WEST);
         panelReserva.add(infoPanel, BorderLayout.CENTER);
 
         return panelReserva;
+    }
+
+    private void agregarComponente(JPanel panel, GridBagConstraints gbc, Object componente) {
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        if (componente instanceof JComponent) {
+            panel.add((JComponent) componente, gbc);
+        } else {
+            panel.add(new JLabel(componente.toString()), gbc);
+        }
     }
 
     /**
