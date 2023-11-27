@@ -222,7 +222,7 @@ public class NewMainPage extends javax.swing.JFrame {
 
         // Añadir botón de reserva con diseño personalizado
         JButton botonReserva = new JButton("Reservar");
-        botonReserva.setBackground(new Color(255,222,89)); // Color verde
+        botonReserva.setBackground(new Color(255, 222, 89)); // Color verde
         botonReserva.setFont(new Font("Century Gothic", Font.BOLD, 14));
         botonReserva.setPreferredSize(new Dimension(150, 30));
 
@@ -540,8 +540,14 @@ public class NewMainPage extends javax.swing.JFrame {
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/perfil.png"))); // NOI18N
         jLabel27.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel27.setIconTextGap(1);
+        jLabel27.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel27MouseClicked(evt);
+            }
+        });
         jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -1104,6 +1110,13 @@ public class NewMainPage extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jLabel29MouseClicked
+
+    private void jLabel27MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseClicked
+        ProfilePage ProfilePage = new ProfilePage(idUser);
+
+        ProfilePage.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jLabel27MouseClicked
 
     /**
      * @param args the command line arguments
