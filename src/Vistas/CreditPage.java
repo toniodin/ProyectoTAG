@@ -479,10 +479,10 @@ public class CreditPage extends javax.swing.JFrame {
         saldo = 50;
         inputDinero.setText(String.valueOf(saldo));
     }//GEN-LAST:event_btn50eurosMouseClicked
-                                     
+
     private void btn80eurosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn80eurosMouseClicked
-    saldo=80;
-    inputDinero.setText(String.valueOf(saldo));
+        saldo = 80;
+        inputDinero.setText(String.valueOf(saldo));
     }//GEN-LAST:event_btn80eurosMouseClicked
 
     private void btn80eurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn80eurosActionPerformed
@@ -546,22 +546,23 @@ public class CreditPage extends javax.swing.JFrame {
 
         if (!inputDinero.getText().equals("Agregar Importe")) {
             try {
-                int dinero = Integer.parseInt(inputDinero.getText());
-                if (dinero % 10 == 0) {
+                double dinero = Double.parseDouble(inputDinero.getText());
+                if (dinero % 10 == 0 && dinero == (int) dinero) {
 
                     if (dinero <= 0) {
                         JOptionPane.showMessageDialog(null, "Por favor, ingrese un múltiplo de 10 y mayor que 0.", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 
-                    creditos_actuales = dinero + creditos_actuales;
+                    creditos_actuales = (int) dinero + creditos_actuales;
                     creditosA_stg = String.valueOf(creditos_actuales);
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor, ingrese un múltiplo de 10 y mayor que 0.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Por favor, ingrese un número válido.");
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
         } else {
             creditos_actuales = saldo + creditos_actuales;
@@ -584,7 +585,7 @@ public class CreditPage extends javax.swing.JFrame {
                 int rowsUpdated = preparedStatement.executeUpdate();
 
                 if (rowsUpdated > 0) {
-                    JOptionPane.showMessageDialog(null, "Se han añadido creditos de forma exitosa");
+                    JOptionPane.showMessageDialog(null, "Se han añadido créditos de forma exitosa");
                     saldo = 0;
                     inputDinero.setText("Agregar Importe");
                 } else {
@@ -594,7 +595,7 @@ public class CreditPage extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
             // Maneja la excepción apropiadamente
-        }        // TODO add your handling code here:
+        }
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jLabel29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseClicked
@@ -613,7 +614,7 @@ public class CreditPage extends javax.swing.JFrame {
 
     private void jLabel30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseClicked
         // TODO add your handling code here:
-        MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser,creditos_actuales);
+        MevesReservesPage MevesReservesPage = new MevesReservesPage(idUser, creditos_actuales);
         MevesReservesPage.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jLabel30MouseClicked
@@ -636,7 +637,6 @@ public class CreditPage extends javax.swing.JFrame {
             }
         });
     }
-
 
     private javax.swing.JLabel Logo;
     private javax.swing.JButton btn10euros;

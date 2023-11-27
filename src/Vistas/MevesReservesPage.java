@@ -151,7 +151,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
     private void mostrarReservasActivas() {
 
-        String consulta = "SELECT ru.id_reservas_usuarios, r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
+        String consulta = "SELECT ru.id_reserva, ru.id_reservas_usuarios, r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
                 + "FROM reservas r INNER JOIN reservas_usuarios ru ON r.id_reserva = ru.id_reserva "
                 + "WHERE ru.id_usuario = ? AND ru.fecha_fin_reserva >= CURRENT_DATE";
 
@@ -174,7 +174,8 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 String direccionTexto = resultado.getString("direccion");
                 byte[] imagenBytes = resultado.getBytes("imagen");
                 int costeReservaValor = resultado.getInt("coste_reserva");
-                int idReserva = resultado.getInt("id_reservas_usuarios");
+                int idReservaUsuarios = resultado.getInt("id_reservas_usuarios");
+                int idReserva = resultado.getInt("id_reserva");
                 Date fechaSolicitudValor = resultado.getDate("fecha_solicitud");
                 Date fechaFinSolicitudValor = resultado.getDate("fecha_fin_reserva");
 
@@ -184,7 +185,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
                 JButton editarReservaButton = new JButton("Editar Reserva");
 
-                JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor, fechaFinSolicitudValor, editarReservaButton, idReserva, costeReservaValor);
+                JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor, fechaFinSolicitudValor, editarReservaButton, idReserva, costeReservaValor, idReservaUsuarios);
                 nuevoPanelActivos.add(panelReserva);
             }
 
@@ -209,7 +210,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
         }
     }
 
-    private JPanel crearPanelReservaMejorado(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaSolicitud, Date fechaFinReserva, JButton editarReservaButton, int idReserva, int costeReservaValor) {
+    private JPanel crearPanelReservaMejorado(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaSolicitud, Date fechaFinReserva, JButton editarReserva, int idReserva, int costeReservaValor, int idReservaUser) {
         
         JPanel panelReserva = new JPanel();
         panelReserva.setLayout(new BorderLayout());
@@ -256,13 +257,14 @@ public class MevesReservesPage extends javax.swing.JFrame {
         fechaFinReservaChooser.setDateFormatString("dd-MM-yyyy"); // Puedes establecer el formato aquí
         infoPanel.add(fechaFinReservaChooser);
 
-        editarReservaButton.addActionListener(new ActionListener() {
+        editarReserva.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int devolucion = 0;
                 
                 String consulta2 = "SELECT * FROM reservas WHERE id_reserva = ?";
                 try (Connection connection2 = conexion.DatabaseConnection(); PreparedStatement statement2 = connection2.prepareStatement(consulta2)) {
+                    System.out.println("Entro" + idReserva);
                     statement2.setInt(1, idReserva);
                     ResultSet resultado2 = statement2.executeQuery();
                     while (resultado2.next()) {
@@ -298,19 +300,20 @@ public class MevesReservesPage extends javax.swing.JFrame {
                                 updateStatementCreditos.setInt(1, creditosUser);
                                 updateStatementCreditos.setInt(2, idUser);
 
-                                int rowsAffectedCreditos = updateStatementCreditos.executeUpdate();
+                                updateStatementCreditos.executeUpdate();
 
-                                String updateReserva = "UPDATE reservas_usuarios SET fecha_solicitud = ?, fecha_fin_reserva = ?, coste_reserva = ? WHERE id_reserva = ?";
+                                String updateReserva = "UPDATE reservas_usuarios SET fecha_solicitud = ?, fecha_fin_reserva = ?, coste_reserva = ? WHERE id_reservas_usuarios = ?";
                                 try (Connection connection4 = conexion.DatabaseConnection(); PreparedStatement updateStatementReserva = connection4.prepareStatement(updateReserva)) {
                                     updateStatementReserva.setDate(1, java.sql.Date.valueOf(fechaSolicitudLocal));
                                     updateStatementReserva.setDate(2, java.sql.Date.valueOf(fechaFinSolicitudLocal));
                                     updateStatementReserva.setInt(3, totalCoste);
-                                    updateStatementReserva.setInt(4, idReserva); 
+                                    updateStatementReserva.setInt(4, idReservaUser); 
                                     
-                                    int rowsAffectedReserva = updateStatementReserva.executeUpdate();
+                                    updateStatementReserva.executeUpdate();
                                     jLabel7.setText(String.valueOf(creditosUser));
                                     costeReservaLabel.setText("<html><b>Coste de reserva:</b> " + String.valueOf(totalCoste) + "</html>");
                                     devolucion = 0;
+                                    mostrarReservasActivas();
                                 } catch (SQLException e2) {
                                     e2.printStackTrace();
                                 }
@@ -325,7 +328,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
             }
         });
         // Botón "Editar Reserva" deshabilitado
-        infoPanel.add(editarReservaButton);
+        infoPanel.add(editarReserva);
 
         // Añadir elementos al panelReserva
         panelReserva.add(imagen, BorderLayout.WEST);
@@ -367,9 +370,8 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
                 JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
-                JButton editarReservaButton = new JButton("Editar Reserva");
 
-                JPanel panelReserva = crearPanelReservaPasadoMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor, fechaFinSolicitudValor, editarReservaButton, idReserva, costeReservaValor);
+                JPanel panelReserva = crearPanelReservaPasadoMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeReservaValor, fechaSolicitudValor, fechaFinSolicitudValor, idReserva, costeReservaValor);
                 nuevoPanelActivos.add(panelReserva);
             }
 
@@ -394,7 +396,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
         }
     }
 
-    private JPanel crearPanelReservaPasadoMejorado(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaSolicitud, Date fechaFinReserva, JButton editarReservaButton, int idReserva, int costeReservaValor) {
+    private JPanel crearPanelReservaPasadoMejorado(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaSolicitud, Date fechaFinReserva, int idReserva, int costeReservaValor) {
         
         JPanel panelReserva = new JPanel();
         panelReserva.setLayout(new BorderLayout());
