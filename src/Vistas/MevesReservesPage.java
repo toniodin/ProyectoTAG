@@ -44,6 +44,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
 /**
  *
@@ -180,7 +181,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 Date fechaFinSolicitudValor = resultado.getDate("fecha_fin_reserva");
 
                 ImageIcon imagenReserva = new ImageIcon(imagenBytes);
-                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
                 ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
                 JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
                 JButton editarReservaButton = new JButton("Editar Reserva");
@@ -193,6 +194,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
             JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelActivos);
             nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
+            nuevoJScrollPane.getVerticalScrollBar().setUnitIncrement(25); // Configurar el desplazamiento a 25 píxeles
 
             // Remover todos los componentes del panel principal
             panelActivos.removeAll();
@@ -211,57 +213,59 @@ public class MevesReservesPage extends javax.swing.JFrame {
     }
 
     private JPanel crearPanelReservaMejorado(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaSolicitud, Date fechaFinReserva, JButton editarReserva, int idReserva, int costeReservaValor, int idReservaUser) {
-        
+
         JPanel panelReserva = new JPanel();
         panelReserva.setLayout(new BorderLayout());
         panelReserva.setBackground(Color.WHITE);
         panelReserva.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         // JPanel para la información de la reserva
-        JPanel infoPanel = new JPanel();
-        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS)); // Diseño en una columna
+        JPanel infoPanel = new JPanel(new GridBagLayout());
         infoPanel.setBackground(Color.WHITE);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(5, 5, 5, 5);
 
         // JLabel para el tipo de estancia
-        JLabel tipoEstanciaLabel = new JLabel("<html><b>Tipo de estancia:</b> " + tipoEstancia + "</html>");
-        tipoEstanciaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(tipoEstanciaLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Tipo de estancia:</b> " + tipoEstancia + "</html>");
 
         // JLabel para la dirección
-        JLabel direccionLabel = new JLabel("<html><b>Dirección:</b> " + direccion + "</html>");
-        direccionLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(direccionLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Dirección:</b> " + direccion + "</html>");
 
         // JLabel para el coste de la reserva
         JLabel costeReservaLabel = new JLabel("<html><b>Coste de reserva:</b> " + coste + "</html>");
         costeReservaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(costeReservaLabel);
+        agregarComponente(infoPanel, gbc, costeReservaLabel);
 
         // JLabel para la fecha de solicitud
-        JLabel fechaSolicitudLabel = new JLabel("<html><b>Fecha de Solicitud:</b></html>");
-        fechaSolicitudLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(fechaSolicitudLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Fecha de Solicitud:</b></html>");
 
         // JDateChooser para la fecha de solicitud
         JDateChooser fechaSolicitudChooser = new JDateChooser(fechaSolicitud);
-        fechaSolicitudChooser.setDateFormatString("dd-MM-yyyy"); // Puedes establecer el formato aquí
-        infoPanel.add(fechaSolicitudChooser);
+        fechaSolicitudChooser.setDateFormatString("dd-MM-yyyy");
+        agregarComponente(infoPanel, gbc, fechaSolicitudChooser);
 
         // JLabel para la fecha de fin de reserva
-        JLabel fechaFinReservaLabel = new JLabel("<html><b>Fecha de Fin Reserva:</b></html>");
-        fechaFinReservaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(fechaFinReservaLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Fecha de Fin Reserva:</b></html>");
 
         // JDateChooser para la fecha de fin de reserva
         JDateChooser fechaFinReservaChooser = new JDateChooser(fechaFinReserva);
-        fechaFinReservaChooser.setDateFormatString("dd-MM-yyyy"); // Puedes establecer el formato aquí
-        infoPanel.add(fechaFinReservaChooser);
+        fechaFinReservaChooser.setDateFormatString("dd-MM-yyyy");
+        agregarComponente(infoPanel, gbc, fechaFinReservaChooser);
 
-        editarReserva.addActionListener(new ActionListener() {
+        // JButton para editar reserva
+        JButton editarReservaButton = new JButton("Editar Reserva");
+        editarReservaButton.setBackground(new Color(255, 222, 89)); // Color de fondo similar al botón de reserva
+        editarReservaButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        editarReservaButton.setFocusPainted(false);
+        editarReservaButton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Añadir espacio alrededor del texto
+
+        // Añadir botón "Editar Reserva"
+        editarReservaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int devolucion = 0;
-                
+
                 String consulta2 = "SELECT * FROM reservas WHERE id_reserva = ?";
                 try (Connection connection2 = conexion.DatabaseConnection(); PreparedStatement statement2 = connection2.prepareStatement(consulta2)) {
                     System.out.println("Entro" + idReserva);
@@ -276,7 +280,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
                         long diferenciaDias = ChronoUnit.DAYS.between(fechaSolicitudLocal, fechaFinSolicitudLocal);
 
                         int totalCoste = (int) (diferenciaDias * coste);
-                        
+
                         if (totalCoste > 0) {
                             devolucion = costeReservaValor - totalCoste;
                         }
@@ -307,8 +311,8 @@ public class MevesReservesPage extends javax.swing.JFrame {
                                     updateStatementReserva.setDate(1, java.sql.Date.valueOf(fechaSolicitudLocal));
                                     updateStatementReserva.setDate(2, java.sql.Date.valueOf(fechaFinSolicitudLocal));
                                     updateStatementReserva.setInt(3, totalCoste);
-                                    updateStatementReserva.setInt(4, idReservaUser); 
-                                    
+                                    updateStatementReserva.setInt(4, idReservaUser);
+
                                     updateStatementReserva.executeUpdate();
                                     jLabel7.setText(String.valueOf(creditosUser));
                                     costeReservaLabel.setText("<html><b>Coste de reserva:</b> " + String.valueOf(totalCoste) + "</html>");
@@ -327,8 +331,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 }
             }
         });
-        // Botón "Editar Reserva" deshabilitado
-        infoPanel.add(editarReserva);
+        agregarComponente(infoPanel, gbc, editarReservaButton);
 
         // Añadir elementos al panelReserva
         panelReserva.add(imagen, BorderLayout.WEST);
@@ -336,7 +339,20 @@ public class MevesReservesPage extends javax.swing.JFrame {
 
         return panelReserva;
     }
-    
+
+    private void agregarComponente(JPanel panel, GridBagConstraints gbc, Object componente) {
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        if (componente instanceof JComponent) {
+            panel.add((JComponent) componente, gbc);
+        } else {
+            panel.add(new JLabel(componente.toString()), gbc);
+        }
+    }
+
     private void mostrarReservasPasadas() {
 
         String consulta = "SELECT ru.id_reservas_usuarios,ru.id_usuario,r.tipo_estancia, r.direccion, r.imagen, ru.coste_reserva, ru.fecha_solicitud, ru.fecha_fin_reserva "
@@ -367,7 +383,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
                 Date fechaFinSolicitudValor = resultado.getDate("fecha_fin_reserva");
 
                 ImageIcon imagenReserva = new ImageIcon(imagenBytes);
-                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
                 ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
                 JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
 
@@ -379,6 +395,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
             JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelActivos);
             nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
+            nuevoJScrollPane.getVerticalScrollBar().setUnitIncrement(25); // Configurar el desplazamiento a 25 píxeles
 
             // Remover todos los componentes del panel principal
             panelPasados.removeAll();
@@ -397,58 +414,50 @@ public class MevesReservesPage extends javax.swing.JFrame {
     }
 
     private JPanel crearPanelReservaPasadoMejorado(JLabel imagen, String tipoEstancia, String direccion, double coste, Date fechaSolicitud, Date fechaFinReserva, int idReserva, int costeReservaValor) {
-        
+
         JPanel panelReserva = new JPanel();
         panelReserva.setLayout(new BorderLayout());
         panelReserva.setBackground(Color.WHITE);
         panelReserva.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         // JPanel para la información de la reserva
-        JPanel infoPanel = new JPanel();
-        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS)); // Diseño en una columna
+        JPanel infoPanel = new JPanel(new GridBagLayout());
         infoPanel.setBackground(Color.WHITE);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(5, 5, 5, 5);
 
         // JLabel para el tipo de estancia
-        JLabel tipoEstanciaLabel = new JLabel("<html><b>Tipo de estancia:</b> " + tipoEstancia + "</html>");
-        tipoEstanciaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(tipoEstanciaLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Tipo de estancia:</b> " + tipoEstancia + "</html>");
 
         // JLabel para la dirección
-        JLabel direccionLabel = new JLabel("<html><b>Dirección:</b> " + direccion + "</html>");
-        direccionLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(direccionLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Dirección:</b> " + direccion + "</html>");
 
         // JLabel para el coste de la reserva
         JLabel costeReservaLabel = new JLabel("<html><b>Coste de reserva:</b> " + coste + "</html>");
         costeReservaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(costeReservaLabel);
-        
-        // JLabel para el coste de la reserva
-        JLabel costeReservaLabelDinero = new JLabel("<html><b>Precio de reserva:</b> " + coste*10+"€"+ "</html>");
+        agregarComponente(infoPanel, gbc, costeReservaLabel);
+
+        // JLabel para el precio de la reserva en euros
+        JLabel costeReservaLabelDinero = new JLabel("<html><b>Precio de reserva:</b> " + (coste * 10) + "€" + "</html>");
         costeReservaLabelDinero.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(costeReservaLabelDinero);
+        agregarComponente(infoPanel, gbc, costeReservaLabelDinero);
 
         // JLabel para la fecha de solicitud
-        JLabel fechaSolicitudLabel = new JLabel("<html><b>Fecha de Solicitud:</b></html>");
-        fechaSolicitudLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        infoPanel.add(fechaSolicitudLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Fecha de Solicitud:</b></html>");
 
         // JDateChooser para la fecha de solicitud
         JDateChooser fechaSolicitudChooser = new JDateChooser(fechaSolicitud);
-        fechaSolicitudChooser.setDateFormatString("dd-MM-yyyy"); // Puedes establecer el formato aquí
-        infoPanel.add(fechaSolicitudChooser);
+        fechaSolicitudChooser.setDateFormatString("dd-MM-yyyy");
+        agregarComponente(infoPanel, gbc, fechaSolicitudChooser);
 
         // JLabel para la fecha de fin de reserva
-        JLabel fechaFinReservaLabel = new JLabel("<html><b>Fecha de Fin Reserva:</b></html>");
-        fechaFinReservaLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-        fechaFinReservaLabel.setPreferredSize(new Dimension(50, 30));
-        infoPanel.add(fechaFinReservaLabel);
+        agregarComponente(infoPanel, gbc, "<html><b>Fecha de Fin Reserva:</b></html>");
 
         // JDateChooser para la fecha de fin de reserva
         JDateChooser fechaFinReservaChooser = new JDateChooser(fechaFinReserva);
-        fechaFinReservaChooser.setDateFormatString("dd-MM-yyyy"); // Puedes establecer el formato aquí
-        fechaFinReservaChooser.setPreferredSize(new Dimension(50, 30));
-        infoPanel.add(fechaFinReservaChooser);
+        fechaFinReservaChooser.setDateFormatString("dd-MM-yyyy");
+        agregarComponente(infoPanel, gbc, fechaFinReservaChooser);
 
         // Añadir elementos al panelReserva
         panelReserva.add(imagen, BorderLayout.WEST);
