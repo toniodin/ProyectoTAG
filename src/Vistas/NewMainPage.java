@@ -211,6 +211,7 @@ public class NewMainPage extends javax.swing.JFrame {
         JDateChooser fechaEntradaChooser = new JDateChooser();
         fechaEntradaChooser.setDateFormatString("dd-MM-yyyy");
         fechaEntradaChooser.setPreferredSize(new Dimension(150, 30));
+        fechaEntradaChooser.setBackground(Color.WHITE);
         agregarComponente(infoPanel, gbc, fechaEntradaChooser);
 
         // JLabel y JDateChooser para la fecha de salida
@@ -218,6 +219,7 @@ public class NewMainPage extends javax.swing.JFrame {
         JDateChooser fechaSalidaChooser = new JDateChooser();
         fechaSalidaChooser.setDateFormatString("dd-MM-yyyy");
         fechaSalidaChooser.setPreferredSize(new Dimension(150, 30));
+        fechaSalidaChooser.setBackground(Color.WHITE);
         agregarComponente(infoPanel, gbc, fechaSalidaChooser);
 
         // Añadir botón de reserva con diseño personalizado

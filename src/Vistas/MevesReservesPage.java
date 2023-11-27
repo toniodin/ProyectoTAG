@@ -243,6 +243,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
         // JDateChooser para la fecha de solicitud
         JDateChooser fechaSolicitudChooser = new JDateChooser(fechaSolicitud);
         fechaSolicitudChooser.setDateFormatString("dd-MM-yyyy");
+        fechaSolicitudChooser.setBackground(Color.WHITE);
         agregarComponente(infoPanel, gbc, fechaSolicitudChooser);
 
         // JLabel para la fecha de fin de reserva
@@ -251,6 +252,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
         // JDateChooser para la fecha de fin de reserva
         JDateChooser fechaFinReservaChooser = new JDateChooser(fechaFinReserva);
         fechaFinReservaChooser.setDateFormatString("dd-MM-yyyy");
+        fechaFinReservaChooser.setBackground(Color.WHITE);
         agregarComponente(infoPanel, gbc, fechaFinReservaChooser);
 
         // JButton para editar reserva
@@ -449,6 +451,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
         // JDateChooser para la fecha de solicitud
         JDateChooser fechaSolicitudChooser = new JDateChooser(fechaSolicitud);
         fechaSolicitudChooser.setDateFormatString("dd-MM-yyyy");
+        fechaSolicitudChooser.setBackground(Color.WHITE);
         agregarComponente(infoPanel, gbc, fechaSolicitudChooser);
 
         // JLabel para la fecha de fin de reserva
@@ -457,6 +460,7 @@ public class MevesReservesPage extends javax.swing.JFrame {
         // JDateChooser para la fecha de fin de reserva
         JDateChooser fechaFinReservaChooser = new JDateChooser(fechaFinReserva);
         fechaFinReservaChooser.setDateFormatString("dd-MM-yyyy");
+        fechaFinReservaChooser.setBackground(Color.WHITE);
         agregarComponente(infoPanel, gbc, fechaFinReservaChooser);
 
         // Añadir elementos al panelReserva
