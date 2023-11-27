@@ -356,13 +356,13 @@ public class NewMainPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         casaRural = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        casaRuralTexto = new javax.swing.JLabel();
+        apartamentos = new javax.swing.JLabel();
+        apartamentosTexto = new javax.swing.JLabel();
+        HotelesTexto = new javax.swing.JLabel();
+        Hoteles = new javax.swing.JLabel();
+        Apartahotel = new javax.swing.JLabel();
+        ApartahotelTexto = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -408,6 +408,7 @@ public class NewMainPage extends javax.swing.JFrame {
         casaRural.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         casaRural.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/casas_rurales.png"))); // NOI18N
         casaRural.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        casaRural.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         casaRural.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         casaRural.setIconTextGap(1);
         casaRural.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -417,48 +418,90 @@ public class NewMainPage extends javax.swing.JFrame {
         });
         jPanel5.add(casaRural, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        jLabel3.setText("Casas rurales");
-        jLabel3.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 80, 30));
+        casaRuralTexto.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
+        casaRuralTexto.setText("Casas rurales");
+        casaRuralTexto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        casaRuralTexto.setPreferredSize(new java.awt.Dimension(30, 20));
+        casaRuralTexto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                casaRuralTextoMouseClicked(evt);
+            }
+        });
+        jPanel5.add(casaRuralTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 80, 30));
 
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/apartamentos.png"))); // NOI18N
-        jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel9.setIconTextGap(1);
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, -1));
+        apartamentos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        apartamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/apartamentos.png"))); // NOI18N
+        apartamentos.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        apartamentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        apartamentos.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        apartamentos.setIconTextGap(1);
+        apartamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                apartamentosMouseClicked(evt);
+            }
+        });
+        jPanel5.add(apartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        jLabel4.setText("Apartamentos");
-        jLabel4.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 90, 30));
+        apartamentosTexto.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
+        apartamentosTexto.setText("Apartamentos");
+        apartamentosTexto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        apartamentosTexto.setPreferredSize(new java.awt.Dimension(30, 20));
+        apartamentosTexto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                apartamentosTextoMouseClicked(evt);
+            }
+        });
+        jPanel5.add(apartamentosTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 90, 30));
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Hoteles");
-        jLabel7.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 50, 30));
+        HotelesTexto.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
+        HotelesTexto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HotelesTexto.setText("Hoteles");
+        HotelesTexto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        HotelesTexto.setPreferredSize(new java.awt.Dimension(30, 20));
+        HotelesTexto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HotelesTextoMouseClicked(evt);
+            }
+        });
+        jPanel5.add(HotelesTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 50, 30));
 
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Hoteles.png"))); // NOI18N
-        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel10.setIconTextGap(1);
-        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, -1));
+        Hoteles.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Hoteles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Hoteles.png"))); // NOI18N
+        Hoteles.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        Hoteles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Hoteles.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        Hoteles.setIconTextGap(1);
+        Hoteles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HotelesMouseClicked(evt);
+            }
+        });
+        jPanel5.add(Hoteles, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, -1));
 
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/apartahoteles.png"))); // NOI18N
-        jLabel11.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel11.setIconTextGap(1);
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, -1));
+        Apartahotel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Apartahotel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/apartahoteles.png"))); // NOI18N
+        Apartahotel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        Apartahotel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Apartahotel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        Apartahotel.setIconTextGap(1);
+        Apartahotel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ApartahotelMouseClicked(evt);
+            }
+        });
+        jPanel5.add(Apartahotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, -1));
 
-        jLabel12.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel12.setText("Apartahoteles");
-        jLabel12.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 100, 30));
+        ApartahotelTexto.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
+        ApartahotelTexto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ApartahotelTexto.setText("Apartahoteles");
+        ApartahotelTexto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ApartahotelTexto.setPreferredSize(new java.awt.Dimension(30, 20));
+        ApartahotelTexto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ApartahotelTextoMouseClicked(evt);
+            }
+        });
+        jPanel5.add(ApartahotelTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 100, 30));
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 62, 450, -1));
 
@@ -629,6 +672,370 @@ public class NewMainPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_casaRuralMouseClicked
 
+    private void casaRuralTextoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_casaRuralTextoMouseClicked
+        String consulta = "SELECT id_reserva, tipo_estancia, coste_dia, metros, direccion, imagen FROM reservas WHERE id_usuario IS NULL and tipo_estancia = 'Casa Rural'";
+
+        try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
+
+            ResultSet resultado = statement.executeQuery();
+
+            // Crear un nuevo panel para contener los resultados
+            JPanel nuevoPanelDisponibles = new JPanel();
+            nuevoPanelDisponibles.setLayout(new BoxLayout(nuevoPanelDisponibles, BoxLayout.Y_AXIS));
+
+            while (resultado.next()) {
+                int idReserva = resultado.getInt("id_reserva");
+                String tipoEstanciaTexto = resultado.getString("tipo_estancia");
+                String direccionTexto = resultado.getString("direccion");
+                byte[] imagenBytes = resultado.getBytes("imagen");
+                int costeDia = resultado.getInt("coste_dia");
+                int metros = resultado.getInt("metros");
+
+                ImageIcon imagenReserva = new ImageIcon(imagenBytes);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+                JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+                JButton reservarButton = new JButton("Reservar");
+
+                JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeDia, metros, idReserva, reservarButton);
+
+                nuevoPanelDisponibles.add(panelReserva);
+            }
+
+            // Crear un nuevo JScrollPane con el nuevo panel
+            JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelDisponibles);
+            nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
+            nuevoJScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+            // Remover todos los componentes del panel principal
+            PanelReservas.removeAll();
+
+            // Agregar el nuevo JScrollPane al panel principal
+            PanelReservas.setLayout(new BorderLayout());
+            PanelReservas.add(nuevoJScrollPane, BorderLayout.CENTER);
+
+            // Actualizar la interfaz gráfica
+            PanelReservas.revalidate();
+            PanelReservas.repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_casaRuralTextoMouseClicked
+
+    private void apartamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apartamentosMouseClicked
+        String consulta = "SELECT id_reserva, tipo_estancia, coste_dia, metros, direccion, imagen FROM reservas WHERE id_usuario IS NULL and tipo_estancia = 'Apartamento'";
+
+        try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
+
+            ResultSet resultado = statement.executeQuery();
+
+            // Crear un nuevo panel para contener los resultados
+            JPanel nuevoPanelDisponibles = new JPanel();
+            nuevoPanelDisponibles.setLayout(new BoxLayout(nuevoPanelDisponibles, BoxLayout.Y_AXIS));
+
+            while (resultado.next()) {
+                int idReserva = resultado.getInt("id_reserva");
+                String tipoEstanciaTexto = resultado.getString("tipo_estancia");
+                String direccionTexto = resultado.getString("direccion");
+                byte[] imagenBytes = resultado.getBytes("imagen");
+                int costeDia = resultado.getInt("coste_dia");
+                int metros = resultado.getInt("metros");
+
+                ImageIcon imagenReserva = new ImageIcon(imagenBytes);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+                JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+                JButton reservarButton = new JButton("Reservar");
+
+                JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeDia, metros, idReserva, reservarButton);
+
+                nuevoPanelDisponibles.add(panelReserva);
+            }
+
+            // Crear un nuevo JScrollPane con el nuevo panel
+            JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelDisponibles);
+            nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
+            nuevoJScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+            // Remover todos los componentes del panel principal
+            PanelReservas.removeAll();
+
+            // Agregar el nuevo JScrollPane al panel principal
+            PanelReservas.setLayout(new BorderLayout());
+            PanelReservas.add(nuevoJScrollPane, BorderLayout.CENTER);
+
+            // Actualizar la interfaz gráfica
+            PanelReservas.revalidate();
+            PanelReservas.repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_apartamentosMouseClicked
+
+    private void apartamentosTextoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apartamentosTextoMouseClicked
+        String consulta = "SELECT id_reserva, tipo_estancia, coste_dia, metros, direccion, imagen FROM reservas WHERE id_usuario IS NULL and tipo_estancia = 'Apartamento'";
+
+        try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
+
+            ResultSet resultado = statement.executeQuery();
+
+            // Crear un nuevo panel para contener los resultados
+            JPanel nuevoPanelDisponibles = new JPanel();
+            nuevoPanelDisponibles.setLayout(new BoxLayout(nuevoPanelDisponibles, BoxLayout.Y_AXIS));
+
+            while (resultado.next()) {
+                int idReserva = resultado.getInt("id_reserva");
+                String tipoEstanciaTexto = resultado.getString("tipo_estancia");
+                String direccionTexto = resultado.getString("direccion");
+                byte[] imagenBytes = resultado.getBytes("imagen");
+                int costeDia = resultado.getInt("coste_dia");
+                int metros = resultado.getInt("metros");
+
+                ImageIcon imagenReserva = new ImageIcon(imagenBytes);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+                JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+                JButton reservarButton = new JButton("Reservar");
+
+                JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeDia, metros, idReserva, reservarButton);
+
+                nuevoPanelDisponibles.add(panelReserva);
+            }
+
+            // Crear un nuevo JScrollPane con el nuevo panel
+            JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelDisponibles);
+            nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
+            nuevoJScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+            // Remover todos los componentes del panel principal
+            PanelReservas.removeAll();
+
+            // Agregar el nuevo JScrollPane al panel principal
+            PanelReservas.setLayout(new BorderLayout());
+            PanelReservas.add(nuevoJScrollPane, BorderLayout.CENTER);
+
+            // Actualizar la interfaz gráfica
+            PanelReservas.revalidate();
+            PanelReservas.repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_apartamentosTextoMouseClicked
+
+    private void HotelesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HotelesMouseClicked
+        String consulta = "SELECT id_reserva, tipo_estancia, coste_dia, metros, direccion, imagen FROM reservas WHERE id_usuario IS NULL and tipo_estancia = 'Hotel'";
+
+        try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
+
+            ResultSet resultado = statement.executeQuery();
+
+            // Crear un nuevo panel para contener los resultados
+            JPanel nuevoPanelDisponibles = new JPanel();
+            nuevoPanelDisponibles.setLayout(new BoxLayout(nuevoPanelDisponibles, BoxLayout.Y_AXIS));
+
+            while (resultado.next()) {
+                int idReserva = resultado.getInt("id_reserva");
+                String tipoEstanciaTexto = resultado.getString("tipo_estancia");
+                String direccionTexto = resultado.getString("direccion");
+                byte[] imagenBytes = resultado.getBytes("imagen");
+                int costeDia = resultado.getInt("coste_dia");
+                int metros = resultado.getInt("metros");
+
+                ImageIcon imagenReserva = new ImageIcon(imagenBytes);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+                JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+                JButton reservarButton = new JButton("Reservar");
+
+                JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeDia, metros, idReserva, reservarButton);
+
+                nuevoPanelDisponibles.add(panelReserva);
+            }
+
+            // Crear un nuevo JScrollPane con el nuevo panel
+            JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelDisponibles);
+            nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
+            nuevoJScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+            // Remover todos los componentes del panel principal
+            PanelReservas.removeAll();
+
+            // Agregar el nuevo JScrollPane al panel principal
+            PanelReservas.setLayout(new BorderLayout());
+            PanelReservas.add(nuevoJScrollPane, BorderLayout.CENTER);
+
+            // Actualizar la interfaz gráfica
+            PanelReservas.revalidate();
+            PanelReservas.repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_HotelesMouseClicked
+
+    private void HotelesTextoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HotelesTextoMouseClicked
+        String consulta = "SELECT id_reserva, tipo_estancia, coste_dia, metros, direccion, imagen FROM reservas WHERE id_usuario IS NULL and tipo_estancia = 'Hotel'";
+
+        try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
+
+            ResultSet resultado = statement.executeQuery();
+
+            // Crear un nuevo panel para contener los resultados
+            JPanel nuevoPanelDisponibles = new JPanel();
+            nuevoPanelDisponibles.setLayout(new BoxLayout(nuevoPanelDisponibles, BoxLayout.Y_AXIS));
+
+            while (resultado.next()) {
+                int idReserva = resultado.getInt("id_reserva");
+                String tipoEstanciaTexto = resultado.getString("tipo_estancia");
+                String direccionTexto = resultado.getString("direccion");
+                byte[] imagenBytes = resultado.getBytes("imagen");
+                int costeDia = resultado.getInt("coste_dia");
+                int metros = resultado.getInt("metros");
+
+                ImageIcon imagenReserva = new ImageIcon(imagenBytes);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+                JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+                JButton reservarButton = new JButton("Reservar");
+
+                JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeDia, metros, idReserva, reservarButton);
+
+                nuevoPanelDisponibles.add(panelReserva);
+            }
+
+            // Crear un nuevo JScrollPane con el nuevo panel
+            JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelDisponibles);
+            nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
+            nuevoJScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+            // Remover todos los componentes del panel principal
+            PanelReservas.removeAll();
+
+            // Agregar el nuevo JScrollPane al panel principal
+            PanelReservas.setLayout(new BorderLayout());
+            PanelReservas.add(nuevoJScrollPane, BorderLayout.CENTER);
+
+            // Actualizar la interfaz gráfica
+            PanelReservas.revalidate();
+            PanelReservas.repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_HotelesTextoMouseClicked
+
+    private void ApartahotelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApartahotelMouseClicked
+        String consulta = "SELECT id_reserva, tipo_estancia, coste_dia, metros, direccion, imagen FROM reservas WHERE id_usuario IS NULL and tipo_estancia = 'Apartahotel'";
+
+        try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
+
+            ResultSet resultado = statement.executeQuery();
+
+            // Crear un nuevo panel para contener los resultados
+            JPanel nuevoPanelDisponibles = new JPanel();
+            nuevoPanelDisponibles.setLayout(new BoxLayout(nuevoPanelDisponibles, BoxLayout.Y_AXIS));
+
+            while (resultado.next()) {
+                int idReserva = resultado.getInt("id_reserva");
+                String tipoEstanciaTexto = resultado.getString("tipo_estancia");
+                String direccionTexto = resultado.getString("direccion");
+                byte[] imagenBytes = resultado.getBytes("imagen");
+                int costeDia = resultado.getInt("coste_dia");
+                int metros = resultado.getInt("metros");
+
+                ImageIcon imagenReserva = new ImageIcon(imagenBytes);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+                JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+                JButton reservarButton = new JButton("Reservar");
+
+                JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeDia, metros, idReserva, reservarButton);
+
+                nuevoPanelDisponibles.add(panelReserva);
+            }
+
+            // Crear un nuevo JScrollPane con el nuevo panel
+            JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelDisponibles);
+            nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
+            nuevoJScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+            // Remover todos los componentes del panel principal
+            PanelReservas.removeAll();
+
+            // Agregar el nuevo JScrollPane al panel principal
+            PanelReservas.setLayout(new BorderLayout());
+            PanelReservas.add(nuevoJScrollPane, BorderLayout.CENTER);
+
+            // Actualizar la interfaz gráfica
+            PanelReservas.revalidate();
+            PanelReservas.repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_ApartahotelMouseClicked
+
+    private void ApartahotelTextoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApartahotelTextoMouseClicked
+        String consulta = "SELECT id_reserva, tipo_estancia, coste_dia, metros, direccion, imagen FROM reservas WHERE id_usuario IS NULL and tipo_estancia = 'Apartahotel'";
+
+        try (Connection connection = conexion.DatabaseConnection(); PreparedStatement statement = connection.prepareStatement(consulta)) {
+
+            ResultSet resultado = statement.executeQuery();
+
+            // Crear un nuevo panel para contener los resultados
+            JPanel nuevoPanelDisponibles = new JPanel();
+            nuevoPanelDisponibles.setLayout(new BoxLayout(nuevoPanelDisponibles, BoxLayout.Y_AXIS));
+
+            while (resultado.next()) {
+                int idReserva = resultado.getInt("id_reserva");
+                String tipoEstanciaTexto = resultado.getString("tipo_estancia");
+                String direccionTexto = resultado.getString("direccion");
+                byte[] imagenBytes = resultado.getBytes("imagen");
+                int costeDia = resultado.getInt("coste_dia");
+                int metros = resultado.getInt("metros");
+
+                ImageIcon imagenReserva = new ImageIcon(imagenBytes);
+                Image imagenRedimensionada = imagenReserva.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
+                JLabel imagenRedimensionadaLabel = new JLabel(imagenRedimensionadaIcon);
+                JButton reservarButton = new JButton("Reservar");
+
+                JPanel panelReserva = crearPanelReservaMejorado(imagenRedimensionadaLabel, tipoEstanciaTexto, direccionTexto, costeDia, metros, idReserva, reservarButton);
+
+                nuevoPanelDisponibles.add(panelReserva);
+            }
+
+            // Crear un nuevo JScrollPane con el nuevo panel
+            JScrollPane nuevoJScrollPane = new JScrollPane(nuevoPanelDisponibles);
+            nuevoJScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            nuevoJScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajusta los márgenes
+            nuevoJScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+            // Remover todos los componentes del panel principal
+            PanelReservas.removeAll();
+
+            // Agregar el nuevo JScrollPane al panel principal
+            PanelReservas.setLayout(new BorderLayout());
+            PanelReservas.add(nuevoJScrollPane, BorderLayout.CENTER);
+
+            // Actualizar la interfaz gráfica
+            PanelReservas.revalidate();
+            PanelReservas.repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_ApartahotelTextoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -665,13 +1072,17 @@ public class NewMainPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Apartahotel;
+    private javax.swing.JLabel ApartahotelTexto;
+    private javax.swing.JLabel Hoteles;
+    private javax.swing.JLabel HotelesTexto;
     private javax.swing.JPanel PanelReservas;
+    private javax.swing.JLabel apartamentos;
+    private javax.swing.JLabel apartamentosTexto;
     private javax.swing.JLabel btnReservas;
     private javax.swing.JLabel casaRural;
+    private javax.swing.JLabel casaRuralTexto;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
@@ -680,12 +1091,8 @@ public class NewMainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
