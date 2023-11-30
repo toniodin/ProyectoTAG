@@ -360,6 +360,9 @@ public class RegisterPage extends javax.swing.JFrame {
             // Inserta el nuevo usuario en la base de datos
             if (insertUser(email, password, nombre, apellido1, apellido2, dni, domicilio)) {
                 JOptionPane.showMessageDialog(this, "Registro exitoso.");
+                LoginPage LoginPage = new LoginPage();
+                LoginPage.setVisible(true);
+                setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Ocurrió un error al registrar el usuario.");
             }
