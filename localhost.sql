@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 30-11-2023 a las 14:48:46
+-- Tiempo de generación: 30-11-2023 a las 14:47:09
 -- Versión del servidor: 5.6.13
 -- Versión de PHP: 5.4.17
 
@@ -123,6 +123,25 @@ INSERT INTO `usuarios` (`Id`, `Nombre`, `Apellido1`, `Apellido2`, `Email`, `Tele
 (7, 'u', 'u', 'a', 'u', NULL, 'a', 'o', '2023-11-30 15:34:55', NULL, NULL, NULL, 'a'),
 (8, 'asdadasd', 'asdadasd', 'asdasdasdas', 'kjasdnfkadn@gmail.com', NULL, '49752138', 'asd', '2023-11-30 15:43:33', NULL, NULL, NULL, 'asdasdasd'),
 (9, 'asdadas', 'asdasdasd', 'asdasdadsa', 'aaaaaaa@gmail.com', NULL, '47592315F', 'aa', '2023-11-30 15:46:25', NULL, NULL, NULL, 'asdadasd');
+--
+-- Base de datos: `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `test`
+--
+
+CREATE TABLE IF NOT EXISTS `test` (
+  `a` int(11) NOT NULL,
+  `s` int(11) NOT NULL,
+  `d` int(11) NOT NULL,
+  `f` int(11) NOT NULL,
+  `g` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
