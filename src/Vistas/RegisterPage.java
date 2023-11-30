@@ -23,13 +23,13 @@ import javax.swing.ImageIcon;
 public class RegisterPage extends javax.swing.JFrame {
 
     private Conexion conexion;
-    
+
     public RegisterPage() {
         initComponents();
         conexion = new Conexion();
-        
+
         this.setLocationRelativeTo(null); //Inicializa al centro de la pantalla
-        
+
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icono.png")); // Esto es para cambiar el icono de la app
         Image image = icon.getImage();
         setIconImage(image);
@@ -340,7 +340,8 @@ public class RegisterPage extends javax.swing.JFrame {
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         String email = inputEmail.getText();
-        String password = inputRepitaPass.getText();
+        String passwordRepeat = inputRepitaPass.getText();
+        String password = inputPass1.getText();
         String nombre = inputNombre.getText();
         String apellido1 = inputApellido1.getText();
         String apellido2 = inputApellido2.getText();
@@ -353,10 +354,28 @@ public class RegisterPage extends javax.swing.JFrame {
             return;
         }
 
+        // Verifica el formato del email
+        if (!isValidEmail(email)) {
+            JOptionPane.showMessageDialog(this, "El formato del email no es válido.");
+            return;
+        }
+
         // Verifica si el email ya existe en la base de datos
         if (emailExists(email)) {
             JOptionPane.showMessageDialog(this, "El email ya está registrado.");
         } else {
+            // Verifica la coincidencia de las contraseñas
+            if (!password.equals(passwordRepeat)) {
+                JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.");
+                return;
+            }
+
+            // Verifica el formato del DNI
+            if (!isValidDNI(dni)) {
+                JOptionPane.showMessageDialog(this, "El formato del DNI no es válido.");
+                return;
+            }
+
             // Inserta el nuevo usuario en la base de datos
             if (insertUser(email, password, nombre, apellido1, apellido2, dni, domicilio)) {
                 JOptionPane.showMessageDialog(this, "Registro exitoso.");
@@ -383,6 +402,39 @@ public class RegisterPage extends javax.swing.JFrame {
         }
     }
 
+    // Método para verificar el formato del email
+    private boolean isValidEmail(String email) {
+        // Puedes implementar una lógica más detallada para validar el formato del email
+        return email.matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b");
+    }
+
+    // Método para verificar el formato del DNI
+    private boolean isValidDNI(String dni) {
+        // Verifica que tenga exactamente 9 caracteres (8 dígitos y 1 letra)
+        if (dni.length() != 9) {
+            return false;
+        }
+
+        // Extrae los primeros 8 caracteres (dígitos)
+        String numeros = dni.substring(0, 8);
+
+        // Extrae el último caracter (letra)
+        String letra = dni.substring(8);
+
+        // Verifica que los primeros 8 caracteres sean dígitos
+        if (!numeros.matches("\\d{8}")) {
+            return false;
+        }
+
+        // Verifica que el último caracter sea una letra (mayúscula o minúscula)
+        if (!letra.matches("[a-zA-Z]")) {
+            return false;
+        }
+
+        // Si pasa todas las validaciones, retorna true
+        return true;
+    }
+
     private boolean insertUser(String email, String password, String nombre, String apellido1, String apellido2, String dni, String domicilio) {
         Connection connection = conexion.DatabaseConnection();
         try {
@@ -399,15 +451,15 @@ public class RegisterPage extends javax.swing.JFrame {
             // Obten la fecha actual
             Date fechaActual = new Date();
             Timestamp fechaAlta = new Timestamp(fechaActual.getTime());
-            statement.setTimestamp(8, fechaAlta); 
-            
+            statement.setTimestamp(8, fechaAlta);
+
             return statement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-    
+
     private void volverLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverLoginMouseClicked
         LoginPage LoginPage = new LoginPage();
         LoginPage.setVisible(true);
@@ -419,7 +471,7 @@ public class RegisterPage extends javax.swing.JFrame {
     }//GEN-LAST:event_inputEmailActionPerformed
 
     private void volverLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverLoginMouseEntered
-        volverLogin.setForeground(new Color(255,204,0));
+        volverLogin.setForeground(new Color(255, 204, 0));
     }//GEN-LAST:event_volverLoginMouseEntered
 
     private void volverLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverLoginMouseExited
@@ -431,151 +483,135 @@ public class RegisterPage extends javax.swing.JFrame {
     }//GEN-LAST:event_inputApellido1ActionPerformed
 
     private void inputEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusGained
-        if(inputEmail.getText().equals("Indica tu correo electrónico"))
-        {
+        if (inputEmail.getText().equals("Indica tu correo electrónico")) {
             inputEmail.setText("");
-            inputEmail.setForeground(new Color(0,0,0));
+            inputEmail.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_inputEmailFocusGained
 
     private void inputEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusLost
-        if(inputEmail.getText().equals(""))
-        {
+        if (inputEmail.getText().equals("")) {
             inputEmail.setText("Indica tu correo electrónico");
-            inputEmail.setForeground(new Color(153,153,153));
+            inputEmail.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_inputEmailFocusLost
 
     private void inputNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNombreFocusGained
-        if(inputNombre.getText().equals("Indica tu nombre"))
-        {
+        if (inputNombre.getText().equals("Indica tu nombre")) {
             inputNombre.setText("");
-            inputNombre.setForeground(new Color(0,0,0));
+            inputNombre.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_inputNombreFocusGained
 
     private void inputNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNombreFocusLost
-        if(inputNombre.getText().equals(""))
-        {
+        if (inputNombre.getText().equals("")) {
             inputNombre.setText("Indica tu nombre");
-            inputNombre.setForeground(new Color(153,153,153));
+            inputNombre.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_inputNombreFocusLost
 
     private void inputApellido1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputApellido1FocusGained
-        if(inputApellido1.getText().equals("Indica tu apellido"))
-        {
+        if (inputApellido1.getText().equals("Indica tu apellido")) {
             inputApellido1.setText("");
-            inputApellido1.setForeground(new Color(0,0,0));
+            inputApellido1.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_inputApellido1FocusGained
 
     private void inputApellido1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputApellido1FocusLost
-        if(inputApellido1.getText().equals(""))
-        {
+        if (inputApellido1.getText().equals("")) {
             inputApellido1.setText("Indica tu apellido");
-            inputApellido1.setForeground(new Color(153,153,153));
+            inputApellido1.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_inputApellido1FocusLost
 
     private void inputApellido2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputApellido2FocusGained
-        if(inputApellido2.getText().equals("Indica tu segundo apellido"))
-        {
+        if (inputApellido2.getText().equals("Indica tu segundo apellido")) {
             inputApellido2.setText("");
-            inputApellido2.setForeground(new Color(0,0,0));
+            inputApellido2.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_inputApellido2FocusGained
 
     private void inputApellido2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputApellido2FocusLost
-        if(inputApellido2.getText().equals(""))
-        {
+        if (inputApellido2.getText().equals("")) {
             inputApellido2.setText("Indica tu segundo apellido");
-            inputApellido2.setForeground(new Color(153,153,153));
+            inputApellido2.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_inputApellido2FocusLost
 
     private void inputDNIFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDNIFocusGained
-        if(inputDNI.getText().equals("Indica tu dni"))
-        {
+        if (inputDNI.getText().equals("Indica tu dni")) {
             inputDNI.setText("");
-            inputDNI.setForeground(new Color(0,0,0));
+            inputDNI.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_inputDNIFocusGained
 
     private void inputDNIFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDNIFocusLost
-        if(inputDNI.getText().equals(""))
-        {
+        if (inputDNI.getText().equals("")) {
             inputDNI.setText("Indica tu dni");
-            inputDNI.setForeground(new Color(153,153,153));
+            inputDNI.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_inputDNIFocusLost
 
     private void inputDomicilioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDomicilioFocusGained
-        if(inputDomicilio.getText().equals("Indica tu domicilio"))
-        {
+        if (inputDomicilio.getText().equals("Indica tu domicilio")) {
             inputDomicilio.setText("");
-            inputDomicilio.setForeground(new Color(0,0,0));
+            inputDomicilio.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_inputDomicilioFocusGained
 
     private void inputDomicilioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDomicilioFocusLost
-        if(inputDomicilio.getText().equals(""))
-        {
+        if (inputDomicilio.getText().equals("")) {
             inputDomicilio.setText("Indica tu domicilio");
-            inputDomicilio.setForeground(new Color(153,153,153));
+            inputDomicilio.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_inputDomicilioFocusLost
 
     private void inputPass1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPass1FocusGained
-       if(inputPass1.getText().equals("Indica tu contraseña"))
-        {
+        if (inputPass1.getText().equals("Indica tu contraseña")) {
             inputPass1.setText("");
-            inputPass1.setForeground(new Color(0,0,0));
+            inputPass1.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_inputPass1FocusGained
 
     private void inputPass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPass1FocusLost
-        if(inputPass1.getText().equals(""))
-        {
+        if (inputPass1.getText().equals("")) {
             inputPass1.setText("Indica tu contraseña");
-            inputPass1.setForeground(new Color(153,153,153));
+            inputPass1.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_inputPass1FocusLost
 
     private void inputRepitaPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputRepitaPassFocusGained
-        if(inputRepitaPass.getText().equals("Repita la contraseña"))
-        {
+        if (inputRepitaPass.getText().equals("Repita la contraseña")) {
             inputRepitaPass.setText("");
-            inputRepitaPass.setForeground(new Color(0,0,0));
+            inputRepitaPass.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_inputRepitaPassFocusGained
 
     private void inputRepitaPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputRepitaPassFocusLost
-        if(inputRepitaPass.getText().equals(""))
-        {
+        if (inputRepitaPass.getText().equals("")) {
             inputRepitaPass.setText("Repita la contraseña");
-            inputRepitaPass.setForeground(new Color(153,153,153));
+            inputRepitaPass.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_inputRepitaPassFocusLost
 
     private void mostrarContraseñaRepetidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarContraseñaRepetidaActionPerformed
         if (mostrarContraseñaRepetida.getText().equals("Mostrar")) {
-        mostrarContraseñaRepetida.setText("Ocultar");
-        inputRepitaPass.setEchoChar((char) 0);
-    } else {
-        mostrarContraseñaRepetida.setText("Mostrar");
-        inputRepitaPass.setEchoChar('*');
-    }
+            mostrarContraseñaRepetida.setText("Ocultar");
+            inputRepitaPass.setEchoChar((char) 0);
+        } else {
+            mostrarContraseñaRepetida.setText("Mostrar");
+            inputRepitaPass.setEchoChar('*');
+        }
     }//GEN-LAST:event_mostrarContraseñaRepetidaActionPerformed
 
     private void mostrarContraseña1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarContraseña1ActionPerformed
         if (mostrarContraseñaRepetida.getText().equals("Mostrar")) {
-        mostrarContraseñaRepetida.setText("Ocultar");
-        inputPass1.setEchoChar((char) 0); // Mostrar texto sin ocultar
-    } else {
-        mostrarContraseñaRepetida.setText("Mostrar");
-        inputPass1.setEchoChar('*'); // Ocultar texto
-    }
+            mostrarContraseñaRepetida.setText("Ocultar");
+            inputPass1.setEchoChar((char) 0); // Mostrar texto sin ocultar
+        } else {
+            mostrarContraseñaRepetida.setText("Mostrar");
+            inputPass1.setEchoChar('*'); // Ocultar texto
+        }
     }//GEN-LAST:event_mostrarContraseña1ActionPerformed
 
     /**
